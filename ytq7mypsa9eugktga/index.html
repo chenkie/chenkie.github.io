@@ -1,0 +1,180 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 1'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 350
+wordpress_url: http://ryanchenkie.com/?page_id=350
+date: '2015-07-25 09:49:18 -0400'
+date_gmt: '2015-07-25 15:49:18 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>If you&rsquo;ve recently been looking into creating web applications, chances are you&rsquo;ve probably heard of a framework called AngularJS. Perhaps you&rsquo;ve even seen the demos that are available on the <a href="https:&#47;&#47;angularjs.org&#47;">AngularJS site<&#47;a> and have played around a little with it. Or, perhaps you haven&rsquo;t gotten very far with the demos and tutorials that are available on the official site or elsewhere and you&rsquo;re looking for guided and step-by-step instruction on how to get started. In either case, over the next seven days we&rsquo;re going to dive into the fundamentals of AngularJS and in that time you will learn how to create your very first single-page web application with it! <&#47;p></p>
+<p>AngularJS can be hard to learn through demos and tutorials scattered across the web, but it doesn&rsquo;t have to be. My aim for this seven-day course is that you would come away from it feeling confident in the fundamentals of the framework and with an excitement for it that drives you to go even deeper.<&#47;p></p>
+<h2 id="what-is-angularjs-and-what-does-it-do">What is AngularJS and What Does it Do?<&#47;h2></p>
+<p>AngularJS is a JavaScript framework that helps to simplify the process of building Single Page Applications (SPAs). As opposed to traditional &ldquo;round trip&rdquo; websites and web applications which refresh the page every time new data needs to be displayed, SPAs generally don&rsquo;t do any hard refreshing. Instead, they rely on <a href="https:&#47;&#47;developer.mozilla.org&#47;en-US&#47;docs&#47;Web&#47;API&#47;XMLHttpRequest">XHR (XMLHttpRequest)<&#47;a> requests to retrieve useful pieces of data for the app at the time the data is needed. <&#47;p></p>
+<p>You&rsquo;ve probably seen XHR at work on many websites, but perhaps you haven&rsquo;t realized it. Take Gmail for example: if you send a message in Gmail, the page doesn&rsquo;t refresh but rather stays in place as the message is sent. When you hit the send button, Gmail does work behind the scenes to send your message&rsquo;s data to its servers as an XHR request which means it doesn&rsquo;t require the page to be refreshed. <&#47;p></p>
+<p>This Single Page Application approach has several benefits, but likely the biggest one is a vast improvement in user experience. With SPAs, the user&rsquo;s experience becomes closer to that of a native desktop application which is inherently more fluid and responsive than traditional round-trip web applications. Instead of waiting for the page to refresh on every interaction that requires data to be sent or received, only a small portion of page is refreshed.<&#47;p></p>
+<p>So where does AngularJS come in? It does a lot of things, but at it&rsquo;s core it makes it easier for you to do things with HTML that it was never originally designed to do. For example, HTML was never designed to let you have elements on your page act dynamically, changing the way they look or the data they display. HTML was also not designed to consistently keep the data that the user sees on their screen in sync with what is under the hood of the application. These problems and more are helped with the following core features of AngularJS:<&#47;p></p>
+<ul>
+<li>Two-way data binding that automatically syncs data between a model and a view (updating a text element in real time as a user types something into a text box)<&#47;li>
+<li>Built-in and custom directives that extend what HTML is capable of doing (with Angular we can create our own HTML tags: <code><whatever-you-want><&#47;whatever-you-want><&#47;code><&#47;li>
+<li>Separation of concerns through a Model-View-Controller (MVC) pattern&mdash;code is separated based on responsibility <&#47;li>
+<li>Templating&mdash;application data is reflected to a user-facing view through Angular&rsquo;s double-curly brace template syntax: <code><br />
+<h1>{{firstname}}<&#47;h1><&#47;code><&#47;li><br />
+<&#47;ul></p>
+<p>There are many more features to AngularJS and we will learn about them as we go. That&rsquo;s enough theory for now though, let&rsquo;s learn by doing and take a look at what we&rsquo;ll build for this course.<&#47;p></p>
+<h2 id="building-a-real-estate-listing-application">Building a Real-Estate Listing Application<&#47;h2></p>
+<p>To learn about some of the core features of AngularJS, we&rsquo;re going to build a simple real estate listing application called <code>ng-cribs<&#47;code>. The app will be pretty basic and will simply display real estate listings in a nicely-styled card, but we&rsquo;ll also be able to locally create, update and delete new real estate listings.<&#47;p></p>
+<p>Why a real estate listing app? The application could be anything really&mdash;AngularJS is totally agnostic about what kind of applications we build. Since an application that handles real estate listings will need to use many of the features that AngularJS provides, it will work as an example.<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-1.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-1.png" alt="day-1-1" width="1314" height="1364" class="alignnone size-full wp-image-351" &#47;><&#47;a></p>
+<h2 id="getting-your-development-environment-setup">Getting Your Development Environment Setup<&#47;h2></p>
+<h3 id="installing-a-local-web-server">Installing a Local Web Server<&#47;h3></p>
+<p>Before we get going, it&rsquo;s important to make sure you have your development environment properly setup. We&rsquo;re not really going to need a local web server for this application, but it&rsquo;s a good idea to have one setup anyway. Also, a local web server will be a requirement if you ever want to pull in any resources that are served over a content delivery network (example: Google Fonts).<&#47;p></p>
+<p>If you don&rsquo;t already have a local web server setup, you should do that now. There are a few options out there, but here are the common ones:<&#47;p></p>
+<p><strong>Mac Users<&#47;strong> &mdash; <a href="https:&#47;&#47;www.mamp.info&#47;en&#47;">MAMP<&#47;a><&#47;p></p>
+<p><strong>Windows Users<&#47;strong> &mdash; <a href="http:&#47;&#47;www.wampserver.com&#47;en&#47;">WAMP<&#47;a><&#47;p></p>
+<p><strong>All Users<&#47;strong> &mdash; <a href="https:&#47;&#47;www.apachefriends.org&#47;index.html">XAMPP<&#47;a><&#47;p></p>
+<p>We won&rsquo;t get into exactly how to install these local web servers in this tutorial, but instructions are provided on the pages for each. If you run into any trouble getting the web servers setup, Google around to find the problem&mdash;it&rsquo;s likely that your issue has been solved before.<&#47;p></p>
+<h3 id="installing-nodejs">Installing Node.js<&#47;h3></p>
+<p>You might be familiar with Node.js already and perhaps you know that it is a platform which gives us a way to write server-side code in JavaScript. We&rsquo;re not going to be doing any server-side code in this course, but we&rsquo;ll still need Node installed so that we can use a JavaScript package manager that runs on it called. Node&rsquo;s package manager is called <code>npm<&#47;code> and it essentially gives us an easy way to install packages, including AngularJS. It&rsquo;s through npm that we&rsquo;ll install the AngularJS framework and some other dependencies.<&#47;p></p>
+<p>Node.js gives us an easy to use installer which can be downloaded from the <a href="https:&#47;&#47;nodejs.org&#47;">Node.js website<&#47;a>. Node.js comes with npm out of the box which makes our lives easier because don&rsquo;t have to do any further installations.<&#47;p></p>
+<h3 id="using-the-command-line">Using the Command Line<&#47;h3></p>
+<p>If you haven&rsquo;t used the command line much before, it can seem a little bit scary at first. Don&rsquo;t worry though, our use of it will be pretty minimal in this course. Plus, it&rsquo;s not that bad once you get used to it. Essentially the command line is an interface that allows us to provide instructions to the computer to carry out certain tasks. We can get the computer to do pretty much anything through the command line, but for our purposes we&rsquo;re only  going to be using it to download code packages (like AngularJS) and to create some files. <&#47;p></p>
+<p>Mac and Windows both come with command prompts built in. On Mac, it&rsquo;s called Terminal and on Windows it&rsquo;s called Command Prompt. <&#47;p></p>
+<p>Although these work fine, you may want to install something a bit nicer to work with. These are two good solutions:<&#47;p></p>
+<p><strong>Mac<&#47;strong> &mdash; <a href="https:&#47;&#47;www.iterm2.com&#47;">iTerm<&#47;a> <br><br />
+<strong>Windows<&#47;strong> &mdash; <a href="http:&#47;&#47;sourceforge.net&#47;projects&#47;console&#47;files&#47;">Console2<&#47;a><&#47;p></p>
+<p>We&rsquo;ll be using Linux-style commands for this course. If you&rsquo;re on Windows, some of the commands will differ a little bit, but it&rsquo;s easy to find translations for them if the commands provided don&rsquo;t work. If you&rsquo;d like a totally Linux-like experience on Windows, you can try <a href="https:&#47;&#47;www.cygwin.com&#47;">Cygwin<&#47;a>.<&#47;p></p>
+<h3 id="checking-the-nodejs-install">Checking the Node.js Install<&#47;h3></p>
+<p>After downloading and installing Node.js, we can now use the command line to test out whether it and <code>npm<&#47;code> are setup properly. Open the program for whichever command prompt you&rsquo;ll be using, type in the following and then hit enter:<&#47;p></p>
+<pre><code class="language-markup">node -v<br />
+<&#47;code><&#47;pre></p>
+<p>This command checks which version of Node.js is installed and displays it on the screen. At the time of this writing, Node.js is at version is 0.12.6. <&#47;p></p>
+<p>We can also check to make sure that npm is there:<&#47;p></p>
+<pre><code class="language-markup">npm -v<br />
+<&#47;code><&#47;pre></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-2.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-2.png" alt="day-1-2" width="759" height="478" class="alignnone size-full wp-image-352" &#47;><&#47;a></p>
+<h2 id="installing-angularjs">Installing AngularJS<&#47;h2></p>
+<p>Now that we have our environment setup and ready to go, let&rsquo;s install AngularJS. We&rsquo;ll install the framework from the command line, but first we&rsquo;ll need create a home for it. You&rsquo;ll want to create a new project in the directory that your local web server serves files from. I&rsquo;m using MAMP and in my case it&rsquo;s with in the <code>htdocs<&#47;code> directory in <code>Applications&#47;MAMP<&#47;code>. To get some more experience on the command line, let&rsquo;s create a new file in this directory from there. You can, however, create the new folder manually if you like.<&#47;p></p>
+<p>First we need to change directories (<code>cd<&#47;code>) into the <code>htdocs<&#47;code> folder (or whichever one serves your files). If you&rsquo;re using MAMP, the command is as follows:<&#47;p></p>
+<pre><code class="language-markup">cd &#47;Applications&#47;MAMP&#47;htdocs<br />
+<&#47;code><&#47;pre></p>
+<p>Next we&rsquo;ll create a new folder in this location using the <code>mkdir<&#47;code> command which, as you&rsquo;ve probably guessed, makes a new directory. Let&rsquo;s call the new directory <code>ng-cribs<&#47;code>:<&#47;p></p>
+<pre><code class="language-markup">mkdir ng-cribs<br />
+<&#47;code><&#47;pre></p>
+<p>If you look in the folder window for that location, you should now see a new directory called <code>ng-cribs<&#47;code>.<&#47;p></p>
+<p>Next we&rsquo;ll need to <code>cd<&#47;code> into this new folder:<&#47;p></p>
+<pre><code class="language-markup">cd ng-cribs<br />
+<&#47;code><&#47;pre></p>
+<p>Now that we&rsquo;re in our new folder, let&rsquo;s download AngularJS using <code>npm<&#47;code>. We&rsquo;re going to put <code>sudo<&#47;code> at the start of this command which just means that we want to run it as the administrator. Depending on how you have Node.js setup, you might be required to prove that you&rsquo;re the administrator before you&rsquo;ll be allowed to use it.<&#47;p></p>
+<pre><code class="language-markup">sudo npm install angular<br />
+<&#47;code><&#47;pre></p>
+<p>You&rsquo;ll be prompted for your password at this point. It will look like you&rsquo;re not typing anything because the cursor won&rsquo;t move at all as you type, but don&rsquo;t worry, the command prompt is receiving what you&rsquo;re putting in there. Once you&rsquo;re done, hit enter.<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-3.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-3.png" alt="day-1-3" width="759" height="478" class="alignnone size-full wp-image-353" &#47;><&#47;a></p>
+<p>AngularJS should now be installed and we&rsquo;ll be able to tell that it is if we can see a new folder called <code>node_modules<&#47;code> within our <code>ng-app<&#47;code> folder. We can check this the traditional way, or we can also see it using the command line:<&#47;p></p>
+<pre><code class="language-markup">ls<br />
+<&#47;code><&#47;pre></p>
+<p>This command will list the files and folders within the directory you&rsquo;re currently in. In our case, we should see the <code>node_modules<&#47;code> folder. If we <code>cd<&#47;code> into it, we&rsquo;ll see a folder called <code>angular<&#47;code> and then if we <code>cd<&#47;code> into that folder, we&rsquo;ll see all the AngularJS files that we&rsquo;ll need.<&#47;p></p>
+<pre><code class="language-markup">cd node_modules<br />
+ls<br />
+cd angular<br />
+ls<br />
+<&#47;code><&#47;pre></p>
+<h2 id="creating-the-indexhtml-file">Creating the index.html File<&#47;h2></p>
+<p>We&rsquo;re going to need a main <code>index.html<&#47;code> file from which the application will load. This is typical of most websites&mdash;they need a starting point. Let&rsquo;s create a new file from the command line using the <code>touch<&#47;code> command. First, we&rsquo;ll need to change directories back to our main project file:<&#47;p></p>
+<pre><code class="language-markup">cd ..&#47;..<br />
+<&#47;code><&#47;pre></p>
+<p>Two dots signify &ldquo;one level up&rdquo; in the folder structure and we do this twice (separated by a slash) to go two levels up.<&#47;p></p>
+<pre><code class="language-markup">touch index.html<br />
+<&#47;code><&#47;pre></p>
+<p>The touch command will create a new file and in this case it&rsquo;s called <code>index.html<&#47;code>.<&#47;p></p>
+<p>Now let&rsquo;s open up the file and add some HTML structure to it. You probably have a text editor installed already, but in case you don&rsquo;t or are looking for a new one, I like <a href="http:&#47;&#47;www.sublimetext.com&#47;">Sublime Text<&#47;a>.<&#47;p></p>
+<p>Let&rsquo;s put some basic HTML structure in.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --><br />
+<!doctype html><br />
+<html><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+        <title>ng-cribs<&#47;title><br />
+    <&#47;head><br />
+    <body ng-app="cribsApp"></p>
+<h1>Welcome to ng-cribs!<&#47;h1></p>
+<p>    <&#47;body><br />
+    <script src="node_modules&#47;angular&#47;angular.js"><&#47;script><br />
+    <script src="app.js"><&#47;script><br />
+<&#47;html><br />
+<&#47;code><&#47;pre></p>
+<p>You&rsquo;re likely familiar with most of what&rsquo;s going on in this file; however, what might stand out as being different right away is the special attribute we&rsquo;ve placed on the <code>body<&#47;code> tag that says <code>ng-app="cribsApp"<&#47;code>. So what&rsquo;s going on here? This special attribute references what is known as a directive. In this case, we&rsquo;re using the framework&rsquo;s built-in <code>ng-app<&#47;code> directive which tells the element that it is declared on (this case the <code>body<&#47;code> tag) that everything within it is considered part of the application. The part where we say <code>="cribsApp"<&#47;code> is a way for us to give the application module a name which will be referred to in other places. <&#47;p></p>
+<p>You&rsquo;ll also notice that we&rsquo;ve got some <code>script<&#47;code> tags at the bottom of the file which reference some JavaScript files. The first one references the AngularJS framework which we saw earlier and the second references a file called <code>app.js<&#47;code>. We haven&rsquo;t created this file yet, but we&rsquo;ll do that next.<&#47;p></p>
+<h2 id="creating-an-appjs-file">Creating an app.js File<&#47;h2></p>
+<p>If the <code>index.html<&#47;code> file is the starting point for the HTML portion of a website or web application then the <code>app.js<&#47;code> file is the starting point for the JavaScript bits of the application. Many JavaScript frameworks will use something like <code>app.js<&#47;code> as the point from which the application is initialized and AngularJS is no exception.<&#47;p></p>
+<p>Let&rsquo;s again use the command line to create this file:<&#47;p></p>
+<pre><code class="language-markup">touch app.js<br />
+<&#47;code><&#47;pre></p>
+<p>Now let&rsquo;s open this file in our text editor and add some Angular to it:<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; app.js<br />
+angular.module('cribsApp', []);<br />
+<&#47;code><&#47;pre></p>
+<p>AngularJS takes the approach of using modules as places to store all the pieces that come together to make the application work. They are like containers for other parts of the application, many of which we&rsquo;ll see later. There are several beneficial implications of the module approach and one of them is that we can easily use code that other people create to help us out in creating our own applications.<&#47;p></p>
+<p>Getting the application started is a matter of us calling the <code>module<&#47;code> method on the <code>angular<&#47;code> object and referencing the name of our application module. As you&rsquo;ll remember from above, we&rsquo;re calling this application <code>cribsApp<&#47;code>, and this name goes in as  the first argument to the <code>module<&#47;code> method. What&rsquo;s that second empty array argument all about though? This is where AngularJS takes in the names of other modules that we want to include and have our application depend on. For now it is empty because we don&rsquo;t have any other modules to include just yet, but we will later. Even though we don&rsquo;t have any other modules to include, we still need to pass in an empty array because this is what AngularJS expects&mdash;we would get an error if we didn&rsquo;t.<&#47;p></p>
+<h3 id="adding-a-third-party-module">Adding a Third Party Module<&#47;h3></p>
+<p>In the last section we talked about how AngularJS uses modules which can be thought of as containers for an application&rsquo;s pieces. This is advantageous because we can also make use of third party modules that help us with our application development. <&#47;p></p>
+<p>There are many third party modules out there for a range of needs&mdash;everything from directives that make it easy to create tables to services that help with translation. A good place to look for packages is <a href="http:&#47;&#47;ngmodules.org&#47;">ngModules<&#47;a> which has a lot of popular AngularJS modules listed.<&#47;p></p>
+<p>For our application we&rsquo;re going to want to make use of a module called <a href="https:&#47;&#47;angular-ui.github.io&#47;bootstrap&#47;">UI Bootstrap<&#47;a>. You may be familiar with <a href="http:&#47;&#47;getbootstrap.com&#47;">Bootstrap<&#47;a> which is a very popular front-end framework that provides pre-made HTML, CSS and JavaScript pieces that make website and application development easier. UI Bootstrap is the AngularJS-specific implementation of Bootstrap that comes with custom directives which can ultimately save us a lot of development time. While we won&rsquo;t use UI Bootstrap directly in this series, we will make use of it in a follow-up course. Either way, it&rsquo;s a useful example of how to bring in third-party modules.<&#47;p></p>
+<p>To bring in UI Bootstrap we&rsquo;ll once again go to the command line and use <code>npm<&#47;code>.<&#47;p></p>
+<pre><code class="language-markup">npm install angular-bootstrap<br />
+<&#47;code><&#47;pre></p>
+<p>UI Bootstrap doesn&rsquo;t actually come with the the standard Bootstrap CSS, so we let&rsquo;s also install the regular Bootstrap package as well.<&#47;p></p>
+<pre><code class="language-markup">npm install bootstrap<br />
+<&#47;code><&#47;pre></p>
+<p>Now that UI Bootstrap is installed we can bring it into our application by including it in the module injection array that we talked about earlier. Let&rsquo;s adjust the <code>app.js<&#47;code> code to reflect this.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; app.js<br />
+angular.module('cribsApp', ['ui.bootstrap']);<br />
+<&#47;code><&#47;pre></p>
+<p>To let our application know that we want to use the UI Bootstrap package, we simply have to include the package name as a string in the array.<&#47;p></p>
+<p>We&rsquo;ve missed one important thing though&mdash;we need to reference the Javascript file for UI Bootstrap in our <code>index.html<&#47;code> file.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --><br />
+<!doctype html><br />
+<html><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+        <title>ng-cribs<&#47;title></p>
+<link rel="stylesheet" href="node_modules&#47;bootstrap&#47;dist&#47;css&#47;bootstrap.css">
+    <&#47;head><br />
+    <body ng-app="cribsApp"></p>
+<h1>Welcome to ng-cribs!<&#47;h1></p>
+<p>    <&#47;body><br />
+    <script src="node_modules&#47;angular&#47;angular.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap-tpls.js"><&#47;script><br />
+    <script src="app.js"><&#47;script><br />
+<&#47;html><br />
+<&#47;code><&#47;pre></p>
+<p>You&rsquo;ll see here that we&rsquo;ve put in a reference to the regular Bootstrap CSS file in the <code>head<&#47;code> of the document. We&rsquo;ve also put in additional <code>script<&#47;code> tags&mdash;one for the main UI Bootstrap files and another file that takes care of some templates that UI Bootstrap relies on.<&#47;p></p>
+<h2 id="testing-it-out-in-the-browser">Testing It Out in the Browser<&#47;h2></p>
+<p>Now that we have our <code>index.html<&#47;code> and <code>app.js<&#47;code> file in place, let&rsquo;s fire up the browser and make sure that everything is working properly. If you&rsquo;re using MAMP you need to go to localhost:8888&#47;ng-cribs to see the application, but this might it might be different for you depending on which local web server you are using. I have my installation of MAMP setup to omit the port number (8888) from the URL.<&#47;p></p>
+<p>If everything worked out you should see our welcome message. We&rsquo;ll also want to make sure we don&rsquo;t get any error messages in the console, so let&rsquo;s check that as well. To do so, we&rsquo;ll need to open the developer tools panel. In Chrome, we can right click on the page and choose Inspect Element, or we can do Option + Command + I on the keyboard (Ctrl + Shift + I on Windows).<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-4.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-1-4.png" alt="day-1-4" width="979" height="856" class="alignnone size-full wp-image-354" &#47;><&#47;a></p>
+<h2 id="wrapping-up-day-1">Wrapping Up Day 1<&#47;h2></p>
+<p>That&rsquo;s all for the first day of the course! We covered a quite a few things today which may or may not be familiar to you, including:<&#47;p></p>
+<ul>
+<li>An overview of what AngularJS is and what it&rsquo;s used for<&#47;li>
+<li>A look at the application we&rsquo;ll be building in this course<&#47;li>
+<li>How to setup our development environment<&#47;li>
+<li>How to install AngularJS with an introduction to the command line<&#47;li>
+<li>How to setup the initial files needed for our application<&#47;li>
+<li>How to bring in third party modules and get them ready to be used<&#47;li><br />
+<&#47;ul></p>
+<p>While we went over quite a bit of theory and setup today, we didn&rsquo;t do a whole lot of work on our actual application, nor did we really get to see any of Angular&rsquo;s features. Don&rsquo;t worry though, there&rsquo;s lot&rsquo;s of that to come. Tomorrow we&rsquo;ll cover some new concepts and topics including Angular&rsquo;s <code>$scope<&#47;code> object and how to use it. We&rsquo;ll also see how to setup and use controllers and views.<&#47;p></p>
+<p>Great job today&mdash;see you back here tomorrow!<&#47;p></p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

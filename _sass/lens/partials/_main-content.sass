@@ -1,0 +1,148 @@
+.main-content
+    padding: 30px
+
+    +breakpoint(sm)
+        padding: 60px 120px
+
+    +breakpoint(md)
+        padding: 50px
+
+    +breakpoint(lg)
+        padding: 50px 50px
+
+    a
+        color: #000
+        transition: all 0.5s
+        border-bottom: 2px solid #777777
+
+        &:hover
+            border-bottom: 4px solid #777777
+
+    h1,h2,
+        margin-bottom: 20px
+
+    img
+        max-width: 100%
+        margin-bottom: 20px
+
+    img.alignleft
+
+        +breakpoint(sm)
+            float: left
+            margin-left: -80px
+            margin-right: 40px
+
+    img.alignright
+        +breakpoint(sm)
+            float: right
+            margin-right: -80px
+            margin-left: 40px
+
+.hero-header
+    height: 185px
+    width: 100%
+    background-color: #333337
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    position: relative
+    margin-bottom: 50px
+
+    +breakpoint(sm)
+        height: 300px
+    +breakpoint(md)
+        height: 390px
+    +breakpoint(lg)
+        height: 460px
+
+.hero-header__inner
+    color: #fff
+    padding: 60px 15px
+    text-align: center
+
+    +breakpoint(sm)
+        padding: 130px
+
+    +breakpoint(md)
+        padding: 150px 100px
+
+    +breakpoint(lg)
+        padding: 200px 150px
+
+.hero-header__meta
+    +font-size(12)
+    color: #333337
+    margin-bottom: 10px
+    position: absolute
+    bottom: -42px
+    width: 100%
+    text-align: center
+
+    +breakpoint(sm)
+        bottom: -50px
+
+
+.hero-header__tags
+    margin-bottom: 10px
+    text-transform: uppercase
+    word-spacing: 10px
+    letter-spacing: 5px
+    font-weight: 700
+    color: #fff
+    +font-size(10)
+
+    +breakpoint(sm)
+        +font-size(12)
+
+    +breakpoint(md)
+        +font-size(14)
+
+    a
+        border-bottom: none
+        +font-size(10)
+        margin: 0 10px
+
+        +breakpoint(sm)
+            +font-size(12)
+
+        +breakpoint(md)
+            +font-size(14)
+
+
+.hero-header__author
+    margin-bottom: 0
+
+    a
+        border-bottom: none
+        text-transform: uppercase
+        letter-spacing: 5px
+        +font-size(12)
+        font-weight: 700
+        color: #333337
+
+        +breakpoint(sm)
+            +font-size(14)
+
+        +breakpoint(md)
+            +font-size(16)
+
+.hero___avatar-link
+    border-bottom: none
+
+.single-content__meta_spacer
+    margin: 0 0 40px
+    width: 100px
+    border: 2px solid #dededc
+
+.page__footer
+    padding: 40px 0 0 0
+    background-color: #F5F5F5
+    border-top: solid 1px #E9E9E9
+    text-align: center
+
+.post__footer
+    background-size: cover
+    background-position: center
+
+.responsive-video-container
+    margin-bottom: 20px

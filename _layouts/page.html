@@ -1,0 +1,32 @@
+---
+layout: default
+---
+{% assign author = site.data.authors[page.author_slug] %}
+
+<header class="hero-header"
+      style="background-image: url({{ site.baseurl }}/img/{{page.feature_image}})"
+  >
+
+    <div class="overlay hero-header__inner">
+        <h1 class="animated fadeIn delay-1">{{ page.title | escape }}</h1>
+    </div>
+</header>
+<main class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 main-content">
+
+            {{ content }}
+
+        </div><!-- main-content/col -->
+    </div> <!--/row -->
+</main> <!-- /container -->
+
+<footer class="page__footer">
+    <div class="container">
+        <div class="col-sm-12 col-md-8 col-md-offset-2 ">
+            <p>
+                {{page.footer}}
+            </p>
+        </div>
+    </div>
+</footer>

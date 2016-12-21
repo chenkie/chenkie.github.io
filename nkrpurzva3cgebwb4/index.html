@@ -1,0 +1,103 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 3'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 372
+wordpress_url: http://ryanchenkie.com/?page_id=372
+date: '2015-07-25 10:21:42 -0400'
+date_gmt: '2015-07-25 16:21:42 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>So far we&rsquo;ve seen a few of the fundamentals of AngularJS by going over some theory and then putting the concepts into practice. Today we&rsquo;re going to dive into the concept of services which are very important in AngularJS.</p>
+<p>In software development, it&rsquo;s a best practice to make our code as DRY (don&rsquo;t-repeat-yourself) and reusable as possible. This is an intuitive concept and it&rsquo;s likely easy for you to see why we&rsquo;d want to be as DRY as possible with our code, but if you are newer to coding it might not seem like that big of a deal to repeat a little code here and there. It&rsquo;s true that there are some occasions that necessitate being repetitive a little bit, and for trivial applications maybe it&rsquo;s not that big of a deal to not have DRY code. However, when applications get larger and more complex, it quickly becomes a maintenance nightmare to be updating the same pieces of code all across the application. Updating something simple could turn into a ton of wasted time that could have been used for something more important.</p>
+<h2 id="what-is-a-service">What is a Service?<&#47;h2><br />
+In AngularJS, using services is one great way we can keep our code DRY. A service in Angular is essentially a generalized piece of code that is given some kind of responsibility or job. This piece of code can then be shared across different parts of the application to deliver on whatever that responsibility or job is. A service&rsquo;s purpose can be anything we want really, but one of the most common things they are responsible for is communication with an API (application programming interface), which is often to perform operations that retrieve and save data in a database.</p>
+<p>To make matters somewhat confusing for programmers who are new to AngularJS, the framework provides several different ways to create services and the occasions that we are supposed to use each kind aren&rsquo;t terribly clear. For applications that need to perform CRUD (create, read, updated, delete) operations on a database, the most appropriate service to use&mdash;and the one we&rsquo;ll focus on in this course&mdash;is the <a href="https:&#47;&#47;docs.angularjs.org&#47;guide&#47;services">factory service<&#47;a>. The <code>factory<&#47;code> service type lets us use other services within them and they help with performance because they&rsquo;re only instantiated when needed. The terms &ldquo;factory&rdquo; and &ldquo;service&rdquo; are used somewhat interchangeably in the AngularJS world since a <code>factory<&#47;code> is a type of service.</p>
+<h2 id="putting-a-factory-service-to-use">Putting a Factory Service to Use<&#47;h2><br />
+We&rsquo;re not going to be doing CRUD operations on an actual database in this course (although we&rsquo;ll mimic it), but we can still setup a <code>factory<&#47;code> service to get a sense of how it works. For our purposes we&rsquo;re going to want to have a <code>factory<&#47;code> that returns the cribs data that we currently have being placed on <code>$scope<&#47;code> within the <code>cribsController<&#47;code>.</p>
+<p>Let&rsquo;s create a new file called <code>cribsFactory.js<&#47;code> in the scripts folder. In this file we&rsquo;ll define a new <code>factory<&#47;code> and give it a method that will return our cribs data.</p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsFactory.js<br />
+angular<br />
+  .module('cribsApp')<br />
+  .factory('cribsFactory', function() {</p>
+<p>    &#47;&#47; The same real estate listing data we<br />
+    &#47;&#47; had in the controller before<br />
+    var cribsData = [<br />
+        {<br />
+          "type": "Condo",<br />
+          "price": 220000,<br />
+          "address": "213 Grove Street",<br />
+          "description": "Excellent place, really nice view!"<br />
+        },<br />
+        {<br />
+          "type": "House",<br />
+          "price": 410500,<br />
+          "address": "7823 Winding Way",<br />
+          "description": "Beautiful home with lots of space for a large family."<br />
+        },<br />
+        {<br />
+          "type": "Duplex",<br />
+          "price": 395000,<br />
+          "address": "834 River Lane",<br />
+          "description": "Great neighbourhood and lot's of nice green space."<br />
+        }<br />
+      ]</p>
+<p>    &#47;&#47; Method that returns the cribs data<br />
+    function getCribs() {<br />
+      return cribsData;<br />
+    }    </p>
+<p>    &#47;&#47; We need to return the methods that we want<br />
+    &#47;&#47;  to be accessible from outside the service<br />
+    return {<br />
+      getCribs: getCribs<br />
+    }</p>
+<p>  });<br />
+<&#47;code><&#47;pre><br />
+To get going with creating the <code>factory<&#47;code> we once again have to reference our application module with <code>angular.module<&#47;code>. We then chain <code>.factory<&#47;code> onto the module and give it a name of &ldquo;cribsFactory&rdquo;. Within the callback function we are putting our array of cribs objects on a variable called <code>cribsData<&#47;code> and setting up a function called <code>getCribs<&#47;code> that returns this data. The <code>return<&#47;code> statement at the end is what the actual factory itself is going to return which in our case is an object with a <code>getCribs<&#47;code> key that references the <code>getCribs<&#47;code> function above.</p>
+<p>So now that we have a <code>factory<&#47;code> in place, how do we make use of it? We&rsquo;ll take a look at that next, but let&rsquo;s first make sure we are bringing the newly created factory in with a <code><script><&#47;code> tag in <code>index.html<&#47;code>.</p>
+<pre><code class="language-markup"><!-- index.html --><br />
+...</p>
+<p>    <&#47;body><br />
+    <script src="node_modules&#47;angular&#47;angular.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap-tpls.js"><&#47;script><br />
+    <script src="app.js"><&#47;script><br />
+    <script src="scripts&#47;cribsController.js"><&#47;script><br />
+    <script src="scripts&#47;cribsFactory.js"><&#47;script><br />
+<&#47;html><br />
+<&#47;code><&#47;pre></p>
+<h2 id="using-factories-in-controllers">Using Factories in Controllers<&#47;h2><br />
+We talked briefly about dependency injection yesterday, but let&rsquo;s refresh on that concept. Dependency injection (DI) is a pattern in software development where we call upon chunks of code where and when we need them. You can probably see how that applies to our case: our <code>cribsFactory<&#47;code> is a chunk of code that we need because it is responsible for giving us our real estate listings, and we need it in our <code>cribsController<&#47;code> because that is the controller responsible for communicating listing data to the view. To make use of it, we just need to inject it in our controller much like how we injected <code>$scope<&#47;code> in yesterday.</p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js<br />
+angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope, cribsFactory) {</p>
+<p>    $scope.cribs = cribsFactory.getCribs();</p>
+<p>  });<br />
+<&#47;code><&#47;pre><br />
+With the <code>cribsFactory<&#47;code> injected we are able to call methods that are returned from it. As we saw earlier, on this service we have a <code>getCribs<&#47;code> method that returns all of our real estate listings. Getting those listings to be on <code>$scope<&#47;code> is then a simple one-liner where <code>$scope.cribs<&#47;code> is equal to a call to the <code>getCribs<&#47;code> method.</p>
+<p>If everything worked out we should be able to still see the real estate listings when we refresh the browser.</p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-3-1.png"><img class="alignnone size-full wp-image-373" src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-3-1.png" alt="day-3-1" width="1085" height="837" &#47;><&#47;a></p>
+<h2 id="what-was-the-point-of-doing-that">What Was the Point of Doing That?<&#47;h2><br />
+So now you might be wondering why we did all that work. All it really did was move our data from one file to another and there was more code involved in the end anyway. At this early stage that is certainly true, but the benefits of it will be seen down the road when our application gets bigger. For example, imagine that we need to put in another controller and view that are responsible for something else completely&mdash;maybe something like displaying company information&mdash;but you&rsquo;d still like to have a spot at the bottom of that page to show real estate listings. If we still had our <code>cribsController<&#47;code> setup the way it was before, we could always just duplicate the code from it and put it in the new controller. But then what if we have another view that needs the data? Ok, we can just duplicate the code again.</p>
+<p>I think you can see where this is going&mdash;we&rsquo;re duplicating things a lot of times and this can get nightmarish in large applications when changes needs to be made. The better way to handle our growing app&rsquo;s need for real estate listing data is to <em>abstract<&#47;em> the logic that takes care of fetching the data to one central location. Then, when we have a new controller that needs to make use of that logic, we just inject the service that handles it and make use of the methods on that service, like we&rsquo;ve now done in our <code>cribsController<&#47;code>. It might seem like more work upfront, but the downstream benefits to this approach are big&mdash;less time maintaining code, fewer places something can break, and much better organization which makes it easier to find things.</p>
+<p>A tenet that some developers subscribe to is that of &ldquo;skinny controllers&rdquo;. This philosophy says that controllers should be kept minimal in their size and that business logic shouldn&rsquo;t exist within them, but rather should be offloaded elsewhere. The controller then just becomes the traffic controller that communicates business logic to the view. Using services like we have here let&rsquo;s us accomplish that skinny controller approach.</p>
+<h2 id="wrapping-up-day-3">Wrapping Up Day 3<&#47;h2><br />
+That&rsquo;s all for today&mdash;great job learning about services! We took a good look at some core concepts, including:</p>
+<ul>
+<li>What services are and why they are useful<&#47;li>
+<li>The different options for services in AngularJS and that for a lot of cases we&rsquo;ll want to use <code>factory<&#47;code><&#47;li>
+<li>How we can apply a <code>factory<&#47;code> service to our application and thereby abstract a common task to a central location where it can be reused later.<&#47;li><br />
+<&#47;ul><br />
+See you back here tomorrow for Day 4!</p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

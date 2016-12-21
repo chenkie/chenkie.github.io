@@ -1,0 +1,28 @@
+---
+layout: default
+bodyclass: full-height
+---
+{% assign posts_to_loop = site.categories[page.category_slug] %}
+<div class="container full-container full">
+    <div class="row full">
+
+          <div class="col-sm-12 hero" style="background-image: url({{ site.baseurl }}/img/{{page.category_feature_image}});">
+                <div class="overlay">
+                    <h1 class="animated fadeIn delay-2 hero__title--tag">All posts in {{page.category_name}} category</h1>
+                    {% assign num_of_cat_posts = site.categories[page.category_slug] | size  %}
+                    {% if num_of_cat_posts <= 0 %}
+                      {% assign post_qualifier = "No posts" %}
+                    {% elsif num_of_cat_posts == 1 %}
+                      {% assign post_qualifier = "1 Post" %}
+                    {% else %}
+                      {% assign post_qualifier = num_of_cat_posts | append: " Posts" %}
+                    {% endif %}
+                    <p class="hero__content  animated fadeIn delay-2">{{ post_qualifier }} in Collection</p>
+                    <p class="hero__content  animated fadeIn delay-2">{{page.category_description}}</p>
+
+                </div>
+            </div>
+            {% include loop-posts-general.html posts=posts_to_loop %}
+
+    </div> <!--/row -->
+</div>

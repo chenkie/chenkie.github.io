@@ -1,0 +1,118 @@
+@import url(http://fonts.googleapis.com/css?family=Bitter:400,700|Open+Sans:400,700,300,300italic,400italic)
+
+$sans : 'Open Sans', sans-serif
+$serif : 'Bitter', serif
+
+$text-color : #333337
+$light-grey : #b6b6b6
+$light-blue : #4761e2
+
+$base-color : $light-blue
+
+body,
+button,
+input,
+select,
+textarea
+    color: $text-color
+
+// Font smoothing for headings
+.full-height
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+
+p, li
+    margin-bottom: 30px
+    font-family: $sans
+    font-weight: 100
+    +font-size(18)
+    +line-height(24)
+
+    +breakpoint(sm)
+        +font-size(20)
+        +line-height(28)
+
+    +breakpoint(md)
+        +font-size(22)
+        +line-height(32)
+a
+    text-decoration: none
+    color: #fff
+    border-bottom: solid 1px #fAfafa
+    transition: color 0.3s
+
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus
+        color: rgba(255,255,255,0.6)
+        text-decoration: none
+        @include transition(all, 300ms)
+
+h1, h2, h3, h4,h5,h6
+    border-bottom: solid 0px transparent
+h1,
+h2
+    font-family: $serif
+    font-weight: 700
+
+h1
+    margin: 0
+    font-family: $serif
+    +font-size(32)
+
+    +breakpoint(md)
+        +font-size(58)
+
+    a
+        border-bottom: solid transparent 0px
+h2
+    margin: 0
+    +font-size(32)
+
+h3
+    +font-size(26)
+    font-family: $serif
+
+h4
+    font-family: $serif
+
+b
+    font-weight: 700
+i
+    font-style: italic
+ul,
+ol
+    margin-bottom: 20px
+    padding-left: 20px
+    +font-size(16)
+
+    li
+        margin: 5px 0
+        font-family: $sans
+
+hr
+    display: block
+    width: 20%
+    margin: 50px auto 40px auto
+    border: 1px solid #dededc
+
+blockquote
+
+    +breakpoint(sm)
+        border: none
+        margin-left: -20%
+        width: 140%
+        padding: 30px 10px
+        border: none
+
+        p
+            +font-size(45)
+            +line-height(40)
+            letter-spacing: -0.01em
+            font-weight: 300
+            font-style: italic
+
+mark
+    background-color: #333337
+    color: #fff

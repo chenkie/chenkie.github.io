@@ -1,0 +1,45 @@
+---
+layout: default
+bodyclass: full-height
+---
+{% assign author = site.data.authors[page.author_slug] %}
+{% assign author_posts = site.posts | where: "author_slug", page.author_slug %}
+<div class="container full-container full">
+    <div class="row full">
+
+            <div class="col-sm-12 hero" style="background-image: url({{ site.baseurl }}/img/{{author.cover_image}});">
+                <div class="overlay overlay--author ">
+
+                  <div class="author-details">
+
+                      <img src='{{ site.baseurl }}/img/{{author.avatar_image}}' class="author-details__image">
+
+                      <div class="author-details__info">
+
+                        {% assign num_oft_posts = author_posts| size  %}
+                        {% if num_oft_posts <= 0 %}
+                          {% assign post_qualifier = "No posts" %}
+                        {% elsif num_oft_posts == 1 %}
+                          {% assign post_qualifier = "1 Post" %}
+                        {% else %}
+                          {% assign post_qualifier = num_oft_posts | append: " Posts" %}
+                        {% endif %}
+                        <p class="author-details__nop">{{ post_qualifier }} in Collection</p>
+
+                          <hr class="author-details__spacer">
+
+                            <h3 class="author-details__name">{{author.name}}</h3>
+
+                            <p class="author-details__bio">{{author.bio}}</p>
+                            <p class="author-details__extra"> {{author.location}} / <a  class="author-details__link" href="{{author.url}}">{{author.url}}</a></p>
+
+                            {% include author-social-icons.html author=author %}
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+            {% include loop-posts-general.html  posts=author_posts%}
+
+    </div> <!--/row -->
+</div>

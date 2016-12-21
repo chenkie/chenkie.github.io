@@ -1,0 +1,365 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 5'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 383
+wordpress_url: http://ryanchenkie.com/?page_id=383
+date: '2015-07-25 11:09:42 -0400'
+date_gmt: '2015-07-25 17:09:42 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>So far in this course we&rsquo;ve focused heavily on introducing new concepts and demonstrating how they play out when we wire our applications together. However, the application as it is right now isn&rsquo;t very useful. While it&rsquo;s necessary to get new concepts understood and out of the way, we also need to make something that works! <&#47;p></p>
+<p>Today we&rsquo;re going to focus on building out our application further and getting the user interface refined so that the app is both functional and good looking. We&rsquo;ll be doing a lot of work with HTML and CSS, so if you&rsquo;ve got a strong background with markup and styling, this lesson will be a breeze. We will, however, get to put a lot of Angular&rsquo;s custom directives to work which will be new.<&#47;p></p>
+<h2 id="changing-the-html-structure">Changing the HTML Structure<&#47;h2></p>
+<p>Right now we have a pretty basic setup for how the real estate listings are displaying on the page. What we&rsquo;ll actually want is more of a card-type layout where we have three listing cards per row. As a first step, we&rsquo;re going to use Bootstrap to give our HTML some better structure by making use of the <a href="http:&#47;&#47;getbootstrap.com&#47;css&#47;#grid">grid system<&#47;a>. <&#47;p></p>
+<p>We&rsquo;re also going to add some extra data into our <code>cribs.json<&#47;code> file. We want to have some extra details and photos for each of our listings, and we want to have more of them overall.<&#47;p></p>
+<p>Let&rsquo;s first edit <code>cribs.json<&#47;code> with some new data:<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; data&#47;cribs.json</p>
+<p>[<br />
+  {<br />
+    "id": 1,<br />
+    "type": "Condo",<br />
+    "price": 220000,<br />
+    "address": "213 Grove Street",<br />
+    "description": "Excellent place, really nice view!",<br />
+    "details": {<br />
+      "bedrooms": 2,<br />
+      "bathrooms": 1.5,<br />
+      "area": 921<br />
+    },<br />
+    "image":"crib-1"<br />
+  },<br />
+  {<br />
+    "id": 2,<br />
+    "type": "House",<br />
+    "price": 410500,<br />
+    "address": "7823 Winding Way",<br />
+    "description": "Beautiful home with lots of space for a large family.",<br />
+    "details": {<br />
+      "bedrooms": 4,<br />
+      "bathrooms": 3,<br />
+      "area": 2145<br />
+    },<br />
+    "image":"crib-2"<br />
+  },<br />
+  {<br />
+    "id": 3,<br />
+    "type": "Duplex",<br />
+    "price": 395000,<br />
+    "address": "834 River Lane",<br />
+    "description": "Great neighbourhood and lot's of nice green space.",<br />
+    "details": {<br />
+      "bedrooms": 3,<br />
+      "bathrooms": 2.5,<br />
+      "area": 1500<br />
+    },<br />
+    "image":"crib-3"<br />
+  },<br />
+  {<br />
+    "id": 4,<br />
+    "type": "House",<br />
+    "price": 755990,<br />
+    "address": "7807 Forest Avenue",<br />
+    "description": "Best house on the block!",<br />
+    "details": {<br />
+      "bedrooms": 6,<br />
+      "bathrooms": 4.5,<br />
+      "area": 3230<br />
+    },<br />
+    "image":"crib-4"<br />
+  },<br />
+  {<br />
+    "id": 5,<br />
+    "type": "Condo",<br />
+    "price": 210500,<br />
+    "address": "1857 Andover Court",<br />
+    "description": "Nice little condo with room to grow.",<br />
+    "details": {<br />
+      "bedrooms": 2,<br />
+      "bathrooms": 1.5,<br />
+      "area": 1023<br />
+    },<br />
+    "image":"crib-5"<br />
+  },<br />
+  {<br />
+    "id": 6,<br />
+    "type": "House",<br />
+    "price": 334900,<br />
+    "address": "7398 East Avenue",<br />
+    "description": "You'll love the view!",<br />
+    "details": {<br />
+      "bedrooms": 4,<br />
+      "bathrooms": 2.5,<br />
+      "area": 1788<br />
+    },<br />
+    "image":"crib-6"<br />
+  }<br />
+]<br />
+<&#47;code><&#47;pre></p>
+<p>As you can see, we&rsquo;ve doubled the number of listings in our JSON data. We&rsquo;ve also added a new key, <code>image<&#47;code>, which we&rsquo;ll use to load stock photos for the listings. I&rsquo;ve downloaded some photos from <a href="https:&#47;&#47;stocksnap.io">StockSnap.io<&#47;a> and saved them to a folder called <code>images<&#47;code> in my main project directory. You can download images from StockSnap as well, but feel free to use any other images you like. Beyond that, we&rsquo;ve also added in an <code>id<&#47;code> key which will come in handy later, and we&rsquo;ve included some more information about the properties on the <code>details<&#47;code> key.<&#47;p></p>
+<p>Now let&rsquo;s change the HTML up to give us some better structure.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><body ng-app="cribsApp" ng-controller="cribsController"></p>
+<p>  <!-- Nav Bar --></p>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+<div class="navbar-header">
+        <a class="navbar-brand" href="#">ng-cribs<&#47;a><br />
+      <&#47;div><br />
+    <&#47;div><br />
+  <&#47;nav></p>
+<p>  <!-- Real Estate Listings --></p>
+<div class="container">
+<div class="col-sm-4" ng-repeat="crib in cribs">
+<div class="thumbnail">
+        <img ng-src="images&#47;{{crib.image}}.jpg" alt=""></p>
+<div class="caption">
+<h3>{{crib.address}}<&#47;h3></p>
+<p><strong>Type: <&#47;strong>{{crib.type}}<&#47;p></p>
+<p><strong>Description: <&#47;strong>{{crib.description}}<&#47;p></p>
+<p><strong>Price: <&#47;strong>{{crib.price | currency}}<&#47;p><br />
+        <&#47;div><br />
+      <&#47;div><br />
+    <&#47;div><br />
+  <&#47;div>   </p>
+<p><&#47;body>   </p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>The first thing we&rsquo;ve done here is given the application a <code><br />
+<navbar><&#47;code> that will help it to look more like a real app. Next, in the real estate listings section, we&rsquo;ve put in a <code>container<&#47;code> <code>
+<div><&#47;code> which allows Bootstrap to apply its grid system to the site contents. Inside the <code>container<&#47;code> <code>
+<div><&#47;code> we have created another <code>
+<div><&#47;code> with a class of <code>col-sm-4<&#47;code>. This class says that we want the contents within that <code>
+<div><&#47;code> to have a column width of 4 out of 12 which equates to 1&#47;3 of the page. The CSS that bootstrap applies will then give each of these columns a width of 33%. Inside this <code>
+<div><&#47;code> is where the meat of the real estate listings will be. We&rsquo;re using Bootstrap&rsquo;s <a href="http:&#47;&#47;getbootstrap.com&#47;components&#47;#thumbnails">thumbnail<&#47;a> class to give each listing some padding and a nice border. Inside the <code>
+<div><&#47;code> with class <code>caption<&#47;code> we see that the code we originally had is still in place.<&#47;p></p>
+<p>You&rsquo;ll see that we&rsquo;re using a directive called <code>ng-src<&#47;code> on the image tag to pull in the listing image. We could use the standard <code>src<&#47;code> attribute here, but the problem is that it will send a request for the image as soon as the HTML is loaded and before the application has had a chance to bootstrap itself. This will cause a <code>404<&#47;code> error in the console because the browser thinks it needs to search for an image called, quite literally, <code>{{crib.image}}.jpg<&#47;code>. In reality however, that name will change once the template loads the proper name for each image. To overcome this, <code>ng-src<&#47;code> is used so that the application doesn&rsquo;t request the image until it is ready.<&#47;p></p>
+<p>If everything is wired up correctly, we should see the new look right away:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-1.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-1.png" alt="day-5-1" width="1314" height="1145" class="alignnone size-full wp-image-384" &#47;><&#47;a></p>
+<p>We&rsquo;re off to a good start! However, the layout still needs some work. Let&rsquo;s think about some other things we&rsquo;ll want the application to do:<&#47;p></p>
+<ul>
+<li>Show the information we have on the <code>details<&#47;code> key of our <code>cribs.json<&#47;code> data, including the number of bedrooms, bathrooms and square footage.<&#47;li>
+<li>Hide the description and address until the user clicks a button to expand the card<&#47;li>
+<li>Make the card look a bit better by adding in icons<&#47;li><br />
+<&#47;ul></p>
+<h2 id="refining-the-listing-cards">Refining the Listing Cards<&#47;h2></p>
+<p>Let&rsquo;s use some of Angular&rsquo;s built-in directives to improve our user interface. At the same time we&rsquo;ll change up the HTML to reflect the other things we want to accomplish.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><!-- Real Estate Listings --></p>
+<div class="container">
+<div class="col-sm-4" ng-repeat="crib in cribs">
+<div class="thumbnail">
+      <img ng-src="images&#47;{{crib.image}}.jpg" alt=""></p>
+<div class="caption">
+<div ng-hide="showDetails === true">
+<h3><i class="glyphicon glyphicon-tag"><&#47;i> {{crib.price | currency}}<&#47;h3></p>
+<h4><i class="glyphicon glyphicon-home"><&#47;i> {{crib.address}}<br />
+            <span class="label label-primary label-sm">{{crib.type}}<&#47;span><br />
+          <&#47;h4></p>
+<p>        <&#47;div>             </p>
+<p>        <button class="btn btn-xs btn-success"<br />
+                ng-hide="showDetails === true"<br />
+                ng-click="showDetails = !showDetails"><br />
+                Details<br />
+        <&#47;button></p>
+<p>        <button class="btn btn-xs btn-danger"<br />
+                ng-show="showDetails === true"<br />
+                ng-click="showDetails = !showDetails"><br />
+                Close<br />
+        <&#47;button></p>
+<div class="details" ng-show="showDetails === true">
+<h4>
+            <span class="label label-primary">Beds: {{crib.details.bedrooms}}<&#47;span><br />
+            <span class="label label-primary">Baths: {{crib.details.bathrooms}}<&#47;span><br />
+            <span class="label label-primary">SqFt: {{crib.details.area}}<&#47;span><br />
+          <&#47;h4></p>
+<p>{{crib.description}}<&#47;p><br />
+        <&#47;div></p>
+<p>      <&#47;div><br />
+    <&#47;div><br />
+  <&#47;div><br />
+<&#47;div></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>As you can see, we&rsquo;ve changed quite a few things, all within the <code>
+<div><&#47;code> with class <code>caption<&#47;code>. You&rsquo;ll likely first notice that we&rsquo;ve put an Angular directive called <code>ng-hide<&#47;code> on the <code>
+<div><&#47;code> directly beneath <code>caption<&#47;code>. To get a sense for what this does, let&rsquo;s take a look at the two buttons towards the middle. <&#47;p></p>
+<h3 id="ng-click">ng-click<&#47;h3></p>
+<p>Both buttons have another Angular directive on them called <code>ng-click<&#47;code>. This directive lets us define some behaviour that should happen when an element is clicked. This could be any kind of element, and in our case we&rsquo;re using a button. We&rsquo;re providing the directive with an expression that should be run when the element is clicked and here we&rsquo;re using negation to say that we want to set a model called <code>showDetails<&#47;code> to be the opposite of whatever it currently is. In other words, if the <code>showDetails<&#47;code> model is currently <code>true<&#47;code>, we want to set it to <code>false<&#47;code> and vice versa. <&#47;p></p>
+<p>The text for the first button is &ldquo;Details&rdquo; and for the second is &ldquo;Close. As you&rsquo;ll probably guess, we want one of the buttons to open up the details panel and the other to close it.<&#47;p></p>
+<h3 id="ng-show-and-ng-hide">ng-show and ng-hide<&#47;h3></p>
+<p>Angular provides us with ways to conditionally show and hide elements on a page simply by putting an <code>ng-show<&#47;code> or <code>ng-hide<&#47;code> attribute on the element and specifying the conditions under which they should show or not. As we mentioned above, the <code>showDetails<&#47;code> model is getting set to either <code>true<&#47;code> or <code>false<&#47;code> depending on what it&rsquo;s current state is. It is this <code>showDetails<&#47;code> model that will tell us whether we should show or hide certain portions of the UI. <&#47;p></p>
+<p>Back to the <code>
+<div><&#47;code> just under <code>caption<&#47;code>, we&rsquo;re using the <code>ng-hide<&#47;code> directive to say that we want to <strong>hide<&#47;strong> that <code>
+<div><&#47;code> and everything within it whenever <code>showDetails<&#47;code> is <code>true<&#47;code>. Further down in the <code>
+<div><&#47;code> with class <code>details<&#47;code>, we&rsquo;re using <code>ng-show<&#47;code> to say we want to <strong>show<&#47;strong> that <code>
+<div><&#47;code> when <code>showDetails<&#47;code> is set to <code>true<&#47;code>. We&rsquo;re doing the same thing with the buttons themselves because we only want to show the &ldquo;details&rdquo; button when the <code>details<&#47;code> <code>
+<div><&#47;code> <strong>isn&rsquo;t<&#47;strong> being shown and we only want to show the &ldquo;close&rdquo; button when it <strong>is<&#47;strong> shown.<&#47;p></p>
+<h3 id="ng-model">ng-model<&#47;h3></p>
+<p>We haven&rsquo;t seen it yet, but <code>ng-model<&#47;code> is a very important directive that is used extensively in Angular applications. We know that we can put some data on <code>$scope<&#47;code> in our controller and then refer to that data in our view using templating with double curly braces. We can also get a reference to that data by putting the <code>ng-model<&#47;code> attribute on elements such as <code><input><&#47;code> and <code><br />
+<select><&#47;code>and setting <code>ng-model<&#47;code> to be equal to the name of what we have on <code>$scope<&#47;code>. Since we have two-way data binding in Angular, any time we update an <code><input><&#47;code> element with a given <code>ng-model<&#47;code> on it, the value of that model will change to be whatever we have typed in. This might be a bit tricky to grasp right now, but we&rsquo;ll see it at work later on.<&#47;p></p>
+<h2 id="adding-a-custom-filter">Adding a Custom Filter<&#47;h2></p>
+<p>So far we&rsquo;re displaying all the real estate listings we have. This is great, but it will quickly get problematic once more and more listings start coming in. To help with this, what we&rsquo;ll need is a way to drill down to a subset of the total listings so that we don&rsquo;t have to see everything all at once. There are many different ways by which we can filter real estate listings, some of which include location, price and type. To demonstrate how to use a custom AngularJS filter, we&rsquo;re going to keep it simple and demonstrate how we can filter by price. We&rsquo;ll create a simple form with two <code><br />
+<select><&#47;code> drop downs that allow the user to choose the price range they would like to apply to their real estate search.<&#47;p></p>
+<p>Angular gives us a lot of versatility when it comes to filtering data and lets create our own custom filters using its <code>filterProvider<&#47;code>.<&#47;p></p>
+<p>Let&rsquo;s first create the UI elements that we&rsquo;ll need for our filter. Right above our <code>ng-repeat<&#47;code> block and just below the <code>
+<div><&#47;code> with class <code>container<&#47;code>, let&rsquo;s create two <code><br />
+<select><&#47;code> drop downs:<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><!-- Min and Max Price Selection --></p>
+<div class="col-sm-12 price-form">
+<div class="col-sm-6">
+<div class="input-group">
+      <span class="input-group-addon">Min Price<&#47;span></p>
+<select name="minPrice" id="minPrice" ng-model="priceInfo.min" class="form-control">
+<option value="100000">$100,000<&#47;option></p>
+<option value="200000">$200,000<&#47;option></p>
+<option value="300000">$300,000<&#47;option></p>
+<option value="400000">$400,000<&#47;option></p>
+<option value="500000">$500,000<&#47;option></p>
+<option value="600000">$600,000<&#47;option></p>
+<option value="700000">$700,000<&#47;option></p>
+<option value="800000">$800,000<&#47;option></p>
+<option value="900000">$900,000<&#47;option></p>
+<option value="1000000">$1,000,000<&#47;option><br />
+      <&#47;select><br />
+    <&#47;div><br />
+  <&#47;div></p>
+<div class="col-sm-6">
+<div class="input-group">
+      <span class="input-group-addon">Max Price<&#47;span></p>
+<select name="maxPrice" id="maxPrice" ng-model="priceInfo.max" class="form-control">
+<option value="100000">$100,000<&#47;option></p>
+<option value="200000">$200,000<&#47;option></p>
+<option value="300000">$300,000<&#47;option></p>
+<option value="400000">$400,000<&#47;option></p>
+<option value="500000">$500,000<&#47;option></p>
+<option value="600000">$600,000<&#47;option></p>
+<option value="700000">$700,000<&#47;option></p>
+<option value="800000">$800,000<&#47;option></p>
+<option value="900000">$900,000<&#47;option></p>
+<option value="1000000">$1,000,000<&#47;option><br />
+      <&#47;select><br />
+    <&#47;div><br />
+  <&#47;div></p>
+<p><&#47;div></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>We&rsquo;ve got a lot of new elements with some Bootstrap classes to help us out with positioning and styling, but the important parts here are the two <code><br />
+<select><&#47;code> elements. We&rsquo;ve put the <code>ng-model<&#47;code> directive right on the <code><br />
+<select><&#47;code> element and assigned the first one to a <code>priceInfo<&#47;code> object with a key of <code>min<&#47;code>. Similarly, for the second <code><br />
+<select><&#47;code> drop down we&rsquo;re giving it an <code>ng-model<&#47;code> of <code>priceInfo.max<&#47;code>. Now that we have models for these values, we can use them in a custom filter.<&#47;p></p>
+<p>We&rsquo;ve also got a custom-defined class on the opening <code>
+<div><&#47;code> tag called <code>price-form<&#47;code>. We&rsquo;ll use some CSS to style this element a bit better. Let&rsquo;s create a new folder called <code>css<&#47;code> and put in a new file called <code>style.css<&#47;code>.<&#47;p></p>
+<pre><code class="language-markup">mkdir css<br />
+cd css<br />
+touch style.css<br />
+<&#47;code><&#47;pre></p>
+<p>Next, let&rsquo;s put the styles in.<&#47;p></p>
+<pre><code class="language-css">&#47;* css&#47;style.css *&#47;</p>
+<p>.price-form {<br />
+  margin-bottom: 10px;<br />
+  padding: 15px;<br />
+  background-color: #5cb85c;<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Be sure to add the new stylesheet in <code>index.html<&#47;code> on a <code>
+<link><&#47;code> tag. <&#47;p></p>
+<p><!-- index.html --></p>
+<pre><code class="language-markup"><!doctype html><br />
+<html><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+        <title>ng-cribs<&#47;title></p>
+<link rel="stylesheet" href="node_modules&#47;bootstrap&#47;dist&#47;css&#47;bootstrap.css">
+<link rel="stylesheet" href="css&#47;style.css">
+    <&#47;head></p>
+<p>    ...<br />
+<&#47;code><&#47;pre></p>
+<p>Now let&rsquo;s make sure the new select drop down elements are showing up properly. If everything is correct, you should now see it in your browser:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-2.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-2.png" alt="day-5-2" width="1286" height="1117" class="alignnone size-full wp-image-385" &#47;><&#47;a></p>
+<p>Now that the UI elements for the filter are in place, let&rsquo;s create the actual filter. The <code>filterProvider<&#47;code> lets us create a filter by calling <code>.filter<&#47;code> on the <code>angular<&#47;code> object, much like how we created our <code>controller<&#47;code> and <code>factory<&#47;code>. Let&rsquo;s create a new file called <code>cribsFilter.js<&#47;code>.<&#47;p></p>
+<pre><code class="language-markup">cd scripts<br />
+touch cribsFilter.js<br />
+<&#47;code><&#47;pre></p>
+<p>Our filter will need to return a function which takes care of the actual filter logic.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsFilter.js</p>
+<p>angular<br />
+  .module('cribsApp')<br />
+  .filter('cribsFilter', function() {</p>
+<p>    &#47;&#47; The filter needs to return a function<br />
+    &#47;&#47; that does the actual filtering<br />
+    return function(listings, priceInfo) {</p>
+<p>      &#47;&#47; Empty array that will eventually contain<br />
+      &#47;&#47; the filtered data<br />
+      var filtered = [];</p>
+<p>      var min = priceInfo.min;<br />
+      var max = priceInfo.max;</p>
+<p>      &#47;&#47; Loop through each listing and check whether<br />
+      &#47;&#47; the price value is in range<br />
+      angular.forEach(listings, function(listing) {</p>
+<p>        if(listing.price >= min &amp;&amp; listing.price <= max) {</p>
+<p>          &#47;&#47; If the value is in range, push it onto the array<br />
+          filtered.push(listing);<br />
+        }</p>
+<p>      });</p>
+<p>      &#47;&#47; Return the filtered array<br />
+      return filtered;<br />
+    }</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>We&rsquo;re creating a new <code>filter<&#47;code> on our <code>module<&#47;code> and calling it <code>cribsFilter<&#47;code>. In the callback function we are returning another function which takes two arguments, the first being the <code>listings<&#47;code> from our <code>cribs.json<&#47;code> data and the second one an object that we&rsquo;ll pass in when we call the filter from our view. The <code>priceInfo<&#47;code> argument is going to be the object that we&rsquo;ve put on <code>ng-model<&#47;code> which has on it <code>min<&#47;code> and <code>max<&#47;code> keys representing and minimum and maximum price. As you can see, we&rsquo;re assigning these values to variables at the top of the filter function.<&#47;p></p>
+<p>Along with everything else that AngularJS provides, it also gives us some helper functions that make it easier to do common tasks. We can see one of these at work here with Angular&rsquo;s <code>forEach<&#47;code> method. As you might expect, this method loops through a collection and lets us operate on it. Here we&rsquo;re saying that we want to iterate over the collection called <code>listings<&#47;code> which is the first argument passed into the filter function. The listings themselves are from our real estate listings data in our <code>cribs.json<&#47;code> file. For each of the listings we are checking whether the price value on them is between the <code>min<&#47;code> and <code>max<&#47;code> price that will be selected by the user. If that is the case, the listing will be pushed onto the <code>filtered<&#47;code> array. Finally, we return this array from the function.<&#47;p></p>
+<p>Now that we have the JavaScript in place for the filter, let&rsquo;s put it to work in our view:<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<div class="col-sm-4" ng-repeat="crib in cribs | cribsFilter:priceInfo">
+<div class="thumbnail">
+    <img ng-src="images&#47;{{crib.image}}.jpg" alt=""></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>Accessing the filter in the view only requires a slight change to our <code>ng-repeat<&#47;code> directive. In it we need to place a pipe character after <code>crib in cribs<&#47;code>, followed by the name of the filter. You&rsquo;ll see that we&rsquo;re then placing a semicolon and giving the filter the <code>priceInfo<&#47;code> object&mdash;this is how we pass in arguments with filters. You&rsquo;ll recall that our filter function took two arguments, <code>listings<&#47;code> and <code>priceInfo<&#47;code>, but we are only passing in the <code>priceInfo<&#47;code> argument here. That&rsquo;s because the first argument is implied to be the collection of data itself. <&#47;p></p>
+<p>We&rsquo;re almost there, but you&rsquo;ll see that when we refresh the page we are greeted with a blank screen:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-3.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-3.png" alt="day-5-3" width="1314" height="1145" class="alignnone size-full wp-image-386" &#47;><&#47;a></p>
+<p>The reason that no listings are showing up is that we don&rsquo;t have any values initialized for <code>priceInfo.min<&#47;code> and <code>priceInfo.max<&#47;code> so when the filter runs, it&rsquo;s not finding any listings that match up with these <code>null<&#47;code> values. If we select some valid price values from the <code><br />
+<select><&#47;code> drop downs, we get some listings displayed:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-4.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-5-4.png" alt="day-5-4" width="1314" height="1145" class="alignnone size-full wp-image-387" &#47;><&#47;a></p>
+<p>So that the user doesn&rsquo;t think something is wrong with the application when it loads, let&rsquo;s initialize those <code>min<&#47;code> and <code>max<&#47;code> values such that all the listings will show by default. We can do this by specifying some default values in <code>cribsController.js<&#47;code>.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope, cribsFactory) {</p>
+<p>    $scope.cribs;</p>
+<p>    $scope.priceInfo = {<br />
+      min: 0,<br />
+      max: 1000000<br />
+    }</p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>We&rsquo;re giving the <code>$scope.priceInfo<&#47;code> object a <code>min<&#47;code> value of 0 and <code>max<&#47;code> value of 1,000,000 so that we get the full range of prices that we have from our drop down lists. In a real application we would anticipate that there would be some listings that are over $1,000,000 and would thus write the filter to account for those, but this is fine for demonstration.<&#47;p></p>
+<p>If everything worked out, we should now see all the listings when the application loads and we should then be able to filter based on price.<&#47;p></p>
+<h2 id="wrapping-up-day-5">Wrapping Up Day 5<&#47;h2></p>
+<p>That was a lot of material today! Great job getting the application looking good and giving us some functionality. We got to see a lot of built-in AngularJS directives, including:<&#47;p></p>
+<ul>
+<li><code>ng-src<&#47;code> which allows us to properly load images when the application is ready<&#47;li>
+<li><code>ng-click<&#47;code> which allows us to hook into click events<&#47;li>
+<li><code>ng-show<&#47;code>&#47;<code>ng-hide<&#47;code> which allow us to conditionally show and hide elements. <&#47;li>
+<li><code>ng-model<&#47;code> which allows us to bind data between a controller and a view<&#47;li><br />
+<&#47;ul></p>
+<p>We also got to make a custom AngularJS filter that lets the user specify a price range to narrow down the results of their real estate listing search.<&#47;p></p>
+<p>We&rsquo;re making great progress on the application, but there are still a few things that are missing. Tomorrow we&rsquo;ll be covering how to add new real estate listings.<&#47;p></p>
+<p>See you tomorrow!<&#47;p></p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

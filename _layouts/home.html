@@ -1,0 +1,42 @@
+---
+layout: default
+bodyclass: full-height
+---
+
+<div class="container full-container full">
+    <div class="row full">
+          {% for post in site.posts %}
+              {% if forloop.index == 1 %}
+              {% assign author = site.data.authors[post.author_slug] %}
+
+              <div class="col-sm-12 hero" style="background-image: url({{ site.baseurl }}/img/{{post.feature_image}});">
+                  <div class="overlay">
+                      <h1 class="animated fadeIn delay-2"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h1>
+                          <p class="hero__content animated fadeIn delay-2">{{ post.excerpt | truncatewords: 24 | strip_html }}</p>
+
+                          <a href="{{author.permalink  | prepend: site.baseurl}}" class="hero___avatar-link"><img src="{{ site.baseurl }}/img/{{author.avatar_image}}"  alt="{{post.author_name}}"class="hero__content__avatar animated fadeIn delay-2" alt=""></a>
+                      <p class="hero__content post-preview__meta animated fadeIn delay-2">{{post.author_name}}</p>
+                  </div>
+              </div>
+              {% else %}
+              <div class="col-sm-6 col-md-4 col-lg-3 post-preview {% if post.is_featured %} post--featured {% endif %}" style="background-image: url({{ site.baseurl }}/img/{{post.feature_image}});">
+                  {% if post.is_featured %}
+                  <span class="post-featured-text">featured</span>
+                  {% endif %}
+                  <div class="overlay">
+                      <div class="post-preview__info animated fadeInUp delay-3">
+                          <div class="inner">
+                              <h2><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
+                              <p class="post-preview__meta">Posted In
+                                {% for category in post.categories %}
+                                    <a href="{{site.baseurl}}{{ category | prepend: "/category/"}}">{{ category | capitalize }}</a>{% if forloop.last %}{% else %},{% endif %}
+                                {% endfor %}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
+          {% endfor %}
+    </div> <!--/row -->
+</div>

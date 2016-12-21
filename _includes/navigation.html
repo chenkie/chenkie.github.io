@@ -1,0 +1,25 @@
+<div id="menu">
+    <ul>
+        {% for page in site.nav_list %}
+            <li><a href="{{ page[1][1] | prepend: site.baseurl }}">{{ page[1][0] }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+
+<span class="menu-trigger side-menu-icon animated fadeInDown">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</span>
+
+<!-- if the user has javascript disabled they can still use the menu -->
+<noscript>
+    <div class="no-js-menu">
+        <ul>
+          {% for page in site.nav_list %}
+              <li><a href="{{ page[1][1] | prepend: site.baseurl }}">{{ page[1][0] }}</a></li>
+          {% endfor %}
+        </ul>
+    </div>
+</noscript>
+<!-- end no script -->

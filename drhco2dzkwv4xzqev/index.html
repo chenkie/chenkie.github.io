@@ -1,0 +1,174 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 2'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 363
+wordpress_url: http://ryanchenkie.com/?page_id=363
+date: '2015-07-25 10:04:19 -0400'
+date_gmt: '2015-07-25 16:04:19 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>Welcome back to the second day of the course! Yesterday we learned some of the basic theory behind AngularJS, setup our development environment and then installed AngularJS and UI Bootstrap. Today we&rsquo;re going to dive into some more AngularJS concepts and get moving a bit further on our real estate listing application, <code>ng-cribs<&#47;code>.<&#47;p></p>
+<h2 id="the-mvc-pattern">The MVC Pattern<&#47;h2></p>
+<p>MVC stands for model-view-controller and it&rsquo;s a popular design pattern in software development. The pattern (or something similar to it) is seen in many web application frameworks today, and AngularJS is one of them. Essentially, the MVC pattern gives us a guide to follow for breaking our code out into different areas of responsibility. Let&rsquo;s take a look at each:<&#47;p></p>
+<ul>
+<li>Model&mdash;code that is responsible for logic, storing data, and communicating with a backend or database<&#47;li>
+<li>View&mdash;code (usually markup) responsible for what the user sees on their screen and the associated interaction elements such as buttons, input boxes, etc<&#47;li>
+<li>Controller&mdash;code that is a kind of middle man responsible for communicating data between the model and the view<&#47;li><br />
+<&#47;ul></p>
+<p>There are a lot of opinions and debates around the MVC pattern, where and how it should be used, and even what its definition is, but for our learning we&rsquo;ll keep it simple and stick to what we have above. In fact, many would argue that AngularJS is actually an MVVM framework, where VM stands for view-model. We won&rsquo;t get into the differences and nuances between MVC and MVVM in this course, but you can <a href="http:&#47;&#47;stackoverflow.com&#47;questions&#47;20286917&#47;angularjs-understanding-design-pattern">read about it<&#47;a> if you&rsquo;re interested. The Angular team has actually declared that the framework uses more of an MVW (model-view-whatever) pattern. Knowing this, we&rsquo;ll just try to get a basic understanding of MVC in general without worrying too much about the fine details.<&#47;p></p>
+<h2 id="the-controller">The Controller<&#47;h2></p>
+<p>We actually saw one piece of the MVC pattern in Day 1&mdash;the view. It didn&rsquo;t do a whole lot, but the welcome message we displayed on the screen at the end of the lesson was part of the view. Let&rsquo;s now jump to the controller so we can have a place to communicate data to the view.<&#47;p></p>
+<p>We can define our controllers by accessing the <code>controller<&#47;code> property on the <code>angular<&#47;code> object. Let&rsquo;s create a new controller within a folder called &ldquo;scripts&rdquo;. From the command line:<&#47;p></p>
+<pre><code class="language-markup">mkdir scripts<br />
+cd scripts<br />
+<&#47;code><&#47;pre></p>
+<p>Here we make a new directory called scripts and then change into it.<&#47;p></p>
+<pre><code class="language-markup">touch cribsController.js<br />
+<&#47;code><&#47;pre></p>
+<p>This creates a new file called <code>cribsController.js<&#47;code> which will be the controller we use for our project. There are several different naming conventions for files in AngularJS projects and the one you choose is up to you. The important part is to remain consistent across the project so that other people working on it don&rsquo;t get confused. I like to be explicit and spell out the whole name, which is what we&rsquo;ve done here.<&#47;p></p>
+<p>Now let&rsquo;s edit the file and define the controller.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js<br />
+angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope) {</p>
+<p>    &#47;&#47; TODO: communicate data to the view!</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>In yesterday&rsquo;s lesson we used <code>angular.module<&#47;code> to define the name of our application which we called <code>cribsApp<&#47;code>. We can also use the <code>module<&#47;code> method to grab a hold of a our module to add other things to it, which is what we&rsquo;re doing here. Notice that we don&rsquo;t add in the module injection array as a second argument.<&#47;p></p>
+<p>The <code>controller<&#47;code> method is what let&rsquo;s us define our controllers and we call this one the same thing we used in the file name, <code>cribsController<&#47;code>. The second argument for the controller definition is an anonymous function, inside of which our data communication will happen. Notice that we&rsquo;ve added something called <code>$scope<&#47;code> in as an argument to that function. This might look a little weird, so let&rsquo;s go over what that&rsquo;s all about.<&#47;p></p>
+<h2 id="introducing-scope">Introducing $scope<&#47;h2></p>
+<p>Perhaps <code>$scope<&#47;code> is totally new to you, or if you&rsquo;ve looked at any AngularJS examples before, perhaps you&rsquo;ve seen it already. So what exactly is it? The <a href="https:&#47;&#47;docs.angularjs.org&#47;guide&#47;scope">official description<&#47;a> from the AngularJS docs gets a bit complex, but for our purposes we can think of <code>$scope<&#47;code> as the piece or mechanism (really it&rsquo;s an object) that lets us tie data between our views and controllers together. It is responsible for moving data between the users&rsquo;s screen (aka the view) and the area in our code where we get data ready for transport (aka the controller). Rather than go any further with describing what <code>$scope<&#47;code> is or show you any kind of diagram, why don&rsquo;t we dive right in and see it at work.<&#47;p></p>
+<h2 id="dependency-injection">Dependency Injection<&#47;h2></p>
+<p>You might remember from Day 1 that one of the core features of AngularJS is dependency injection. This is a pattern seen in software design that let&rsquo;s us make use of individual components, services, functions or instances where and when they are needed. Dependency injection is beneficial because it makes it possible for us to abstract our code out into reusable chunks which can then be called upon later when we need them. <&#47;p></p>
+<p>In the code example above, <code>$scope<&#47;code> is injected simply by passing it as an argument to the callback function within the controller. This is the most popular way to do dependency injection in Angular, although there are other ways as well. When we&rsquo;re dealing with simple apps the dependency injection system is great&mdash;we just call whichever piece we need when we need it.<&#47;p></p>
+<p>Now that we&rsquo;ve got an understanding of these concepts, let&rsquo;s put <code>$scope<&#47;code> to work and get it displaying data in our view.<&#47;p></p>
+<h2 id="displaying-data-in-the-view">Displaying Data in the View<&#47;h2></p>
+<p>Let&rsquo;s start small and do a simple test to get going.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js<br />
+angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope) {</p>
+<p>    $scope.hello = "Hello World!";</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>Here&rsquo;s the classic &ldquo;Hello World!&rdquo; example to get us going. Now that this string is on <code>$scope<&#47;code> we can make use of it in the view.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --><br />
+<!doctype html><br />
+<html><br />
+    <head><br />
+        <meta charset="utf-8"><br />
+        <title>ng-cribs<&#47;title></p>
+<link rel="stylesheet" href="node_modules&#47;bootstrap&#47;dist&#47;css&#47;bootstrap.css">
+    <&#47;head><br />
+    <body ng-app="cribsApp" ng-controller="cribsController"></p>
+<h1>{{hello}}<&#47;h1></p>
+<p>    <&#47;body><br />
+    <script src="node_modules&#47;angular&#47;angular.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap.js"><&#47;script><br />
+    <script src="node_modules&#47;angular-bootstrap&#47;dist&#47;ui-bootstrap-tpls.js"><&#47;script><br />
+    <script src="app.js"><&#47;script><br />
+    <script src="scripts&#47;cribsController.js"><&#47;script><br />
+<&#47;html><br />
+<&#47;code><&#47;pre></p>
+<p>There are a couple things we&rsquo;ve changed up here so let&rsquo;s take a look at them one at a time.<&#47;p></p>
+<p>You&rsquo;ll see that on the <code>body<&#47;code> tag we have added another directive called <code>ng-controller<&#47;code>. Like we mentioned in Day 1, the <code>ng-app<&#47;code> directive is used to define which parts of the HTML our application should work in. Since we put <code>ng-app<&#47;code> on the <code><body><&#47;code> tag, anything in between the start and end <code><body><&#47;code> tags will be available to the application. In the same way, putting <code>ng-controller="cribsController"<&#47;code> on the <code><body><&#47;code> tag means that we&rsquo;ll be able to use that controller anywhere in the body.<&#47;p></p>
+<p>Next, we&rsquo;ve changed up the welcome message from what we had yesterday to something we haven&rsquo;t seen yet. We&rsquo;ve got the word &ldquo;hello&rdquo; between double curly braces within the <code>h1<&#47;code> tags here. This is called templating and it&rsquo;s what allows us to have dynamic data displayed on the page that gets fed from elsewhere&mdash;in this case, our controller. Using <code>{{ hello }}<&#47;code> in this manner is known as a string expression. <&#47;p></p>
+<p>This gets to the crux of communicating data between the controller and the view: the string expression lines up with what we put on <code>$scope<&#47;code> in the controller. Once we put something on <code>$scope<&#47;code> we simply have to call that something by name (without preceding it by <code>$scope<&#47;code>) in the view and it shows up for us. Awesome!<&#47;p></p>
+<p>Lastly, we have a reference to our <code>cribsController<&#47;code> JavaScript file near the end of <code>index.html<&#47;code>. Let&rsquo;s check this out in the browser to make sure it&rsquo;s working:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-1.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-1.png" alt="day-2-1" width="986" height="735" class="alignnone size-full wp-image-364" &#47;><&#47;a></p>
+<h3 id="more-on-templating">More on Templating<&#47;h3></p>
+<p>As a quick side note, we&rsquo;re not limited to string expressions in our templates. We can also do things like numerical expressions and string concatenation. For example, we can use the <code>+<&#47;code> operator and then provide a string between quotes. Let&rsquo;s see an example of this:<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><body ng-app="cribsApp" ng-controller="cribsController"></p>
+<h1>{{hello}}<&#47;h1></p>
+<h1>{{hello + ' You\'re looking great.'}}<&#47;h1></p>
+<h1>{{5 + 2}}<&#47;h1></p>
+<h1>{{(7 - 3) * 20}}<&#47;h1>       </p>
+<p><&#47;body></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>Let&rsquo;s refresh the page to see the results:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-2.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-2.png" alt="day-2-2" width="1085" height="837" class="alignnone size-full wp-image-365" &#47;><&#47;a></p>
+<h2 id="setting-up-some-real-estate-listing-data">Setting Up Some Real Estate Listing Data<&#47;h2></p>
+<p>Now that we have a way to bring data over from the controller to the view, let&rsquo;s add some real estate listings in! The best way we can do this is to put an array of objects on <code>$scope<&#47;code> that describe individual real estate listings. The objects let us be as descriptive as we want about each listing and putting them in an array let&rsquo;s us iterate over them easily, which will come in handy later.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js<br />
+angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope) {</p>
+<p>    $scope.cribs = [<br />
+      {<br />
+        "type": "Condo",<br />
+        "price": 220000,<br />
+        "address": "213 Grove Street",<br />
+        "description": "Excellent place, really nice view!"<br />
+      },<br />
+      {<br />
+        "type": "House",<br />
+        "price": 410500,<br />
+        "address": "7823 Winding Way",<br />
+        "description": "Beautiful home with lots of space for a large family."<br />
+      },<br />
+      {<br />
+        "type": "Duplex",<br />
+        "price": 395000,<br />
+        "address": "834 River Lane",<br />
+        "description": "Great neighbourhood and lot's of nice green space."<br />
+      }<br />
+    ]</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>Now let&rsquo;s view the <code>cribs<&#47;code> in the browser. To do so, we&rsquo;ll need to adjust the view.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><body ng-app="cribsApp" ng-controller="cribsController"></p>
+<pre>{{cribs | json}}<&#47;pre>     </p>
+<p><&#47;body></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>As you can see, we&rsquo;ve added something new to our template&mdash;we now have a pipe character followed by <code>json<&#47;code>. This is known as a filter and we&rsquo;ll get more into how they work later, but essentially they let us transform data in our views. We use the pipe character to say that we want to use a filter and then we call the name of the filter we want. Angular comes with several filters built in and one of them is <code>json<&#47;code> which takes the data being supplied to the view and formats it as JSON, giving us a much nicer output than if we had left it out. Let&rsquo;s take a look at the output in the browser:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-3.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-3.png" alt="day-2-3" width="1085" height="837" class="alignnone size-full wp-image-366" &#47;><&#47;a></p>
+<p>As you can see, we now get the real estate listing data in the view. It&rsquo;s not very useful in its current form though&mdash;our users aren&rsquo;t going to want to read through an array of JSON objects. Let&rsquo;s do a little bit of work to get the output looking nicer.<&#47;p></p>
+<h2 id="introducing-ng-repeat">Introducing ng-repeat<&#47;h2></p>
+<p>To make proper use of our data in the view, we have to introduce a new directve: <code>ng-repeat<&#47;code>. This directive can be used any time we have a collection of data that we want iterative over in our views. It let&rsquo;s us make our code reusable because we just have to define the way we want something to look once and then we can apply that to all of the records in the collection. Let&rsquo;s dive right in to see how this works:<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><body ng-app="cribsApp" ng-controller="cribsController"></p>
+<div class="well" ng-repeat="crib in cribs">
+<h3>{{crib.address}}<&#47;h3></p>
+<p><strong>Type: <&#47;strong>{{crib.type}}<&#47;p></p>
+<p><strong>Description: <&#47;strong>{{crib.description}}<&#47;p></p>
+<p><strong>Price: <&#47;strong>{{crib.price | currency}}<&#47;p></p>
+<p>    <&#47;div></p>
+<p><&#47;body></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>We setup <code>ng-repeat<&#47;code> by putting the directive name on the element we want the iteration to apply to. Like with <code>ng-app<&#47;code> and <code>ng-controller<&#47;code>, everything in between the tag on which the directive was placed will have access to what that directive offers. The syntax for <code>ng-repeat<&#47;code> is similar to iterators in a lot of languages&mdash;we say that on each iteration we want access to a single <code>crib<&#47;code> <code>in<&#47;code> the collection of all the <code>cribs<&#47;code>. <&#47;p></p>
+<p>Within the <code>
+<div><&#47;code> tag we now have access to the properties of <code>crib<&#47;code> and can display them in our view. As you can see, we are display the address, type, description and price keys with dot notation (<code>crib.property<&#47;code>). <&#47;p></p>
+<p>The last one in there, <code>crib.price<&#47;code> has another one of Angular&rsquo;s built-in filters on it: <code>currency<&#47;code>. This lets us keep the price information in our data objects in number format, making it easier to do calculations on.<&#47;p></p>
+<p>If everything worked out, you should be able to see a better-looking listing of the cribs in the browser:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-4.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-2-4.png" alt="day-2-4" width="1085" height="837" class="alignnone size-full wp-image-367" &#47;><&#47;a></p>
+<h2 id="wrapping-up-day-2">Wrapping Up Day 2<&#47;h2></p>
+<p>That&rsquo;s all for today! We&rsquo;ve seen quite a few new concepts and put them right into practice in this lesson, including:<&#47;p></p>
+<ul>
+<li>The MVC pattern in software development and why it&rsquo;s important<&#47;li>
+<li>What a controller is and how to implement one in AngularJS<&#47;li>
+<li>What <code>$scope<&#47;code> is and how to use it with dependency injection<&#47;li>
+<li>How to display data in the view<&#47;li>
+<li>How to iterate over data using <code>ng-repeat<&#47;code><&#47;li><br />
+<&#47;ul></p>
+<p>Tomorrow we&rsquo;re going to look at another tenet of AngularJS, called &ldquo;services&rdquo;. These help us to abstract away common parts of our code into reusable chunks. <&#47;p></p>
+<p>Great work today, see you again tomorrow!<&#47;p></p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

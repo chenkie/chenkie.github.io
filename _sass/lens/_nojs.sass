@@ -1,0 +1,56 @@
+.no-js-menu
+    position: absolute
+    left: 30px
+    top: 0
+    z-index: 1
+    text-align: left
+    ul
+        padding: 10px 0
+        margin-bottom: 0
+
+    li
+        margin: 0
+        padding: 3px 0
+        list-style: none
+
+        +breakpoint(sm)
+            padding: 3px 0
+
+        +breakpoint(md)
+            padding: 5px 0
+
+        i
+            padding: 0 20px
+            color: #DADADA
+            font-style: normal
+            +font-size(14)
+        a
+            color: #DADADA
+            font-family: $sans
+            font-weight: 700
+            border-bottom: 0 transparent
+            +font-size(12)
+
+            &:hover
+                border-bottom: none
+                color: #fff
+
+    span
+        border-bottom: solid 1px #fff
+        color: #fff
+        width: 70%
+        padding-bottom: 3px
+        display: block
+        margin: 0
+        +font-size(15)
+        font-family: $sans
+.no-js
+
+    .menu-trigger
+        display: none
+
+    .hero .overlay p
+        max-width: 50%
+
+        +breakpoint(md)
+            max-width: 65%

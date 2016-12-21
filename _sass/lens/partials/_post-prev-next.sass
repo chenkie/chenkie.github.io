@@ -1,0 +1,55 @@
+.post-prev-next
+    padding: 10px 0 30px
+    background-color: #F5F5F5
+    border-top: solid 1px #E9E9E9
+
+    .read-more
+        color: #333337
+
+    .read-more--prev
+        text-align: center
+        +breakpoint(sm)
+            text-align: left
+
+
+    .read-more--next
+        text-align: center
+        +breakpoint(sm)
+            text-align: right
+
+    .read-more__title
+        +font-size(16)
+
+        +breakpoint(sm)
+            +font-size(20)
+
+        +breakpoint(md)
+            +font-size(22)
+
+    .read-more__subtitle
+        font-family: $sans
+        margin-bottom: 10px
+        text-transform: uppercase
+        letter-spacing: 5px
+        font-weight: 700
+        +font-size(10)
+
+        +breakpoint(sm)
+            +font-size(12)
+
+        +breakpoint(md)
+            +font-size(14)
+
+        .fa-chevron-right
+            display: none
+            +breakpoint(sm)
+                display: inline
+                margin: 0 -35px 0 15px
+
+        .fa-chevron-left
+            display: none
+            +breakpoint(sm)
+                display: inline
+                margin: 0 15px 0 -31px
+
+

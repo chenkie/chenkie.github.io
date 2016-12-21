@@ -1,0 +1,163 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 7'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 397
+wordpress_url: http://ryanchenkie.com/?page_id=397
+date: '2015-07-25 11:37:04 -0400'
+date_gmt: '2015-07-25 17:37:04 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>Yesterday we got our application one step closer to completion by giving users the ability to create new real estate listings. Creating and reading is only half of the CRUD equation though, so today we&rsquo;ll find out how we can update and delete listings as well.</p>
+<h2 id="editing-the-listings">Editing the Listings<&#47;h2><br />
+There are several different ways we could setup the UI elements for editing listings. For example, we could make brand new elements that sit within the listing cards themselves that allow us to change values on those cards. Alternatively, we could use the dialog box that we have for adding new listings since it will already contain all the fields we need. We&rsquo;ll take the latter approach as this will give us the quickest way of getting up and running with editing.</p>
+<p>The first thing we&rsquo;ll need to do is duplicate the input elements we put in place for adding new listings. The reason we&rsquo;ll want to duplicate them and not just work off the same ones is that we&rsquo;ll need to have a different <code>ng-model<&#47;code> object for new listings versus the existing listings that we want to edit&mdash;we don&rsquo;t want to mix up concerns between the two models. Let&rsquo;s duplicate the listing addition HTML and change up <code>ng-model<&#47;code> to reflect this. We&rsquo;ll also want change up the button at the bottom of the form to call a different method.</p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<div class="listing-form" ng-if="editListing">
+<h3>Edit Listing<&#47;h3></p>
+<div class="row listing-form-row">
+<div class="col-sm-4">
+<div class="input-group">
+       <span class="input-group-addon">Address<&#47;span><br />
+       <input type="text" placeholder="Enter the address" class="form-control" ng-model="existingListing.address"><br />
+     <&#47;div><br />
+   <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+       <span class="input-group-addon">Price<&#47;span><br />
+       <input type="text" placeholder="Enter the price" class="form-control" ng-model="existingListing.price"><br />
+     <&#47;div><br />
+   <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+       <span class="input-group-addon">Property Type<&#47;span></p>
+<select type="select" name="propertyType" id="propertyType" class="form-control" ng-model="existingListing.type">
+<option value="House">House<&#47;option></p>
+<option value="Condo">Condo<&#47;option></p>
+<option value="Duplex">Duplex<&#47;option></p>
+<option value="Apartment">Apartment<&#47;option><br />
+       <&#47;select><br />
+     <&#47;div><br />
+   <&#47;div><br />
+ <&#47;div></p>
+<div class="row listing-form-row">
+<div class="col-sm-4">
+<div class="input-group">
+       <span class="input-group-addon">Description<&#47;span><br />
+       <textarea type="text" placeholder="Enter the description" class="form-control" ng-model="existingListing.description"><&#47;textarea><br />
+     <&#47;div><br />
+   <&#47;div></p>
+<div class="col-sm-8">
+<div class="col-sm-4">
+<div class="input-group">
+         <span class="input-group-addon">Beds<&#47;span><br />
+         <input type="text" placeholder="Bedrooms" class="form-control" ng-model="existingListing.details.bedrooms"><br />
+       <&#47;div><br />
+     <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+         <span class="input-group-addon">Baths<&#47;span><br />
+         <input type="text" placeholder="Bathrooms" class="form-control" ng-model="existingListing.details.bathrooms"><br />
+       <&#47;div><br />
+     <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+         <span class="input-group-addon">SqFt<&#47;span><br />
+         <input type="text" placeholder="Square Footage" class="form-control" ng-model="existingListing.details.area"><br />
+       <&#47;div><br />
+     <&#47;div></p>
+<p>   <&#47;div></p>
+<p>   <button class="btn btn-primary listing-button" ng-click="saveCribEdit()" ng-show="editListing">Save<&#47;button></p>
+<pre>{{newListing | json}}<&#47;pre></p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+We&rsquo;ve changed up the name of the object on <code>ng-model<&#47;code> in this set of input elements and it is now called <code>existingListing<&#47;code>. However, all of the key names on this object have remained the same so that our data can still easily map to the input elements. We are now referencing a method called <code>saveCribEdit()<&#47;code> on the <code>ng-click<&#47;code> on the &ldquo;Save&rdquo; button. We&rsquo;ll set this method up in the controller a bit later.</p>
+<p>Notice that we&rsquo;re also doing a check at the top of the form with the <code>ng-if<&#47;code> directive to only show the form if <code>editListing<&#47;code> is set to true. We&rsquo;ll also need to adjust some other areas of the UI to not show this edit form when it should be hidden. Let&rsquo;s take care of those now.</p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><!-- Min and Max Price Selection --></p>
+<div class="col-sm-12 price-form">
+<div class="row price-form-row" ng-if="!addListing &amp;&amp; !editListing">
+<p>...</p>
+<p><button class="btn btn-primary" ng-click="addListing = !addListing" ng-show="!addListing &amp;&amp; !editListing">Add Listing<&#47;button></p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+We&rsquo;ve adjusted the <code>ng-if<&#47;code> and <code>ng-show<&#47;code> directives on these elements to say that we want these parts hidden if both <code>addListing<&#47;code> and <code>editListing<&#47;code> are false.</p>
+<p>Before we get to adding in the controller methods, we&rsquo;ll need to add a control to the listing cards so that we can open the editing form. We can copy one of the existing buttons that are on the cards and just change up the specifics. Just below the &ldquo;Details&rdquo; and &ldquo;Close&rdquo; button HTML, let&rsquo;s add one for &ldquo;Edit&rdquo;:</p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><button class="btn btn-xs btn-primary" ng-show="showDetails === true" ng-click="editCrib(crib)">Edit<&#47;button></p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+On this button we are setting <code>ng-click<&#47;code> to call a method called <code>editCrib<&#47;code> which we will define in the controller&mdash;it will be responsible for opening the editing form.</p>
+<h3 id="adding-editing-methods-to-the-controller">Adding Editing Methods to the Controller<&#47;h3><br />
+You&rsquo;ll likely have noticed that when we set the <code>editCrib<&#47;code> method on the <code>ng-click<&#47;code> directive of the &ldquo;Edit&rdquo; button that we are passing in an argument called <code>crib<&#47;code>. Since this button is found within an <code>ng-repeat<&#47;code> and we are iterating over the <code>cribs<&#47;code> data, this <code>crib<&#47;code> argument actually refers to the current listing. Passing it in as an argument allows us to send it to the controller where we can operate on it.</p>
+<p>We&rsquo;ll need to define these two new methods in the controller&mdash;one for opening the edit form and the other for saving the edits.</p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>...</p>
+<p>$scope.editCrib = function(crib) {<br />
+  $scope.editListing = true;<br />
+  $scope.existingListing = crib;<br />
+}</p>
+<p>$scope.saveCribEdit = function(listing) {<br />
+  $scope.existingListing = {};<br />
+  $scope.editListing = false;<br />
+}</p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+The <code>editCrib<&#47;code> method opens up the edit dialog and sets the <code>$scope.existingListing<&#47;code> to be the current listing that we passed through as an argument from the view. This means that whenever we click the &ldquo;Edit&rdquo; button on a listing card, the data from that card will be placed on the <code>ng-model<&#47;code> for our editing screen which means we&rsquo;ll be able to edit it. In this method we&rsquo;re also setting <code>$scope.editListing<&#47;code> to <code>true<&#47;code> so that we can show the editing dialog.</p>
+<p>You&rsquo;ll see that in the <code>saveCribEdit<&#47;code> method we&rsquo;re actually just setting the <code>$scope.existingListing<&#47;code> to an empty object and then closing the edit dialog by setting <code>$scope.editListing<&#47;code> to <code>false<&#47;code> to hide it. We&rsquo;re actually kind of faking editing behaviour here which Angular makes very easy for us to do. Because Angular has two-way data binding, the data for each listing card is going update automatically as we type. Because we&rsquo;re only working with in-memory data on the front-end for this course, once we&rsquo;ve typed our changes out in the input elements, our &ldquo;editing&rdquo; is effectively done and we can just close edit dialog box. Of course, when we refresh the page the changes will be lost since we have no database persistence.</p>
+<h2 id="deleting-listings">Deleting Listings<&#47;h2><br />
+Deleting listings is easily done and will just require us to setup a new button and method to remove a given listing object from the <code>$scope.cribs<&#47;code> array.</p>
+<p>First, let&rsquo;s put a &ldquo;Delete&rdquo; button right next to the &ldquo;Save&rdquo; button in the edit dialog.</p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><button class="btn btn-primary listing-button" ng-click="saveCribEdit()" ng-show="editListing">Save<&#47;button><br />
+<button class="btn btn-danger listing-button" ng-click="deleteCrib(existingListing)" ng-show="editListing">Delete<&#47;button></p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+We&rsquo;ve given this new button an <code>ng-click<&#47;code> that calls a method called <code>deleteCrib<&#47;code> which we&rsquo;ll define next.</p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>...</p>
+<p>$scope.deleteCrib = function(existingListing) {<br />
+  var index = $scope.cribs.indexOf(existingListing);<br />
+  $scope.cribs.splice(index, 1);<br />
+  $scope.existingListing = {};<br />
+  $scope.editListing = false;<br />
+}</p>
+<p>...<br />
+<&#47;code><&#47;pre><br />
+Since we&rsquo;re operating directly on an array with our <code>$scope.cribs<&#47;code>, we&rsquo;ll need to do some setup to find the right index to remove from the array. We&rsquo;re passing in the <code>existingListing<&#47;code> object that is on <code>ng-model<&#47;code> to the <code>deleteCrib<&#47;code> method. We can then find the index of this object in the <code>$scope.cribs<&#47;code> array&mdash;that is, which position in the array the object is at&mdash;by using JavaScript&rsquo;s <code>indexOf<&#47;code> method. We set this value on a variable called <code>index<&#47;code> and then use JavaScript&rsquo;s <code>splice<&#47;code> method to remove that specific element from the array. The second argument we pass in to the <code>splice<&#47;code> method says that we only want to remove one element. After this we&rsquo;re again setting <code>existingListing<&#47;code> to be an empty object to clear the form fields and then we close the edit dialog by setting <code>editListing<&#47;code> to <code>false<&#47;code>.</p>
+<h2 id="wrapping-up-the-course">Wrapping Up the Course<&#47;h2><br />
+There we have it! We&rsquo;ve made fully-functioning (on the front end anyway) CRUD app in AngularJS. Great job sticking it out all the way through this course and learning a ton of new things. AngularJS isn&rsquo;t the easiest framework to learn, but if you&rsquo;ve made it this far then you&rsquo;ve overcome most of the initial learning hurdles and you&rsquo;ll now be more comfortable as you put Angular to use in your own applications and as you continue your learning journey.</p>
+<h3 id="but-wait-front-end-only">But Wait, Front-End Only?<&#47;h3><br />
+I&rsquo;m sure you&rsquo;ve been thinking throughout the course something along the lines of &ldquo;well this is great and all, but what is the use when I can&rsquo;t save any of this data?&rdquo;. You&rsquo;re absolutely right, an application that doesn&rsquo;t save data isn&rsquo;t very useful beyond a single person&rsquo;s own browser window.</p>
+<p>As was mentioned towards the beginning of the course, AngularJS is a front-end framework that is completely backend&#47;database agnostic. That means that you can literally use any backend language or framework to interact with Angular, as long as it responds to standard HTTP requests. Fortunately, most do, as they wouldn&rsquo;t be of much use if they didn&rsquo;t. Some examples of languages and frameworks include PHP (Laravel), JavaScript (Node.js), ASP.NET and Ruby on Rails.</p>
+<p>A very interesting and increasingly popular solution for data persistence is called <a href="https:&#47;&#47;www.firebase.com&#47;">Firebase<&#47;a>. Firebase is a real-time datastore for applications that allows developers to focus their efforts on front-end development instead of worrying about setting up, configuring and coding for a server. This means that developers can get up and running with their applications much more quickly than if they had to use one of the aforementioned frameworks.</p>
+<p>Knowing how to wire up a backend for your application is crucial and Firebase is a great way to get going on it easily. It&rsquo;s a perfect next step to your AngularJS learning because it fits so nicely in with the AngularJS framework.</p>
+<h2 id="angularjs-and-firebase-ebook">AngularJS and Firebase eBook<&#47;h2><br />
+To learn the ins and outs of integrating AngularJS with Firebase, I&rsquo;ve written an eBook that will show you exactly how to put Firebase to use in the application we&rsquo;ve just built over the past week. We&rsquo;ll build off the existing code base and see how to get our data persisted to the backend. Along with that, we&rsquo;ll also implement some additional features and make some improvements to the application. Specifically, we&rsquo;ll learn how to:</p>
+<ul>
+<li>Setup user registration and authentication<&#47;li>
+<li>Display changes to data in real time<&#47;li>
+<li>Handle routing with UI Router<&#47;li>
+<li>View individual listings<&#47;li><br />
+<&#47;ul><br />
+Head over <a href="https:&#47;&#47;gumroad.com&#47;l&#47;PlvZS">here<&#47;a> to get the eBook or just to learn more!</p>
+<h2 id="thanks">Thanks!<&#47;h2><br />
+Thanks so much for following along in this course. I&rsquo;m hopeful that you found it useful and that you&rsquo;ll be able to apply what you&rsquo;ve learned here right away.</p>
+<p>I&rsquo;d love your feedback on the course! It would be great to know if there&rsquo;s anything that I can improve to make learning easier for you, or if there&rsquo;s anything in particular you&rsquo;d like to see in future courses. Get in touch and let me know what you&rsquo;re thinking.</p>
+<p>If you found this course helpful, I would appreciate it a ton if you shared it with anyone you know who is wanting to learn AngularJS.</p>
+<p>Thanks, and happy coding!</p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

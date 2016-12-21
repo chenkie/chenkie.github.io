@@ -1,0 +1,190 @@
+.full-container
+
+    +breakpoint(only-sm)
+        max-width: 100%
+        width: 100%
+
+    +breakpoint(md)
+        margin: 0
+        width: 100%
+
+.hero
+    padding: 0
+    background-size: cover
+    background-position: center center
+    background-repeat: no-repeat
+    text-align: center
+    color: #fff
+
+    +breakpoint(sm)
+        height: 70%
+
+    .overlay
+        padding: 50px 0
+
+        +breakpoint(sm)
+            padding: 0 60px 0
+            padding-top: 140px
+
+        +breakpoint(md)
+            padding-top: 150px
+
+        +breakpoint(lg)
+            padding-top: 170px
+
+    .overlay--author
+        padding-top: 0
+        text-align: left
+
+.hero__content
+    max-width: 80%
+    margin: 0 auto
+    padding: 15px 0
+    line-height: 1.2
+    letter-spacing: 0.02em
+    +font-size(16)
+
+    +breakpoint(md)
+        max-width: 60%
+        line-height: 1.4
+
+    +breakpoint(lg)
+        max-width: 40%
+
+.hero__content__avatar
+    width: 80px
+    border-radius: 50%
+
+.hero__title--tag
+    line-height: 2
+    text-shadow: 0 1px 1px #292727
+
+.post-preview
+    background-color: #333337
+    height: 30%
+    padding: 0
+    background-size: cover
+    background-position: center center
+    background-repeat: no-repeat
+    color: #fff
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.4)
+    text-shadow: 0 1px 1px #292727
+
+
+.post-preview--pagination
+    background: #444447
+
+.post-preview__info
+    position: absolute
+    bottom: 0
+    height: auto
+    padding: 30px 15px 20px 25px
+    +clearfix()
+
+    .inner
+        float: left
+
+        h2
+            +font-size(18)
+            +line-height(30)
+            text-shadow: 0 1px 1px #292727
+
+        p
+            margin-top: 2px
+
+        a,
+        a:focus
+            color: #fff
+            text-decoration: none
+
+    img
+        margin-right: 15px
+        margin-bottom: 5px
+        float: left
+        padding: 0
+        border-radius: 50%
+        width: 60px
+
+
+.post-preview__meta
+    +font-size(14)
+    color: #fff
+    margin-bottom: 0
+    letter-spacing: 0.02em
+
+    +breakpoint(sm)
+        +font-size(15)
+
+    a
+        color: #fff
+        transition: all 0.5s
+
+        &:hover
+            color: #fff
+            border-bottom: 1px solid $light-grey
+
+.post--featured
+
+    &:before
+        content: "\f005"
+        display: block
+        position: absolute
+        right: 20px
+        top: 20px
+        z-index: 20
+        display: inline-block
+        font: normal normal normal 14px/1 FontAwesome
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        +font-size(21)
+        transition: all 400ms
+    &:hover
+
+        &::before
+            transform: rotate(360deg)
+
+        .post-featured-text
+            transform: translateX(0)
+            opacity: 1
+
+.post-featured-text
+    color: #fff
+    position: absolute
+    top: 25px
+    right: 50px
+    text-transform: uppercase
+    z-index: 20
+    transition: all 400ms
+    transform: translate(40px)
+    opacity: 0
+    letter-spacing: 1px
+    font-weight: 700
+
+.pagination
+    margin: 0
+    a
+        text-transform: uppercase
+        letter-spacing: 2px
+        font-weight: 700
+        color: #fff
+        +font-size(14)
+
+    p
+        margin: 0
+
+    .newer-posts,
+    .page-number,
+    .older-posts
+        color: #b6b6b6
+
+    .fa-chevron-right,
+        font-size: 13px
+        margin-left: 10px
+
+    .fa-chevron-left
+        font-size: 13px
+        margin-right: 10px
+
+    .page-number
+        font-size: 14px

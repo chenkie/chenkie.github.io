@@ -1,0 +1,37 @@
+{% assign author = include.author %}
+{% unless author.twitter_url == nil %}
+  <a class="social-icon" href="{{author.twitter_url}}"><i class="fa fa-twitter"></i></a>
+{% endunless %}
+{% unless author.facebook_url == nil %}
+  <a class="social-icon" href="{{author.facebook_url}}"><i class="fa fa-facebook-official"></i></a>
+{% endunless %}
+{% unless author.instagram_url == nil %}
+<a class="social-icon" href="{{author.instagram_url}}"><i class="fa fa-instagram"></i></a>
+{% endunless %}
+{% unless author.tumblr_url == nil %}
+  <a class="social-icon" href="{{author.tumblr_url}}"><i class="fa fa-tumblr"></i></a>
+{% endunless %}
+{% unless author.dribbble_url == nil %}
+  <a class="social-icon" href="{{author.dribbble_url}}"><i class="fa fa-dribbble"></i></a>
+{% endunless %}
+{% unless author.github_url == nil %}
+  <a class="social-icon" href="{{author.github_url}}"><i class="fa fa-github-alt"></i></a>
+{% endunless %}
+{% unless author.google_url == nil %}
+  <a class="social-icon" href="{{author.google_url}}"><i class="fa fa-google-plus"></i></a>
+{% endunless %}
+{% unless author.pinterest_url == nil %}
+  <a class="social-icon" href="{{author.pinterest_url}}"><i class="fa fa-pinterest"></i></a>
+{% endunless %}
+{% unless author.reddit_url == nil %}
+  <a class="social-icon" href="{{author.reddit_url}}"><i class="fa fa-reddit-square"></i></a>
+{% endunless %}
+{% unless author.vine_url == nil %}
+  <a class="social-icon" href="{{author.vine_url}}"><i class="fa fa-vine"></i></a>
+{% endunless %}
+{% unless author.vimeo_url == nil %}
+  <a class="social-icon" href="{{author.vimeo_url}}"><i class="fa fa-vimeo"></i></a>
+{% endunless %}
+{% unless author.snapchat_url == nil %}
+  <a class="social-icon" href="{{author.snapchat_url}}"><i class="fa fa-snapchat-ghost"></i></a>
+{% endunless %}

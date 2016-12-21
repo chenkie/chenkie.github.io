@@ -1,0 +1,24 @@
+{% assign author = site.data.authors[page.author_slug] %}
+<div class="post__footer" style="background-image: url({{ site.baseurl }}/img/{{author.cover_image}})">
+    <div class="overlay">
+        <div class="author-details">
+
+            <a href="{{author.permalink}}"><img src='{{ site.baseurl }}/img/{{author.avatar_image}}' class="author-details__image"></a>
+
+            <div class="author-details__info">
+                <p class="author-details__date">Posted on <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time></p>
+
+                <hr class="author-details__spacer">
+
+                  <a href="{{author.permalink}}">
+                      <h3 class="author-details__name">{{author.name}}</h3>
+                  </a>
+                  <p class="author-details__bio">{{author.bio}}</p>
+                  <p class="author-details__extra"> {{author.location}} / <a  class="author-details__link" href="{{author.url}}">{{author.url}}</a></p>
+
+                  {% include author-social-icons.html author=author %}
+
+            </div>
+        </div>
+    </div>
+</div>

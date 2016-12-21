@@ -1,0 +1,23 @@
+<div class="container full-container full">
+    <div class="row full">
+          {% for post in include.posts %}
+              <div class="col-sm-6 col-md-4 col-lg-3 post-preview {% if post.is_featured %} post--featured {% endif %}" style="background-image: url({{ site.baseurl }}/img/{{post.feature_image}});">
+                  {% if post.is_featured %}
+                  <span class="post-featured-text">featured</span>
+                  {% endif %}
+                  <div class="overlay">
+                      <div class="post-preview__info animated fadeInUp delay-3">
+                          <div class="inner">
+                              <h2><a href="{{post.url | prepend: site.baseurl }}">{{post.title}}</a></h2>
+                              <p class="post-preview__meta">Posted In
+                                {% for category in post.categories %}
+                                    <a href="{{ category | prepend: "/category/" | prepend: site.baseurl }}">{{ category | capitalize }}</a>{% if forloop.last %}{% else %},{% endif %}
+                                {% endfor %}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+    </div> <!--/row -->
+</div>

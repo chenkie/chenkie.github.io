@@ -1,0 +1,71 @@
+#menu
+    position: absolute !important
+    top: -9999px !important
+    left: -9999px !important
+
+// This is the main background area
+.jPanelMenu-panel
+    background: #111117
+    box-shadow: #000 2px 2px 10px
+    transition: all 450ms
+
+// This is the navigation area
+#jPanelMenu-menu
+    background-color: #111117
+    overflow: hidden
+    overflow-y: hidden !important
+
+    ul
+        padding: 25px 0
+
+    li
+        margin: 0
+        padding: 8px 30px
+        list-style: none
+
+        a
+            color: #DADADA
+            font-family: $sans
+            font-weight: 700
+            border-bottom: 0 transparent
+            +font-size(12)
+
+            &:hover
+                border-bottom: none
+                color: #fff
+
+    span
+        border-bottom: solid 1px #fff
+        color: #fff
+        width: 70%
+        padding-bottom: 3px
+        display: block
+        margin: 0 30px
+        margin-top: 30px
+        +font-size(15)
+        font-family: $sans
+
+.side-menu-icon
+    right: 15px
+    top: 15px
+    z-index: 1080
+    position: absolute
+    display: block
+    height: 40px
+    width: 40px
+    padding-top: 8px
+
+    &:hover
+        pointer: cursor
+
+    span
+        height: 5px
+        width: 28px
+        float: left
+        display: block
+        margin: 0 6px 5px
+        background: #fff
+
+    +breakpoint(md)
+        right: 35px
+        top: 35px

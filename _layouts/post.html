@@ -1,0 +1,40 @@
+---
+layout: default
+---
+{% assign author = site.data.authors[page.author_slug] %}
+
+  <header class="hero-header"
+      style="background-image: url({{ site.baseurl }}/img/{{page.feature_image}})"
+  >
+
+        <div class="overlay hero-header__inner">
+            <h1 class="animated fadeIn delay-1">{{page.title}}</h1>
+        </div>
+
+        <div class="hero-header__meta">
+            <p class="hero-header__tags animated fadeInDown">
+              {% for category in page.categories %}
+                  <a href="{{ site.baseurl }}{{ category | prepend: "/category/" }}">{{ category | capitalize }}</a>
+                  {% if forloop.last %}{% else %}&middot;{% endif %}
+              {% endfor %}
+              </p>
+            <p class="hero-header__author animated fadeInUp">
+            <a href="{{author.permalink | prepend: site.baseurl}}">{{author.name}}</a>
+            </p>
+        </div>
+  </header>
+
+  <main class="container">
+      <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1 main-content animated fadeIn">
+
+              {{content}}
+              {% include social-links.html %}
+
+
+          </div><!-- main-content/col -->
+      </div> <!--/row -->
+  </main> <!-- /container -->
+
+  {% include  post-footer.html %}
+  {% include  post-next-prev.html %}}

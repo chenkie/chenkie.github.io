@@ -1,0 +1,196 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 6'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 391
+wordpress_url: http://ryanchenkie.com/?page_id=391
+date: '2015-07-25 11:26:15 -0400'
+date_gmt: '2015-07-25 17:26:15 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>So far we&rsquo;ve learned quite a few things about how AngularJS works and we&rsquo;ve been able to put all those concepts together to form a nice looking real estate listing application. We&rsquo;ve got some of the major Angular concepts out of the way and we&rsquo;ve got a functioning app, but it still needs some work. Today we&rsquo;ll look at how we can give users the ability to add in new real estate listings. <&#47;p></p>
+<p>While we&rsquo;re obviously going to use Angular for this task, most of the leg work for creating new listings will be plain old JavaScript. This will be true for editing and deleting listings as well, which we&rsquo;ll look at tomorrow. <&#47;p></p>
+<p>As you know, we don&rsquo;t yet have a backend setup for our application which means every time we create, read, update and delete listings, we&rsquo;re really just affecting the current browser session in memory. In other words, when we go to refresh the page, all of our changes will be lost. Don&rsquo;t worry though, at the end of the course we&rsquo;ll look at some easy ways we can get simple database persistence going which will give us a more real life application.<&#47;p></p>
+<h2 id="setting-up-the-ui">Setting Up the UI<&#47;h2></p>
+<p>We&rsquo;ll need some user interface elements to get us started towards adding new real estate listings. Let&rsquo;s add some HTML to <code>index.html<&#47;code> directly under the select drop downs from Day 5 that will take care of this:<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><button class="btn btn-primary" ng-click="addListing = !addListing" ng-show="!addListing">Add Listing<&#47;button><br />
+<button class="btn btn-danger" ng-click="addListing = !addListing" ng-show="addListing">Close<&#47;button></p>
+<div class="listing-form" ng-if="addListing">
+<h3>Add a Listing<&#47;h3></p>
+<div class="row listing-form-row">
+<div class="col-sm-4">
+<div class="input-group">
+          <span class="input-group-addon">Address<&#47;span><br />
+          <input type="text" placeholder="Enter the address" class="form-control" ng-model="newListing.address"><br />
+        <&#47;div><br />
+      <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+          <span class="input-group-addon">Price<&#47;span><br />
+          <input type="text" placeholder="Enter the price" class="form-control" ng-model="newListing.price"><br />
+        <&#47;div><br />
+      <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+          <span class="input-group-addon">Property Type<&#47;span></p>
+<select type="select" name="propertyType" id="propertyType" class="form-control" ng-model="newListing.type">
+<option value="House">House<&#47;option></p>
+<option value="Condo">Condo<&#47;option></p>
+<option value="Duplex">Duplex<&#47;option></p>
+<option value="Apartment">Apartment<&#47;option><br />
+          <&#47;select><br />
+        <&#47;div><br />
+      <&#47;div><br />
+    <&#47;div></p>
+<div class="row listing-form-row">
+<div class="col-sm-4">
+<div class="input-group">
+          <span class="input-group-addon">Description<&#47;span><br />
+          <textarea type="text" placeholder="Enter the description" class="form-control" ng-model="newListing.description"><&#47;textarea><br />
+        <&#47;div><br />
+      <&#47;div></p>
+<div class="col-sm-8">
+<div class="col-sm-4">
+<div class="input-group">
+            <span class="input-group-addon">Beds<&#47;span><br />
+            <input type="text" placeholder="Bedrooms" class="form-control" ng-model="newListing.details.bedrooms"><br />
+          <&#47;div><br />
+        <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+            <span class="input-group-addon">Baths<&#47;span><br />
+            <input type="text" placeholder="Bathrooms" class="form-control" ng-model="newListing.details.bathrooms"><br />
+          <&#47;div><br />
+        <&#47;div></p>
+<div class="col-sm-4">
+<div class="input-group">
+            <span class="input-group-addon">SqFt<&#47;span><br />
+            <input type="text" placeholder="Square Footage" class="form-control" ng-model="newListing.details.area"><br />
+          <&#47;div><br />
+        <&#47;div></p>
+<p>      <&#47;div><br />
+    <&#47;div></p>
+<pre>{{newListing | json}}<&#47;pre><br />
+  <&#47;div></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>There&rsquo;s quite a bit going on here! Let&rsquo;s go through it from the top.<&#47;p></p>
+<p>The first thing you&rsquo;ll notice is that we&rsquo;re adding two buttons in&mdash;one for adding a new listing and one for closing the dialog box that will be opened up. We&rsquo;re handling a click event on them with <code>ng-click<&#47;code> which is used to toggle the state of <code>addListing<&#47;code>, a model value that is used to conditionally show or hide elements. We&rsquo;re using <code>ng-show<&#47;code> to say that we want the &ldquo;Add Listing&rdquo; button to be displayed when <code>addListing<&#47;code> is false and hidden otherwise. Inversely, we are saying that we want to show the &ldquo;Close&rdquo; button when <code>addListing<&#47;code> is true, and close it otherwise.<&#47;p></p>
+<p>In the <code>add-listing<&#47;code> <code>
+<div><&#47;code> tag below we are using a built-in directive that we haven&rsquo;t seen until now&mdash;<code>ng-if<&#47;code>. This directive is similar to <code>ng-show<&#47;code> and <code>ng-hide<&#47;code>, except that it actually removes the element in question based on a condition rather than simply showing or hiding it with CSS. The cases in which this is useful will vary depending on the needs of your application, but it&rsquo;s useful to put it in here just to see how it works. If <code>addListing<&#47;code> is set to true, we are displaying a bunch of new elements, many of which are <code><input><&#47;code> tags, but we also have a <code><br />
+<select><&#47;code> drop down and a <code><textarea><&#47;code>.<&#47;p></p>
+<p>You&rsquo;ll see that we&rsquo;ve got an <code>ng-model<&#47;code> on each of the new UI elements and that each is acting on a base model object called <code>newListing<&#47;code>. The keys on this <code>newListing<&#47;code> model are given the same names as the keys on our <code>cribs.json<&#47;code> data, such as address, price, description etc. <&#47;p></p>
+<p>It&rsquo;s often useful to output a model right to the screen for the purposes of debugging and this is exactly what we&rsquo;re doing near the end in the <code>
+<pre><&#47;code> tag. As you see, we&rsquo;re using the templating syntax to output the <code>newListing<&#47;code> model to the screen. The pipe character gives us access to filters, whether they be built-in with Angular or custom ones that we define, and in this case we&rsquo;re using the built-in <code>json<&#47;code> filter to have our <code>newListing<&#47;code> model displayed nicely on the screen.<&#47;p></p>
+<p>With the main UI elements in place, there are a couple other small changes we&rsquo;ll want to make. First, we&rsquo;ll need some extra CSS to make our elements look at bit nicer.<&#47;p></p>
+<pre><code class="language-css">&#47;* css&#47;style.css *&#47;</p>
+<p>.price-form {<br />
+  margin-bottom: 10px;<br />
+  padding: 15px;<br />
+  background-color: #5cb85c;<br />
+}</p>
+<p>.price-form-row {<br />
+  margin-bottom: 10px;<br />
+}</p>
+<p>.listing-form-row, .listing-button {<br />
+  margin-top: 10px;<br />
+}</p>
+<p>.listing-form h3 {<br />
+  color: white;<br />
+}<br />
+<&#47;code><&#47;pre></p>
+<p>Next, we&rsquo;ll also need to adjust some of the other elements within <code>index.html<&#47;code>. We&rsquo;ll add a new <code>row<&#47;code> to the select drop downs we made yesterday and we&rsquo;ll also add an <code>ng-if<&#47;code> to that row to conditionally show or hide those drop downs.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><!-- Min and Max Price Selection --></p>
+<div class="col-sm-12 price-form">
+<div class="row price-form-row" ng-if="!addListing">
+<div class="col-sm-6">
+<div class="input-group">
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>You&rsquo;ll probably have noticed that the expression we&rsquo;re giving to the <code>ng-if<&#47;code> and <code>ng-show<&#47;code> directives is a bit different than we&rsquo;ve seen before. Instead of saying something like <code>ng-if="addListing === true"<&#47;code> we&rsquo;re simply saying <code>ng-if="addListing"<&#47;code>. With JavaScript, we can determine whether something is <code>true<&#47;code> or <code>false<&#47;code> simply by asking for that thing. On the <code>price-form-row<&#47;code> <code>
+<div><&#47;code> above we are checking whether <code>addListing<&#47;code> is <code>false<&#47;code> by negating it using <code>!<&#47;code>. <&#47;p></p>
+<p>If everything is wired up correctly, we should see the new UI elements at work:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-1.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-1.png" alt="day-6-1" width="1314" height="1145" class="alignnone size-full wp-image-392" &#47;><&#47;a></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-2.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-2.png" alt="day-6-2" width="1314" height="1145" class="alignnone size-full wp-image-393" &#47;><&#47;a></p>
+<h2 id="adding-new-listings">Adding New Listings<&#47;h2></p>
+<p>Earlier on we talked about how doing the CRUD operations on our data for this part of the tutorial will largely be plain old JavaScript at work. For adding new real estate listings, we&rsquo;re going to use the <code>push<&#47;code> method to take our form input and add the object that results from that input onto the already existing <code>$scope.cribs<&#47;code> array. Just as a reminder, the data for this array is stored in and retrieved from our <code>cribs.json<&#47;code> file, but we can operate on this array directly when the application is running. <&#47;p></p>
+<p>First, let&rsquo;s setup the method that will handle adding new listings to the array. We&rsquo;ll need to add in a new method on <code>$scope<&#47;code> called <code>addCrib<&#47;code>. <&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope, cribsFactory) {</p>
+<p>    $scope.cribs;</p>
+<p>    $scope.priceInfo = {<br />
+      min: 0,<br />
+      max: 1000000<br />
+    }</p>
+<p>    $scope.newListing = {};</p>
+<p>    $scope.addCrib = function(newListing) {<br />
+      if(newListing) {<br />
+        newListing.image = "default-crib";<br />
+        $scope.cribs.push(newListing);<br />
+      }<br />
+    }</p>
+<p>    cribsFactory.getCribs().success(function(data) {<br />
+      $scope.cribs = data;<br />
+    }).error(function(error) {<br />
+      console.log(error);<br />
+    });</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>We&rsquo;re first initializing the <code>newListing<&#47;code> object by putting it on <code>$scope<&#47;code> which will allow us to access it directly from the method we use to handle adding listings. This new method is called <code>$scope.addCrib<&#47;code> and it expects one argument which will be an object for our new listing that comes from the data entered in the form. We first check to see if we get a new listing before proceeding so that we don&rsquo;t add in an empty object to the array. Next, we&rsquo;re creating an <code>image<&#47;code> key on the <code>newListing<&#47;code> object and setting its value to &ldquo;default-crib&rdquo;. We&rsquo;re doing this is because we won&rsquo;t be able to cover getting an image uploader running in this course but we&rsquo;ll want something as a placeholder image to make our listings show up properly. Finally, we&rsquo;re using JavaScript&rsquo;s <code>push<&#47;code> method to add the <code>newListing<&#47;code> object onto the already existing <code>$scope.cribs<&#47;code> array.<&#47;p></p>
+<p>NOTE: The default-crib image is available in the course downloads<&#47;p></p>
+<p>With the method in place, we&rsquo;ll now need to attach it to an event. For this we&rsquo;ll need a new button in our form that will have an <code>ng-click<&#47;code> on it which calls this method. Let&rsquo;s place this new button just above our <code>
+<pre><&#47;code> tags that we&rsquo;re currently using to output the form data to the screen.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<p><button class="btn btn-primary listing-button" ng-click="addCrib(newListing)" ng-show="addListing">Add<&#47;button></p>
+<pre>{{newListing | json}}<&#47;pre></p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>Calling the <code>addCrib<&#47;code> method in the view is as simple as referencing it on <code>ng-click<&#47;code> and passing in the <code>newListing<&#47;code> object as the argument. This is a great feature of the <code>ng-click<&#47;code> and other directives in Angular&mdash;we can call methods right in our HTML. Just for review, the <code>newListing<&#47;code> object that we pass in as an argument comes from all the form inputs combined together. As you&rsquo;ll remember, we set <code>ng-model<&#47;code> on each input to <code>newListing.someKey<&#47;code> which gives us an object to pass around.<&#47;p></p>
+<h3 id="ordering-the-data">Ordering the Data<&#47;h3></p>
+<p>There&rsquo;s one more change we&rsquo;ll want to make in the HTML before trying this out so that we get newly added listings showing at the beginning. We&rsquo;ll want to tell our view how it should order our data when it displays. Thankfully, Angular gives us an easy way to do this with the <code>orderBy<&#47;code> filter. It takes an expression that it uses to determine data ordering and a simple way to make use of it is to pass in the name of a key in our data that we want it to use. We can order the data based on any of our data&rsquo;s keys and in our case we&rsquo;ll want to use the <code>id<&#47;code> in reverse order.<&#47;p></p>
+<pre><code class="language-markup"><!-- index.html --></p>
+<p>...</p>
+<div class="col-sm-4" ng-repeat="crib in cribs | cribsFilter:priceInfo | orderBy:'-id'">
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>You&rsquo;ll see that we&rsquo;re simply chaining on an additional filter with another pipe character and passing a string of <code>'-id'<&#47;code> to the <code>orderBy<&#47;code> filter which says we want to display the results in reverse order.<&#47;p></p>
+<p>We can now try adding a new listing:<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-3.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-3.png" alt="day-6-3" width="1314" height="1145" class="alignnone size-full wp-image-394" &#47;><&#47;a></p>
+<h3 id="clearing-the-form-data">Clearing the Form Data<&#47;h3></p>
+<p>You&rsquo;ll likely have noticed that when we pressed the &ldquo;Add&rdquo; button and the new listing showed up below the form, the data within the form stuck around. This is obviously unwanted behaviour and would make for bad user experience. Let&rsquo;s fix that now by adjusting the <code>$scope.addCrib<&#47;code> method to clear the data after the listing gets submitted. There are a few different ways we could do this but likely the easiest one is to just reset <code>$scope.newListing<&#47;code> to be an empty object once the listing has been pushed onto the <code>$scope.cribs<&#47;code> array.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>...</p>
+<p>$scope.newListing = {};</p>
+<p>$scope.addCrib = function(newListing) {<br />
+  if(newListing) {<br />
+    newListing.image = "default-crib";<br />
+    $scope.cribs.push(newListing);<br />
+    $scope.newListing = {};<br />
+  }<br />
+}</p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>Now when we add new listings the form will be reset after we&rsquo;ve pressed the &ldquo;Add&rdquo; button.<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-4.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-6-4.png" alt="day-6-4" width="1314" height="1145" class="alignnone size-full wp-image-395" &#47;><&#47;a></p>
+<h2 id="wrapping-up-day-6">Wrapping Up Day 6<&#47;h2></p>
+<p>That was another big job today, great work putting the create functionality in place!<&#47;p></p>
+<p>We&rsquo;re nearly at the end of the course! We&rsquo;ll wrap things up tomorrow by putting in edit and delete functionality for our listings.<&#47;p></p>
+<p>See you tomorrow for the final day!<&#47;p></p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>

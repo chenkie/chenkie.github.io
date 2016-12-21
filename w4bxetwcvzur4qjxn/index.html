@@ -1,0 +1,155 @@
+---
+layout: page
+status: publish
+published: true
+title: 'AngularJS for Beginners: Day 4'
+author:
+  display_name: Ryan Chenkie
+  login: cienki
+  email: ryanchenkie@gmail.com
+  url: ''
+author_login: cienki
+author_email: ryanchenkie@gmail.com
+wordpress_id: 376
+wordpress_url: http://ryanchenkie.com/?page_id=376
+date: '2015-07-25 10:46:56 -0400'
+date_gmt: '2015-07-25 16:46:56 -0400'
+categories: []
+tags: []
+comments: []
+---
+<p>Yesterday we saw how to make our code more reusable by moving common application logic into an AngularJS <code>factory<&#47;code>, also known as a service. We&rsquo;ll be revisiting this service once again today as we take a look at how to setup communication with a backend.<&#47;p></p>
+<p>As was mentioned yesterday, we&rsquo;re not actually going to do any communication with a real database in this course because we want to focus on the fundamentals of Angular. However, at the end of the course we&rsquo;ll talk about what options we have for integrating a backend in.<&#47;p></p>
+<h2 id="angularjs-as-a-front-end-framework">AngularJS as a Front-End Framework<&#47;h2></p>
+<p>As you&rsquo;re likely aware and have come to realize by now, AngularJS is solely a front-end framework. That is, it focuses on letting developers easily create the parts of the application that users see in their web browsers. For some applications, especially those that are trivial and don&rsquo;t require any ability to persist data, AngularJS alone is all that is needed to make the application run. However, for most real world applications this simply won&rsquo;t do. In most cases the user will need to be able to create, read, update and delete records in a database. In most (but not all) cases, this will require the application developer to have a web server and database setup with some server-side language that takes care of database interaction and other backend logic. <&#47;p></p>
+<p>So which server-side languages and frameworks is AngularJS compatible with? In short, anything! That&rsquo;s the beauty of Angular&mdash;as long as you have a web server that has the ability to return data after an HTTP request is made to it, Angular is compatible with it. The arrangement between Angular and whichever server-side language is being used can vary, but in general the best way to set the two up is to have the server provide what is called a RESTful API (application programming interface). The API then becomes responsible for receiving HTTP requests from Angular and, in response, delivers data of some form. <&#47;p></p>
+<p>Going any deeper into server-side languages and APIs is beyond the scope of this introductory course, but there are many resources for further learning available. However, to get a sense for how we would eventually interact with a backend, we&rsquo;re going to set our AngularJS app up as if it were communicating with one. This will let us see the mechanics of it and will let our application code be a little more real world like.<&#47;p></p>
+<h2 id="communication-with-remote-http-servers">Communication with Remote HTTP Servers<&#47;h2></p>
+<p>AngularJS provides two ways of communicating with remote HTTP servers. The first way is through the <code>$http<&#47;code> service which is uses XMLHttpRequests (XHR) to send requests and handle the data that comes back from the server. This service has support and shortcut methods for all HTTP request types and also gives developers the ability to set headers and modify requests and responses as they go out and come back in.<&#47;p></p>
+<p>Different HTTP methods exist for different kinds of requests. The four methods that we use the most for our applications are <code>POST<&#47;code>, <code>GET<&#47;code>, <code>PUT<&#47;code> and <code>DELETE<&#47;code> and these essentially map to the kinds of operations we perform on our databases&mdash;Create, Read, Update and Delete (CRUD).<&#47;p></p>
+<p>To get a sense for how these work, let&rsquo;s modify our code to use <code>$http<&#47;code> for retrieving data.<&#47;p></p>
+<h2 id="putting-the-data-in-its-own-file">Putting the Data in its Own File<&#47;h2></p>
+<p>To best demonstrate how to use <code>$http<&#47;code>, we&rsquo;ll first want to move our real estate listing data to its own separate file. We&rsquo;re dealing with JSON data here, so we&rsquo;re going to create a file called <code>cribs.json<&#47;code> in a new folder called <code>data<&#47;code>.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; data&#47;cribs.json</p>
+<p>[<br />
+  {<br />
+    "type": "Condo",<br />
+    "price": 220000,<br />
+    "address": "213 Grove Street",<br />
+    "description": "Excellent place, really nice view!"<br />
+  },<br />
+  {<br />
+    "type": "House",<br />
+    "price": 410500,<br />
+    "address": "7823 Winding Way",<br />
+    "description": "Beautiful home with lots of space for a large family."<br />
+  },<br />
+  {<br />
+    "type": "Duplex",<br />
+    "price": 395000,<br />
+    "address": "834 River Lane",<br />
+    "description": "Great neighbourhood and lot's of nice green space."<br />
+  }<br />
+]<br />
+<&#47;code><&#47;pre></p>
+<p>With the data now in its own file, it&rsquo;s now as if it were coming from a web server, at least enough so that we&rsquo;ll be able to make use of <code>$http<&#47;code> to retrieve it.<&#47;p></p>
+<h2 id="modifying-the-factory">Modifying the Factory<&#47;h2></p>
+<p>We&rsquo;ll need to make use of the <code>$http<&#47;code> service in the <code>cribsFactory<&#47;code> we created yesterday and then use its <code>get<&#47;code> method to retrieve the data.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsFactory.js</p>
+<p>angular<br />
+  .module('cribsApp')<br />
+  .factory('cribsFactory', function($http) {</p>
+<p>    &#47;&#47; Method that returns the cribs data<br />
+    function getCribs() {<br />
+      &#47;&#47; We're now using $http to get the<br />
+      &#47;&#47; data from a separate file<br />
+      return $http.get('data&#47;cribs.json');<br />
+    }</p>
+<p>    return {<br />
+      getCribs: getCribs<br />
+    }</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>We&rsquo;re once again making use of dependency injection in the <code>cribsFactory<&#47;code> service and this time it&rsquo;s the <code>$http<&#47;code> service that we&rsquo;re injecting. We&rsquo;ve modified the <code>getCribs<&#47;code> method so that it now returns an <code>$http.get<&#47;code> request which is directed to the newly created <code>cribs.json<&#47;code> file in the data folder. <&#47;p></p>
+<p>Now when we access the <code>getCribs<&#47;code> method in our controller, it&rsquo;s going to perform the proper <code>GET<&#47;code> request for our data. Making an <code>$http.get<&#47;code> request returns something called a <code>promise<&#47;code> which we will define a little later. For now, let&rsquo;s modify the code in <code>cribsController<&#47;code> to handle this new method of retrieving the data.<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsController.js</p>
+<p>angular<br />
+  .module('cribsApp')<br />
+  .controller('cribsController', function($scope, cribsFactory) {</p>
+<p>    $scope.cribs;</p>
+<p>    cribsFactory.getCribs().success(function(data) {<br />
+      $scope.cribs = data;<br />
+    }).error(function(error) {<br />
+      console.log(error)<br />
+    });</p>
+<p>  });<br />
+<&#47;code><&#47;pre></p>
+<p>As you&rsquo;ll notice, our <code>cribsController<&#47;code> now looks quite a bit different than it did before. There are a couple new things going on, including some chaining we&rsquo;re doing where we add on a <code>success<&#47;code> and an <code>error<&#47;code> method to the call to <code>getCribs<&#47;code>. <&#47;p></p>
+<p>The <code>success<&#47;code> method, which is often referred to as the &ldquo;success handler&rdquo; takes an anonymous function as an argument and can return a number of things from that function, namely: <code>data<&#47;code>, <code>status<&#47;code>, <code>headers<&#47;code>, and <code>config<&#47;code>. For our case, we&rsquo;re really only interested in the data that should be returned, so that&rsquo;s the only parameter we put in the anonymous function. We do whatever we want with the resulting data, and for us it makes sense to put it on <code>$scope<&#47;code> right away, so that&rsquo;s what we do here.<&#47;p></p>
+<p>We&rsquo;re also chaining on an <code>error<&#47;code> method which is our &ldquo;error handler&rdquo;. We haven&rsquo;t set anything up in the application yet to do anything with any error data that we might get, so in our case we just log it to the console. So when would we get errors? It could be for many reasons&mdash;a hiccup on the server, the user not being logged in, a request to an invalid location. Basically, anything that returns an error response code will be routed to the error handler.<&#47;p></p>
+<p>With this code in place, we should be able to once again see our data on the screen when we refresh.<&#47;p></p>
+<p><a href="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-4-1.png"><img src="http:&#47;&#47;ryanchenkie.com&#47;store&#47;uploads&#47;2015&#47;07&#47;day-4-1.png" alt="day-4-1" width="1085" height="837" class="alignnone size-full wp-image-377" &#47;><&#47;a></p>
+<h2 id="about-promises">About Promises<&#47;h2></p>
+<h3 id="asynchronous-programming">Asynchronous Programming<&#47;h3></p>
+<p>As we mentioned earlier, when we use <code>$http<&#47;code> to make a <code>GET<&#47;code> request for our data, the <code>$http<&#47;code> service returns what is called a <code>promise<&#47;code>. <code>Promises<&#47;code> are useful due to the nature of JavaScript and the fact that it is asynchronous. <&#47;p></p>
+<p>To get a feel for what asynchronous means, let&rsquo;s consider some different ways a program might work. For a given script file, we might typically think that the program will run through things in sequential order. That is, it will start at the top of the script file and execute the code line by line until the end. This may well be how a given program will run and if so, we would be doing synchronous programming. The problem with synchronous programming is that since everything must happen in order, from top to bottom, long-running processes in the script will cause a stall to everything else that needs to happen in the program.<&#47;p></p>
+<p>Consider, for example, a poorly-formed <em>synchronous<&#47;em> program that first loads a webpage, then retrieves some data from a web server and lastly populates some elements on a web page with that data. For illustrative purposes, let&rsquo;s pretend the server is very slow and takes 10 whole seconds to respond and return the data as requested. Here&rsquo;s the scenario with some pseudo code:<&#47;p></p>
+<ol>
+<li><code>loadPage();<&#47;code><&#47;li>
+<li><code>retrieveDataFromServer();<&#47;code><&#47;li>
+<li><code>drawPageElements();<&#47;code><&#47;li>
+<li><code>populateElementsWithData();<&#47;code><&#47;li><br />
+<&#47;ol></p>
+<p>In the synchronous setup, the program is executed sequentially, steps one through four. This means that the user has to stare at a frozen-looking screen for over 10 seconds while the web server prepares the data to be sent back. After the long wait the data is returned and steps 3 and 4 can run.<&#47;p></p>
+<p>Let&rsquo;s rethink this scenario in the <em>asynchronous<&#47;em> fashion.<&#47;p></p>
+<ol>
+<li><code>loadHeader();<&#47;code><&#47;li>
+<li>
+  <code>retrieveDataFromServer(function(data) { return data; });<&#47;code><br />
+<&#47;li></p>
+<li><code>drawPageElements();<&#47;code><&#47;li>
+<li><code>populateElementsWithData();<&#47;code><&#47;li><br />
+<&#47;ol></p>
+<p>In this setup, we&rsquo;ve changed the second step in a significant way. Here we&rsquo;re saying that we want to ask the server for the data we need, but that we don&rsquo;t want to wait for it to come back before moving on with the rest of the program. In this setup we are moving onto steps 3 and 4 <em>before<&#47;em> step 2 is finished. However, we&rsquo;re also saying that once step 2 is finished, we want to do something with the data that is retrieved.<&#47;p></p>
+<p>This is a trivial example, but it demonstrates a concept in JavaScript that is important to understand as we get into describing promises.<&#47;p></p>
+<h3 id="promises">Promises<&#47;h3></p>
+<p>Put simply, a promise can be thought of as a &ldquo;guarantee&rdquo; that something in our program will happen when it is <em>ready<&#47;em> to happen. Like we&rsquo;ve described above, because JavaScript is asynchronous, that <em>when<&#47;em> is not always known. In addition, the <em>what<&#47;em> is not always known either. Since we don&rsquo;t know exactly what the result of the promise will be, we have to be prepared to handle the possible outcomes. With our Angular code we can be pretty general and stick to two outcomes: the promise is either successful or it is unsuccessful.<&#47;p></p>
+<p>Let&rsquo;s use the new code we wrote earlier to understand this better. For review, here&rsquo;s the new code we have put in:<&#47;p></p>
+<pre><code class="language-javascript">&#47;&#47; scripts&#47;cribsFactory.js</p>
+<p>...</p>
+<p>function getCribs() {<br />
+  return $http.get('data&#47;cribs.json');<br />
+}</p>
+<p>...</p>
+<p>&#47;&#47; scripts&#47;cribsController.js</p>
+<p>...</p>
+<p>cribsFactory.getCribs().success(function(data) {<br />
+  $scope.cribs = data;<br />
+}).error(function(error) {<br />
+  console.log(error)<br />
+});</p>
+<p>...<br />
+<&#47;code><&#47;pre></p>
+<p>Here&rsquo;s the conversation that&rsquo;s going on between the controller and the service:<&#47;p></p>
+<p><strong>Controller<&#47;strong>: cribsFactory, please send an HTTP <code>GET<&#47;code> request to retrieve the data <br><br />
+<strong>Service<&#47;strong>: Sounds good, I&rsquo;ll grab that. I <strong>promise<&#47;strong> you that something will happen as a result of my work <br><br />
+<strong>Controller<&#47;strong>: Perfect, I know what I&rsquo;ll do if your work is successful and also what will happen if it is not successful<&#47;p></p>
+<p><em>Some arbitrary amount of time later<&#47;em><&#47;p></p>
+<p><strong>Service<&#47;strong>: Alright controller, my work is done. I&rsquo;ve made the HTTP <code>GET<&#47;code> request and have retrieved the data. I was able to get the data, and thus I was successful <br><br />
+<strong>Controller<&#47;strong>: Excellent, since you were successful and have data to give me, I&rsquo;m going to put that data on <code>$scope<&#47;code> to be used in the app<&#47;p></p>
+<h3 id="the-point">The Point<&#47;h3></p>
+<p>That&rsquo;s a lot to take in about asynchronous programming and promises in Angular, but the point is this: we can set things up such that our program doesn&rsquo;t need to execute all its parts sequentially. We can move on with the rest of the program and go back to whatever didn&rsquo;t get finished later on. With promises, we get a guarantee that we&rsquo;ll get something back <em>when<&#47;em> that something is ready.<&#47;p></p>
+<h2 id="using-resource-for-restful-apis">Using $resource for RESTful APIs<&#47;h2></p>
+<p>We talked about RESTful APIs earlier in this tutorial. While we won&rsquo;t go into what these are and how they work, it is useful to note that Angular provides an abstraction of the <code>$http<&#47;code> service that helps us to handle RESTful APIs in a nicer way. In particular, the <code>$resource<&#47;code> factory gives us helper methods that alleviates the need to interact with the implementation details of the <code>$http<&#47;code> service. For example, with <code>$resource<&#47;code>, we can use methods such as <code>save<&#47;code>, <code>query<&#47;code> and <code>remove<&#47;code> and these methods take care of the HTTP request types and other details for us.<&#47;p></p>
+<p>Since we&rsquo;re using a small amount of data for our app, we&rsquo;re going to stick with <code>$http<&#47;code> in this series to continue to get a feel for how HTTP communication with Angular works.<&#47;p></p>
+<h2 id="wrapping-up-day-4">Wrapping Up Day 4<&#47;h2></p>
+<p>Great job today! We learned a lot about HTTP requests and how Angular gives us a way to make these requests. We also looked some other things, including:<&#47;p></p>
+<ul>
+<li>A conceptual look at asynchronous programming<&#47;li>
+<li>What promises are and how they work<&#47;li>
+<li>How Angular uses promises<&#47;li>
+<li>Another option for communicating with a backend called <code>$resource<&#47;code><&#47;li><br />
+<&#47;ul></p>
+<p>At this point we&rsquo;re over half way through and you might be thinking &ldquo;we haven&rsquo;t really done much on the application yet&rdquo;. If so, you&rsquo;re totally right. However, I wanted to be sure that we get a lot of the core Angular concepts out of the way before we dig deeper into actually building the app. Don&rsquo;t worry though, starting tomorrow we&rsquo;re diving right into making the application function and look beautiful. <&#47;p></p>
+<p>See you back here tomorrow! <&#47;p></p>
+<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe<&#47;a> to the email list to get the rest of the course.<&#47;div></p>
