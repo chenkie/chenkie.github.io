@@ -203,4 +203,5 @@ I’d love your feedback on the course! It would be great to know if there’s a
 If you found this course helpful, I would appreciate it a ton if you shared it with anyone you know who is wanting to learn AngularJS.
 
 Thanks, and happy coding!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

@@ -218,4 +218,5 @@ That’s all for the first day of the course! We covered a quite a few things to
 While we went over quite a bit of theory and setup today, we didn’t do a whole lot of work on our actual application, nor did we really get to see any of Angular’s features. Don’t worry though, there’s lot’s of that to come. Tomorrow we’ll cover some new concepts and topics including Angular’s <code>$scope</code> object and how to use it. We’ll also see how to setup and use controllers and views.
 
 Great job today—see you back here tomorrow!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

@@ -219,4 +219,5 @@ That’s all for today! We’ve seen quite a few new concepts and put them right
 Tomorrow we’re going to look at another tenet of AngularJS, called “services”. These help us to abstract away common parts of our code into reusable chunks.
 
 Great work today, see you again tomorrow!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

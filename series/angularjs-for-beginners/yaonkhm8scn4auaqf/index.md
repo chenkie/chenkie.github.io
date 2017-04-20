@@ -410,4 +410,5 @@ We also got to make a custom AngularJS filter that lets the user specify a price
 We’re making great progress on the application, but there are still a few things that are missing. Tomorrow we’ll be covering how to add new real estate listings.
 
 See you tomorrow!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

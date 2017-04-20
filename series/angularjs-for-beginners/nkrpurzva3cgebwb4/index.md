@@ -121,4 +121,5 @@ That’s all for today—great job learning about services! We took a good look 
  	<li>How we can apply a <code>factory</code> service to our application and thereby abstract a common task to a central location where it can be reused later.</li>
 </ul>
 See you back here tomorrow for Day 4!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

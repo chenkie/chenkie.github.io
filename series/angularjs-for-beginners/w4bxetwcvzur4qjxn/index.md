@@ -194,4 +194,5 @@ Great job today! We learned a lot about HTTP requests and how Angular gives us a
 At this point we’re over half way through and you might be thinking “we haven’t really done much on the application yet”. If so, you’re totally right. However, I wanted to be sure that we get a lot of the core Angular concepts out of the way before we dig deeper into actually building the app. Don’t worry though, starting tomorrow we’re diving right into making the application function and look beautiful.
 
 See you back here tomorrow!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.

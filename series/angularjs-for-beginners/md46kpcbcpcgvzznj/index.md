@@ -254,4 +254,5 @@ That was another big job today, great work putting the create functionality in p
 We’re nearly at the end of the course! We’ll wrap things up tomorrow by putting in edit and delete functionality for our listings.
 
 See you tomorrow for the final day!
-<div class="alert alert-primary">If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.</div>
+
+###### If you've ended up here some other way than through the email link, I'm still glad you're here! You can <a href="#">subscribe</a> to the email list to get the rest of the course.
