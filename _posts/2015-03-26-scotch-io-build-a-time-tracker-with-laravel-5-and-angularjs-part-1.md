@@ -14,6 +14,7 @@ tags:
 - AngularJS
 - Laravel
 - Scotch.io
+comments: true
 ---
 
 In the first of this two-part series I did for Scotch.io, we’ll setup an AngularJS front-end for an Laravel + Angular time tracker app.

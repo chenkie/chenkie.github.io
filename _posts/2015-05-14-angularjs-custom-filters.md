@@ -15,6 +15,7 @@ tags:
 - Google Maps
 - Angular Google Maps
 - Custom Filter
+comments: true
 ---
 
 AngularJS filters are awesome for modifying the output of data as it is being displayed in the view and Angular comes with many of these filters built-in with the framework. For example, with the `currency` filter we can easily display numeric values with a dollar sign and two decimal places and with `date` we can format dates and times however we like. The built-in filters are great, but what if we want to make a custom filter that goes beyond these? For this we can make use of AngularJS custom filters.

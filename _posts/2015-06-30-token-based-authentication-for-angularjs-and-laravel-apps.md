@@ -13,6 +13,7 @@ categories:
 tags:
 - AngularJS
 - Laravel
+comments: true
 ---
 
 This post is a continuation of the [Token-Based Authentication for AngularJS and Laravel Apps](https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps) tutorial on [Scotch.io](https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps). If you haven’t read it yet, head over there and take a look before continuing with this one.

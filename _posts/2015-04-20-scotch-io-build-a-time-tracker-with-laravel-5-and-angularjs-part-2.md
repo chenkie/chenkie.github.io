@@ -14,6 +14,7 @@ tags:
 - AngularJS
 - Laravel
 - Scotch.io
+comments: true
 ---
 
 In the second of this two-part series I did for Scotch.io, we’ll finish out our time tracker app by setting up the Laravel backend and adjusting our Angular code to make use of the RESTful API we create with Laravel.

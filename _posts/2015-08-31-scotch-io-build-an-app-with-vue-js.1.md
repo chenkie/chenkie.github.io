@@ -14,6 +14,7 @@ tags:
 - Javascript
 - vue
 - vuejs
+comments: true
 ---
 
 Vue.js is an excellent front end library that focuses on the ViewModel and makes it easy to get up and running with single page apps. It’s heavily influenced by AngularJS, so using Vue feels quite natural if you come from an Angular background. One of the nice things about Vue is that you don’t have to worry about the overhead that can often come with setting up an Angular app, but you still get the tools to make awesome single page apps.

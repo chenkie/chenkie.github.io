@@ -18,6 +18,55 @@ categories: []
 tags: []
 comments: []
 ---
-<h2>Get in touch!<&#47;h2></p>
+<h2>Get in touch!</p>
 <p>I'd love to hear about what you're working on! Feel free to get in touch&nbsp;and let me know about your current projects and also whether there are any subjects that you'd like me to write about for you.</p>
-<p>[contact-form-7 id="282" title="Main Contact Form"]</p>
+
+<div class="alert alert-success" id="email-sent" hidden><p>Your email has been sent, thanks for getting in touch!</p></div>
+<div class="alert alert-danger" id="email-error" hidden><p>Something went wrong, please try again.</p></div>
+
+<form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input class="form-control" type="text" name="name" placeholder="John Doe" id="name" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input class="form-control" type="email" name="email" placeholder="john@doe.com" id="email" required>
+  </div>
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <input class="form-control" type="text" name="subject" placeholder="Inquiring about..." id="subject" required>
+  </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea class="form-control" name="message" placeholder="Your message" id="message" required></textarea>
+  </div>
+  <input type="submit" value="Send" id="form-submit">
+</form>
+
+<script>
+  $(document).ready(function() {
+    var submitButton = $('#form-submit');
+
+    submitButton.click(function(e) {
+      e.preventDefault();
+      var data = {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        subject: $('#subject').val(),
+        message: $('#message').val()
+      }
+      $.post('https://wt-e226e2760fa13be8110b118fef90efb3-0.run.webtask.io/contact-form', data, function(data) {
+        $('#email-error').hide();
+        $('#email-sent').show();
+        $('#name').val(''),
+        $('#email').val(''),
+        $('#subject').val(''),
+        $('#message').val('')
+      }).fail(function(xhr, textStatus, error) {
+        $('#email-sent').hide();
+        $('#email-error').show();
+      });
+    });
+  });
+</script>

@@ -15,6 +15,7 @@ tags:
 - Laravel
 - Bootstrap
 - Typeahead
+comments: true
 ---
 
 Typeaheads are great for adding to a rich user experience in modern web applications, and luckily Twitter offers a JavaScript library called Typeahead.js which drastically simplifies setting this feature up. If you're using AngularJS and Bootstrap, you've likely come across UI Bootstrap which is a set of native Bootstrap directives for AngularJS. In this two-part tutorial, we will get an AngularJS and Laravel typeahead working. Part 1 will focus on setting up the front-end with AngularJS.
@@ -230,7 +231,7 @@ Adding these attributes to our input element, we end up with:
 
 This is enough to get us going with a basic typeahead. Open the page in your browser and test it out by plugging in some of the known properties of the airplane data.
 
-![typeahead]({{site.url}}/{{site.baseurl}}img/post-assets/typeahead-1.png)
+![typeahead]({{site.url}}/{{site.baseurl}}img/post-assets/typeahead1.png)
 
 While this is great to show a single property of our data at a time, what we ultimately want is a more comprehensive drop down list. To accomplish this we will use a custom typeahead template. Let’s create a new html template:
 
@@ -266,7 +267,7 @@ With the template now created, we can reference it in ourinput element. All of t
 >
 ~~~
 
-![typeahead]({{site.url}}/{{site.baseurl}}img/post-assets/typeahead-2.png)
+![typeahead]({{site.url}}/{{site.baseurl}}img/post-assets/typeahead2.png)
 
 As you’ll recall, we assign a model for our selected airplane to selectedAirplane and this model can now be used however we want. We can output the result of our selection on the page much like we did earlier.
 

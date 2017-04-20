@@ -12,6 +12,7 @@ categories:
 tags:
 - Aurelia
 - Auth0
+comments: true
 ---
 
 [Aurelia](http://aurelia.io/) is a client-side JavaScript framework that has been gaining a lot of popularity lately. One of the nice aspects of Aurelia is that it anticipates common application needs and provides simple conventions for accomplishing them.

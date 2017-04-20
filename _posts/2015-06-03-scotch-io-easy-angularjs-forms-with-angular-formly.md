@@ -11,6 +11,7 @@ categories:
 tags:
 - AngularJS
 - Javascript
+comments: true
 ---
 
 Have you ever created a form in AngularJS and been frustrated with how bloated your HTML was? Putting lots of Angular attributes on our HTML tags can make things get big quickly and can lead to a mess of markup.

@@ -16,6 +16,7 @@ tags:
 - REST
 - REST API
 - Update Specific Value
+comments: true
 ---
 
 Using a `PUT` request to update a record in a database can be tricky when you only want to update the value for a specific field. By default, the `PUT` request will override the entire entry, and this is often undesirable. Support for `PATCH` (used to update a specific field in a record) is increasing, but for various reasons, using it is not always an option. For those times when you need to use `PUT`, there are ways to setup your API so that you can easily update only the specific values you want.

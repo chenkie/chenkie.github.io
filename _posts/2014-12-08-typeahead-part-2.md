@@ -15,6 +15,7 @@ tags:
 - Laravel
 - Bootstrap
 - Typeahead
+comments: true
 ---
 
 Now that we’ve got our front-end in place for our typeahead input, let’s work on retrieving data from a database instead of just from a static JSON file on disk. For the back-end we’ll be using Laravel 4.2 with a MySQL database.

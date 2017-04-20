@@ -15,6 +15,7 @@ tags:
 - Factory
 - Service
 - Weather
+comments: true
 ---
 
 While AngularJS certainly is an opinionated framework, it also gives developers a lot of freedom when it comes to application architecture. In many cases this can be a positive thing, but it can also lead to applications getting built in ways that aren’t the most maintainable.

@@ -13,6 +13,7 @@ tags:
 - Angular CLI
 - Deployment
 - Heroku
+comments: true
 ---
 
 The Angular CLI is all around awesome and gives us a ton of time-saving features out-of-the-box. One that I love is the development server it comes with. If you’ve used the Angular CLI, there’s a good chance you’ve run `ng serve` and then visited `localhost:4200` to see your app.
