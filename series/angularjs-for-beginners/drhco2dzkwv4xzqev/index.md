@@ -116,10 +116,10 @@ As a quick side note, we’re not limited to string expressions in our templates
 
 &lt;body ng-app="cribsApp" ng-controller="cribsController"&gt;
 
-    &lt;h1&gt;{{hello}}&lt;/h1&gt;
-    &lt;h1&gt;{{hello + ' You\'re looking great.'}}&lt;/h1&gt;
-    &lt;h1&gt;{{5 + 2}}&lt;/h1&gt;
-    &lt;h1&gt;{{(7 - 3) * 20}}&lt;/h1&gt;       
+    &lt;h1&gt;{% raw %}{{ hello }}{% endraw %}&lt;/h1&gt;
+    &lt;h1&gt;{% raw %}{{ hello + ' You\'re looking great.' }}{% endraw %}&lt;/h1&gt;
+    &lt;h1&gt;{% raw %}{{ 5 + 2 }}{% endraw %}&lt;/h1&gt;
+    &lt;h1&gt;{% raw %}{{ (7 - 3) * 20 }}{% endraw %}&lt;/h1&gt;       
 
 &lt;/body&gt;
 
@@ -165,7 +165,7 @@ Now let’s view the <code>cribs</code> in the browser. To do so, we’ll need t
 
 &lt;body ng-app="cribsApp" ng-controller="cribsController"&gt;
 
-    &lt;pre&gt;{{cribs | json}}&lt;/pre&gt;     
+    &lt;pre&gt;{% raw %}{{ cribs | json }}{% endraw %}&lt;/pre&gt;     
 
 &lt;/body&gt;
 
@@ -186,10 +186,10 @@ To make proper use of our data in the view, we have to introduce a new directve:
 
     &lt;div class="well" ng-repeat="crib in cribs"&gt;
 
-        &lt;h3&gt;{{crib.address}}&lt;/h3&gt;
-        &lt;p&gt;&lt;strong&gt;Type: &lt;/strong&gt;{{crib.type}}&lt;/p&gt;
-        &lt;p&gt;&lt;strong&gt;Description: &lt;/strong&gt;{{crib.description}}&lt;/p&gt;
-        &lt;p&gt;&lt;strong&gt;Price: &lt;/strong&gt;{{crib.price | currency}}&lt;/p&gt;
+        &lt;h3&gt;{% raw %}{{ crib.address }}{% endraw %}&lt;/h3&gt;
+        &lt;p&gt;&lt;strong&gt;Type: &lt;/strong&gt;{% raw %}{{ crib.type }}{% endraw %}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Description: &lt;/strong&gt;{% raw %}{{ crib.description }}{% endraw %}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Price: &lt;/strong&gt;{% raw %}{{ crib.price | currency }}{% endraw %}&lt;/p&gt;
 
     &lt;/div&gt;
 

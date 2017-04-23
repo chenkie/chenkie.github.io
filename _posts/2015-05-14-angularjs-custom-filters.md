@@ -449,8 +449,8 @@ Now that our filter is complete, we can add some elements to the view that will 
   </div>      
   <div class="col-sm-6">
     <h3>Decimal Degrees</h3>
-    <h3><span class="label label-primary">Latitude</span> {{lat | coordinateFilter:'toDD':'lat':4}}</h3>
-    <h3><span class="label label-primary">Longitude</span> {{lon | coordinateFilter:'toDD':'lon':4}}</h3>
+    <h3><span class="label label-primary">Latitude</span> {% raw %}{{ lat | coordinateFilter:'toDD':'lat':4 }}{% endraw %}</h3>
+    <h3><span class="label label-primary">Longitude</span> {% raw %}{{ lon | coordinateFilter:'toDD':'lon':4 }}{% endraw %}</h3>
   </div>
 </div>
 ~~~

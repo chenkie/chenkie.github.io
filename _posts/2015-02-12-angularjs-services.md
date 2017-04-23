@@ -205,7 +205,9 @@ The biggest thing to notice here is that we have duplicated almost all of the co
 
 </div>
 
-<pre>{{ "{{ weather | json" }}}}</pre>
+<pre>
+{% raw %}{{ weather | json }}{% endraw %}
+</pre>
 ~~~
 
 ~~~html
@@ -222,7 +224,7 @@ The biggest thing to notice here is that we have duplicated almost all of the co
   <button class="btn btn-primary" ng-click="checkWeather()">Get the Weather!</button>
 </div>
 
-<pre>{{ "{{ weather | json" }}}}</pre>
+<pre>{% raw %}{{ weather | json }}{% endraw %}</pre>
 ~~~
 
 We’ve put some Bootstrap classes in for styling and added an `ng-click` on the buttons that call the `checkWeather` method. At this point, we’re only going to dump the returned `weather` data that is on the weather model out as raw JSON.
@@ -358,16 +360,16 @@ Up until now we have only displayed the raw JSON data that the API returns betwe
   <div class="panel-body">
     <div class="col-sm-6">
 
-      <h1>{{weather.name}}</h1>
-      <h1 class="temp">{{weather.main.temp - 273.15 | number:1}}&deg;C</h1>
+      <h1>{% raw %}{{weather.name}}{% endraw %}</h1>
+      <h1 class="temp">{% raw %}{{weather.main.temp - 273.15 | number:1}}{% endraw %}&deg;C</h1>
 
     </div>
 
     <div class="col-sm-6 conditions">   
 
-      <h4>{{weather.weather[0].description}}</h4>
-      <h4>Humidity: {{weather.main.humidity}}%</h4>
-      <h4>Pressure: {{weather.main.pressure}} hPa</h4>
+      <h4>{% raw %}{{ weather.weather[0].description }}{% endraw %}</h4>
+      <h4>Humidity: {% raw %}{{ weather.main.humidity }}{% endraw %}%</h4>
+      <h4>Pressure: {% raw %}{{ weather.main.pressure }}{% endraw %} hPa</h4>
 
     </div>
   </div>
@@ -394,15 +396,15 @@ Up until now we have only displayed the raw JSON data that the API returns betwe
   <div class="panel-body">
     <div class="col-sm-6">  
 
-      <h1>{{weather.name}}</h1>
-      <h1 class="temp">{{weather.main.temp - 273.15 | number:1}}&deg;C</h1>
+      <h1>{% raw %}{{ weather.name }}{% endraw %}</h1>
+      <h1 class="temp">{% raw %}{{ weather.main.temp - 273.15 | number:1 }}{% endraw %}&deg;C</h1>
 
     </div>
     <div class="col-sm-6 conditions">   
 
-      <h4>{{weather.weather[0].description}}</h4>
-      <h4>Humidity: {{weather.main.humidity}}%</h4>
-      <h4>Pressure: {{weather.main.pressure}} hPa</h4>
+      <h4>{% raw %}{{ weather.weather[0].description }}{% endraw %}</h4>
+      <h4>Humidity: {% raw %}{{ weather.main.humidity }}{% endraw %}%</h4>
+      <h4>Pressure: {% raw %}{{ weather.main.pressure }}{% endraw %} hPa</h4>
 
     </div>
   </div>
