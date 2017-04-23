@@ -16,7 +16,7 @@
 title: Ryan Chenkie
 description: > # A blog about travel, adventure and stories from the road.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+url: "https://ryanchenkie.com" # the base hostname & protocol for your site
 permalink: :title
 
 # Comments
