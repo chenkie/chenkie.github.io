@@ -10,7 +10,6 @@ layout: default
         <div class="overlay hero-header__inner">
             <h1 class="animated fadeIn delay-1">{{page.title}}</h1>
         </div>
-
         <div class="hero-header__meta">
             <p class="hero-header__tags animated fadeInDown">
               {% for category in page.categories %}
@@ -18,9 +17,12 @@ layout: default
                   {% if forloop.last %}{% else %}&middot;{% endif %}
               {% endfor %}
               </p>
-            <p class="hero-header__author animated fadeInUp">
-            <a href="{{author.permalink | prepend: site.baseurl}}">{{author.name}}</a>
-            </p>
+            <div class="hero-header__bumper">
+                <p class="hero-header__author animated fadeInUp">
+                    <a href="{{author.permalink | prepend: site.baseurl}}">{{author.name}}</a>
+                </p>
+                <a href="https://twitter.com/{{author.twitter}}" class="twitter-follow-button animated fadeInUp" data-show-count="false">Follow @ryanchenkie</a><script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
         </div>
   </header>
 

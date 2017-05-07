@@ -15,6 +15,9 @@ bodyclass: full-height
                           <p class="hero__content animated fadeIn delay-2">{{ post.excerpt | truncatewords: 24 | strip_html }}</p>
 
                           <a href="{{author.permalink  | prepend: site.baseurl}}" class="hero___avatar-link"><img src="{{ site.baseurl }}/img/{{author.avatar_image}}"  alt="{{post.author_name}}"class="hero__content__avatar animated fadeIn delay-2" alt=""></a>
+                          <div class="hero-twitter">
+                            <a href="https://twitter.com/{{author.twitter}}" class="twitter-follow-button animated fadeInUp" data-show-count="false">Follow @ryanchenkie</a><script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                          </div>
                       <p class="hero__content post-preview__meta animated fadeIn delay-2">{{post.author_name}}</p>
                   </div>
               </div>
