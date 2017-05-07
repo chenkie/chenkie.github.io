@@ -18,7 +18,9 @@ bodyclass: full-height
                       <p class="hero__content post-preview__meta animated fadeIn delay-2">{{post.author_name}}</p>
                   </div>
               </div>
+
               {% else %}
+
               <div class="col-sm-6 col-md-4 col-lg-3 post-preview {% if post.is_featured %} post--featured {% endif %}" style="background-image: url({{ site.baseurl }}/img/{{post.feature_image}});">
                   {% if post.is_featured %}
                   <span class="post-featured-text">featured</span>

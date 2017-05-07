@@ -1,0 +1,82 @@
+<style>
+  .angularcasts-banner * {
+    font-family: Tahoma, sans-serif;
+  }
+  .angularcasts-banner {
+    display: none;
+    position: relative;
+    height: 235px;
+    background-image: -webkit-linear-gradient(325deg, #26a9b3 0%, #2482a9 99%);
+    background-image: -moz-linear-gradient(325deg, #26a9b3 0%, #2482a9 99%);
+    background-image: -o-linear-gradient(325deg, #26a9b3 0%, #2482a9 99%);
+    background-image: linear-gradient(55deg, #26a9b3 0%, #2482a9 99%);
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0px -1px 9px 0px #444 inset;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .angularcasts-banner a:hover {
+    color: #fff;
+  }
+  .angularcasts-banner h3 {
+    margin-top: 0;
+    letter-spacing: 2px;
+  }
+  .angularcasts-banner img {
+    max-width: 250px;
+    margin: 10px;
+  }
+  .angularcasts-banner .title-container {
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .angularcasts-banner .text-container {
+    text-align: center;
+  }
+  .dismiss-ad {
+    position: relative;
+    display: inline;
+    color: #fff;
+    font-size: 12px;
+    font-family: Tahoma, sans-serif;
+    opacity: 0.7;
+    font-weight: 100;
+  }
+  @media(max-width: 477px) {
+    .angularcasts-banner {
+      height: 275px;
+    }
+  }
+</style>
+
+<div class="angularcasts-banner">
+  <div class="dismiss-ad">
+    <span>Dismiss</span>
+  </div>
+  <a href="https://angularcasts.io/?utm_source=ryanchenkie&utm_medium=banner&utm_campaign=fixed" class="angularcasts-link" target="_blank">
+    <div class="col-sm-12 title-container">
+      <h3><strong>Want to master Angular?</strong></h3>
+      <img src="{{ site.baseurl }}/img/angularcasts-logo-long.png" />
+    </div>
+    <div class="col-sm-12 text-container">
+      <h4>End-to-end Screencasts on Angular and Much More</h4>
+      <a href="https://angularcasts.io/?utm_source=ryanchenkie&utm_medium=banner&utm_campaign=fixed" class="btn btn-danger btn-sm ac-link" target="_blank">BROWSE COURSES</a>        
+    </div>
+  </a>
+</div>
+
+<script>
+  $(document).ready(function() {
+    setTimeout(function() {
+      if (!localStorage.getItem('ad-dismissed')) {
+        $('.angularcasts-banner').slideDown();
+      }
+    }, 3000);
+
+    $('.dismiss-ad').click(function() {
+      $('.angularcasts-banner').hide();
+      localStorage.setItem('ad-dismissed', true);
+    });
+  });
+</script>

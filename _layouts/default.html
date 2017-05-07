@@ -4,6 +4,9 @@
   {% include head.html %}
 
   <body class="{% if layout.bodyclass %}{{ layout.bodyclass }}{% endif %}">
+
+    {% include angularcasts-banner.html %}
+
     {% include navigation.html %}
 
     {{ content }}
