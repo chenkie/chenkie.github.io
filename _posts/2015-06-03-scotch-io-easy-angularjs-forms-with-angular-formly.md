@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Scotch.io | Easy AngularJS Forms with angular-formly
-feature_image: angular-formly-cover.png
+feature_image: angular-formly-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-06-03 06:00:33 -0400'
 categories:

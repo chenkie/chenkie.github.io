@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Angular CLI Deployment: Host Your Angular 2 App on Heroku'
-feature_image: angular-cli-heroku-cover.png
+feature_image: angular-cli-heroku-cover.jpg
 author_slug: ryan-chenkie
 date: '2016-12-15'
 categories:

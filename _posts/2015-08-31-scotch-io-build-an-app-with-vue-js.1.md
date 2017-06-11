@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Scotch.io | Build an App With Vue.js
-feature_image: vue-cover.png
+feature_image: vue-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-08-31 07:00:34 -0400'
 categories:

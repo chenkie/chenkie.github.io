@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Laravel PUT Requests: Updating Only Specific Fields'
-feature_image: laravel-put-cover.png
+feature_image: laravel-put-cover.jpg
 author_slug: ryan-chenkie
 date: '2014-12-23 13:14:28 -0500'
 categories:

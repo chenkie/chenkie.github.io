@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Simple Typeahead With AngularJS and Laravel - Part 1
-feature_image: typeahead1-cover.png
+feature_image: typeahead1-cover.jpg
 author_slug: ryan-chenkie
 date: '2014-12-01 18:41:38 -0500'
 categories:

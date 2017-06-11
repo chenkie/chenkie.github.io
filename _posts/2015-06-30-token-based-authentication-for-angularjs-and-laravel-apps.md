@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Token-Based Authentication for AngularJS and Laravel Apps (continued)
-feature_image: angular-laravel-auth-cover.png
+feature_image: angular-laravel-auth-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-06-30 05:00:38 -0400'
 categories:

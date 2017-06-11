@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: 'Make Code Reusable with AngularJS Services'
-feature_image: angular-services-cover.png
+feature_image: angular-services-cover.jpg
 author_slug: ryan-chenkie
 date: '2014-12-23'
 categories:

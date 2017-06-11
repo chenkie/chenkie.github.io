@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Auth0 | Creating Your First Aurelia App
-feature_image: aurelia-cover.png
+feature_image: aurelia-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-08-12 05:00:35 -0400'
 categories:

@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: Scotch.io | Build a Time Tracker with Laravel 5 and AngularJS &ndash; Part 1
-feature_image: laravel-angular-cover.png
+feature_image: laravel-angular-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-03-26 15:03:00 -0400'
 categories:

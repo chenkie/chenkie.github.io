@@ -3,7 +3,7 @@ layout: post
 status: publish
 published: true
 title: AngularJS Custom Filters
-feature_image: angular-filters-cover.png
+feature_image: angular-filters-cover.jpg
 author_slug: ryan-chenkie
 date: '2015-05-14 05:00:56 -0400'
 categories:
