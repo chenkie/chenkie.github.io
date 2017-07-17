@@ -2,7 +2,7 @@
 layout: post
 status: publish
 published: true
-title: 'Angular Authentication Techniques: Using Http Interceptors'
+title: 'Angular Authentication: Using the Http Client and Http Interceptors'
 feature_image: angular-http-interceptors.jpg
 author_slug: ryan-chenkie
 date: '2017-07-17'
