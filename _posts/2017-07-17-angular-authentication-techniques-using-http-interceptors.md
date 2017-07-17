@@ -35,7 +35,7 @@ npm i --save jwt-decode angular2-jwt
 ~~~
 
 ~~~js
-// src/app/auth/auth.serviec.ts
+// src/app/auth/auth.service.ts
 
 import { Injectable } from '@angular/core';
 import decode from 'jwt-decode';
@@ -93,7 +93,7 @@ export class TokenInterceptor implements HttpInterceptor {
 }
 ~~~
 
-Any interceptor that we want to create needs to `implement` the `HttpInterceptor` interface. This means that our new class must have a method called `intercept` with `HttpRequest` and `HttpHandler` parameters. Using interceptors is all about changing outgoing requests and incoming responses, but we can't tamper with the original request--it needs to be immutable. To make changes we need to `clone` the original `request`.
+Any interceptor that we want to create needs to implement the `HttpInterceptor` interface. This means that our new class must have a method called `intercept` with `HttpRequest` and `HttpHandler` parameters. Using interceptors is all about changing outgoing requests and incoming responses, but we can't tamper with the original request--it needs to be immutable. To make changes we need to `clone` the original `request`.
 
 As we `clone` the original `request` we can set the headers we want. In our case its very simple--we just want to add an `Authorization` header with an auth scheme of `Bearer` followed by the JSON Web Token in local storage which we get from a call to the `getToken` method from the `AuthService`.
 
@@ -190,6 +190,9 @@ This is also a great spot to cache any failed requests. This comes in handy if w
 ~~~js
 // src/app/auth/auth.service.ts
 
+import { HttpRequest } from '@angular/common/http';
+
+// ...
 export class AuthService {
 
   cachedRequests: Array<HttpRequest<any>> = [];
@@ -225,7 +228,7 @@ intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<an
 }
 ~~~
 
-With this in place, you could call `retryFailedRequests` after the user's token is refreshed to fire off the previously-failed requests. This is just a small addition that can help to greatly improve UX, especially if you have tokens with a very short lifetime.
+With this in place, we have the option of calling `retryFailedRequests` after the user's token is refreshed to fire off the previously-failed requests. This is just a small addition that can help to greatly improve UX, especially if you have tokens with a very short lifetime.
 
 ## Wrapping Up
 
