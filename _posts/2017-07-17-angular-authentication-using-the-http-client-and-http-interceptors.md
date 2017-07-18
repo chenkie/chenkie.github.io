@@ -22,11 +22,13 @@ So why are HTTP interceptors useful? There are many reasons, but one common use 
 
 Let's take a look at how to use Angular's `HttpInterceptor` interface to make authenticated HTTP requests.
 
+> <div style="text-align: center"><img src="/securing-angular-applications/img/book-cover.png" style="max-width: 200px"/></div><span><b>Quick note:</b> I'm writing a book which will teach you <b>everything</b> you need to properly add authentication and lock down your Angular apps. [Check it out](/securing-angular-applications) if you're interested :)</span>
+
 ## Make an Authentication Service
 
 When handling authentication in an Angular app, it's generally best to put everything you need in a dedicated service. Any authentication service should have a few basic methods for allowing users to log in and log out. It should also include a method for retrieving a JSON Web Token from wherever it is stored on the client and a way to determine if the user is authenticated or not.
 
-> **Note**: This article assumes you already have an authentication setup in place and that you are storing JWTs in local storage. We won't get into a full details here.
+> This article assumes you already have an authentication setup in place and that you are storing JWTs in local storage. We won't get into a full details here.
 
 One way we can check whether a JWT is expired is to use **jwt-decode** to decode the token. Then we just need to check whether the `exp` time in the token payload has passed. We can use the `tokenNotExpired` function from **angular2-jwt** to make the check.
 
