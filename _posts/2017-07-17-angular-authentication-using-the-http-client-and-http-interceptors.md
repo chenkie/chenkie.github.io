@@ -30,10 +30,10 @@ When handling authentication in an Angular app, it's generally best to put every
 
 > This article assumes you already have an authentication setup in place and that you are storing JWTs in local storage. We won't get into a full details here.
 
-One way we can check whether a JWT is expired is to use **jwt-decode** to decode the token. Then we just need to check whether the `exp` time in the token payload has passed. We can use the `tokenNotExpired` function from **angular2-jwt** to make the check.
+One way we can check whether a JWT is expired is to use **angular2-jwt** to return a `boolean` after checking the `exp` claim.
 
 ~~~bash
-npm i --save jwt-decode angular2-jwt
+npm i --save angular2-jwt
 ~~~
 
 ~~~js
@@ -50,11 +50,11 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    // decode the token
-    const tokenPayload = decode(localStorage.getItem('token'));
+    // get the token
+    const token = this.getToken();
     // return a boolean reflecting 
     // whether or not the token is expired
-    return tokenNotExpired(tokenPayload);
+    return tokenNotExpired(token);
   }
 
 }
