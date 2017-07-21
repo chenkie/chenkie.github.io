@@ -20,3 +20,5 @@ comments: true
 In the second of this two-part series I did for Scotch.io, we’ll finish out our time tracker app by setting up the Laravel backend and adjusting our Angular code to make use of the RESTful API we create with Laravel.
 
 [Build a Time Tracker with Laravel 5 and AngularJS – Part 2](https://scotch.io/tutorials/build-a-time-tracker-with-laravel-5-and-angularjs-part-2)
+
+{% include securing-angular-applications.md %}

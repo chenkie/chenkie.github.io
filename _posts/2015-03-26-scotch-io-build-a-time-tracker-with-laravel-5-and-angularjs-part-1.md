@@ -20,3 +20,5 @@ comments: true
 In the first of this two-part series I did for Scotch.io, we’ll setup an AngularJS front-end for an Laravel + Angular time tracker app.
 
 [Build a Time Tracker with Laravel 5 and AngularJS – Part 1](https://scotch.io/tutorials/build-a-time-tracker-with-laravel-5-and-angularjs-part-1)
+
+{% include securing-angular-applications.md %}

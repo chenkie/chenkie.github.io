@@ -23,6 +23,8 @@ Using a `PUT` request to update a record in a database can be tricky when you on
 
 For this example, we’ll use a simple resource controller to illustrate the issue and the fix using a Laravel `PUT` request.
 
+{% include securing-angular-applications.md %}
+
 ## The Problem
 
 Consider the following `create` method in a Laravel resource controller that handles adding new Christmas gifts:

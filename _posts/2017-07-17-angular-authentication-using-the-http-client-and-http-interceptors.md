@@ -22,7 +22,7 @@ So why are HTTP interceptors useful? There are many reasons, but one common use 
 
 Let's take a look at how to use Angular's `HttpInterceptor` interface to make authenticated HTTP requests.
 
-> <div style="text-align: center"><img src="/securing-angular-applications/img/book-cover.png" style="max-width: 200px"/></div><span><b>Quick note:</b> I'm writing a book which will teach you <b>everything</b> you need to properly add authentication and lock down your Angular apps. [Check it out](/securing-angular-applications) if you're interested :)</span>
+{% include securing-angular-applications.md %}
 
 ## Make an Authentication Service
 

@@ -30,6 +30,8 @@ There were a few things for a complete authentication solution that we didn’t 
 
 We’ll look at how to handle all of the above in this tutorial.
 
+{% include securing-angular-applications.md %}
+
 ## Adding the Authenticated User Route
 
 The first thing we’ll need to do is add a new method to our `AuthenticateController` on the Laravel side so that we can have an object of the currently authenticated user’s data returned to us. Where exactly you put this method, whether it be in an existing controller or an entirely new one, is up to you. For the sake of simplicity, we’ll stick with our current controller.

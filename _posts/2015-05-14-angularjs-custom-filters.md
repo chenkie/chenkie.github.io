@@ -24,6 +24,8 @@ Most AngualrJS custom filter examples that we see around the web deal with fairl
 
 In this tutorial we will build a more complex AngularJS custom filter that will allow us to modify geographic coordinates in our views and also make use of the filter in a controller. The filter will accept geographic coordinates in degrees, minutes, and seconds notation, or in decimal degrees, and will return the conversion for us.
 
+{% include securing-angular-applications.md %}
+
 ## Getting Started
 
 To get a good feel for how AngularJS custom filters can be used, we will build out a small application that will incorporate an AngularJS custom filter with a Google Map to display geographic coordinates. The filter will convert the geographic coordinates from degrees, minutes and seconds notation to decimal degress notation and vice versa.

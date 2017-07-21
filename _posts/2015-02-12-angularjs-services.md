@@ -22,6 +22,8 @@ While AngularJS certainly is an opinionated framework, it also gives developers 
 
 One area this freedom of architecture often shows up is in the controller. When starting out with Angular, it can be tempting to put all bits of logic directly into the controller, especially given the fact that many quick examples and tutorials follow this pattern. However, when it comes to real-life applications, keeping the controllers thin is one key way to increase maintainability. To help us keep controllers thin and encourage code reusability, we can make use of services.
 
+{% include securing-angular-applications.md %}
+
 ## Using Services Instead
 
 Services in Angular give us a way to abstract certain parts of our application logic out into reusable objects or functions. They can be injected as dependencies across all parts of the application, including controllers, directives, filters, and even other services. Creating and using services effectively requires that they be generalized enough to be easily reused in many different areas of the app.

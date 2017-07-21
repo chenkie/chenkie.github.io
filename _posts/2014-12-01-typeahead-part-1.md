@@ -20,6 +20,8 @@ comments: true
 
 Typeaheads are great for adding to a rich user experience in modern web applications, and luckily Twitter offers a JavaScript library called Typeahead.js which drastically simplifies setting this feature up. If you're using AngularJS and Bootstrap, you've likely come across UI Bootstrap which is a set of native Bootstrap directives for AngularJS. In this two-part tutorial, we will get an AngularJS and Laravel typeahead working. Part 1 will focus on setting up the front-end with AngularJS.
 
+{% include securing-angular-applications.md %}
+
 ### Getting Started
 
 The typeahead that we setup will be used to search for specific airplanes belonging to various airlines. If airplanes aren't your thing, feel free to swap out the data we create here with something less av-geeky.

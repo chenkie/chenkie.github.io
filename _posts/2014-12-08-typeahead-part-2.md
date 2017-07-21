@@ -24,6 +24,8 @@ This tutorial will assume a basic working knowledge of Laravel, so if you’re b
 
 We’ll need a webserver for this part of the tutorial. I’ll be using MAMP which is an easy solution for Mac. An even better tool for Laravel is [Laravel Homestead](http://laravel.com/docs/4.2/homestead), but setup is a bit more involved.
 
+{% include securing-angular-applications.md %}
+
 ## Creating our Project
 
 Once you have Laravel installed, create a new project by using the Laravel command in the terminal

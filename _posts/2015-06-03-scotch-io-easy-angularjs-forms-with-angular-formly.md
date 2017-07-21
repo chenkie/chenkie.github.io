@@ -19,3 +19,5 @@ Have you ever created a form in AngularJS and been frustrated with how bloated y
 To get around this, I really like using angular-formly, a module that let’s us have just a couple lines of HTML and then define our form fields and their behaviour in JavaScript.
 
 To show you how to use angular-formly, I’ve written an [article for Scotch.io](https://scotch.io/tutorials/easy-angularjs-forms-with-angular-formly) where we’ll build a quick car rental form and make use of a bunch of the formly’s features.
+
+{% include securing-angular-applications.md %}

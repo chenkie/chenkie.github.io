@@ -25,6 +25,8 @@ In this tutorial we’ll cover how to deploy an Angular 2 app (built with the An
 
 [Get the code](https://github.com/chenkie/angular-cli-heroku) and check out the [live demo](https://angular-cli-heroku.herokuapp.com/). Also, stay tuned to [Angularcasts](https://angularcasts.io/?utm_source=medium&utm_campaign=ng2-cli-deploy&utm_medium=banner) if you’d like the screencast version of this tutorial.
 
+{% include securing-angular-applications.md %}
+
 ## Get Set Up with Heroku
 
 The beauty of Heroku is in its simple model: push your code to a remote Heroku repo and it will run everything necessary to deploy it. The key is that we need to tell Heroku a few things about how the app should be deployed.
