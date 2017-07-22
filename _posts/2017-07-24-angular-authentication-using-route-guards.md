@@ -1,6 +1,6 @@
 ---
 layout: post
-status: draft
+status: publish
 published: true
 title: 'Angular Authentication: Using Route Guards'
 feature_image: angular-route-guards.jpg
