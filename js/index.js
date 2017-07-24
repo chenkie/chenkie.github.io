@@ -29,7 +29,7 @@ var s,
             this.jpm();
 
             // Fast Click for Mobile - removes 300ms delay - https://github.com/ftlabs/fastclick
-            FastClick.attach(document.body);
+            // FastClick.attach(document.body);
 
             // Add Bg colour from JS so jPanel has time to initalize
             $('body').css({"background-color":"#333337"});
