@@ -206,7 +206,7 @@ For the `/admin` route, we're still using `canActivate` to control navigation, b
 
 ## Isn't this Easily Hackable?
 
-If you're like most developers, you're probably looking at this and thinking that the user could very easily hack their way to a protected route. After all, any knowlegable user could find their JWT in local storage, head over to [jwt.io](https://jwt.io), plug the token in, and change its payload. For example, they could change the `exp` in an attempt to extend the token's lifetime, or they could give themselves a different `role`.
+If you're like most developers, you're probably looking at this and thinking that the user could very easily hack their way to a protected route. After all, any knowledgeable user could find their JWT in local storage, head over to [jwt.io](https://jwt.io), plug the token in, and change its payload. For example, they could change the `exp` in an attempt to extend the token's lifetime, or they could give themselves a different `role`.
 
 This is all true--a user *could* do this and then get past the guards. The key point to remember, however, is that any change the user makes to their token payload will invalidate the signature. JSON Web Token signatures are calculated by including the payload, so any modifications to it will throw the whole thing off. This is good news because it means the user won't be able to access your protected resources with it.
 
