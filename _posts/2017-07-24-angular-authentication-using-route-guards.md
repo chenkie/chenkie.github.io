@@ -214,7 +214,7 @@ Any sensitive data that you don't want unauthorized access to should be kept beh
 
 ## But I Want to Lock Routes Down Completely
 
-In some cases, there's still a strong desire to lock down client-side routes completely. While it's not possible to have 100% protection of anything on the client side, Angular provides some interesting possibiliies through async routing. We'll have a look at how we can use async routing to our advantage is a future post.
+In some cases, there's still a strong desire to lock down client-side routes completely. While it's not possible to have 100% protection of anything on the client side, Angular provides some interesting possibilities through async routing. We'll have a look at how we can use async routing to our advantage is a future post.
 
 ## Wrapping Up
 
