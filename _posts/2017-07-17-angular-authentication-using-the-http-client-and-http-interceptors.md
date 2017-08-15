@@ -163,7 +163,7 @@ Either way, we need to set up the intereptor to handle responses. The `intercept
 // src/app/auth/jwt.interceptor.ts
 
 // ...
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 export class JwtInterceptor implements HttpInterceptor {
 
@@ -171,7 +171,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    return next.handle(req).map((event: HttpEvent<any>) => {
+    return next.handle(req).do((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want
       }
@@ -216,7 +216,7 @@ export class AuthService {
 
 // ...
 intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {    
-  return next.handle(req).map((event: HttpEvent<any>) => {
+  return next.handle(req).do((event: HttpEvent<any>) => {
     if (event instanceof HttpResponse) {
       // do stuff with response if you want
     }
