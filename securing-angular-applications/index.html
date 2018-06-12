@@ -1,154 +1,686 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./../css/bootstrap.min.css">
-  <link rel="stylesheet" href="./style.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800|Roboto+Slab:300" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700' rel='stylesheet'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Securing Angular Applications - Lock Down Your Angular App the Right Way</title>
+  <meta name="description" content="Securing Angular Applications - Lock Down Your Angular App the Right Way">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link href="css/styles.min.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
   <meta name="description" content="Learn everything necessary to properly lock down your Angular app">
-  <meta property="og:title" content="Securing Angular Applications eBook">
+  <meta property="og:title" content="Securing Angular Applications - Lock Down Your Angular App the Right Way">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://ryanchenkie.com/securing-angular-applications/">
-  <meta property="og:image" content="https://ryanchenkie.com/securing-angular-applications/img/book-cover.png">
+  <meta property="og:image" content="https://ryanchenkie.com/securing-angular-applications/img/angular-auth-book.png">
   <meta name="og:description" content="Learn everything necessary to properly lock down your Angular app">
-  <title>Securing Angular Applications eBook</title>
 </head>
+
 <body>
-  <div class="header">
+
+  <!--nav-->
+
+  <nav class="navbar navbar-default">
     <div class="container">
-      <section style="border-bottom: none">
-        <div class="text-center">        
-          <h1 class="extra-margin-bottom">Authentication for Angular apps is hard.</h1>
-          <h3 class="text-light">Learn everything you need to know about authentication, authorization, and security for your Angular apps.</h3>
-        </div>
-      </section>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#table-of-contents">Table of Contents</a>
+          </li>
+          <li>
+            <a href="#screencast">Watch a Screencast</a>
+          </li>
+          <li>
+            <a href="#testimonials">Testimonials</a>
+          </li>
+          <li>
+            <a href="#packages">Packages</a>
+          </li>
+          <li>
+            <a href="#about">About the Author</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <section>
-      <h2 class="text-center extra-margin-bottom book-title">Securing Angular Applications</h2>
+  </nav>
+
+  <!--nav end-->
+
+  <!--Hero section-->
+  <section class="hero" id="Home">
+    <div class="container">
+      <div class="row first-row" data-0="opacity: 1" data-800="opacity: 0">
+        <div class="col-md-5 text-center">
+          <img src="img/angular-auth-book.png" alt="ebook" class="book-cover" data-no-retina>
+        </div>
+        <div class="col-md-7">
+          <!--welcome message-->
+          <header class="welcome-message">
+            <h1>Learn how to secure your Angular app properly</h1>
+            <h2>Authentication and authorization for single page apps doesn't need to a by a mystery anymore. Learn how to properly
+              lock down your Angular app with this practical, step-by-step guide</h2>
+          </header>
+          <!--welcome message end-->
+
+          <!--action button-->
+          <div class="action-button">
+            <a href="#packages" class="button learn-more text-center">View Packages
+              <i class="fa fa-arrow-right"></i>
+            </a>
+            <!-- <a href="#sample" class="button buy text-center">Get a Sample
+              <i class="fa fa-file"></i>
+            </a> -->
+          </div>
+          <!--action button end-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Hero section end-->
+
+  <!--features-->
+  <section class="features section-spacing text-center" id="table-of-contents">
+    <div class="container">
+      <header>
+        <h2>Authentication for Angular apps is hard</h2>
+        <h3>Building a robust application can be hard enough. Properly locking it down can be even harder. Any way you crunch
+          it, getting authentication and authorization right is crucial for non-trivial apps.</h3>
+        <br>
+        <h3>Auth in a single page application looks a lot different than it does in a traditional round-trip app. Having a separate
+          client and server means you need to manage sessions on the front end while protecting data resources at the API
+          in a stateless manner.</h3>
+        <br>
+        <br>
+        <h2>Let's Build a Security-First App Together</h2>
+        <h3>Learn how to build an app with the MEAN stack and make authentication, authorization, and security a priority</h3>
+      </header>
       <div class="row">
-        <div class="col-sm-6">
-          <img class="img img-responsive book-cover" src="./img/book-cover.png" alt="">
+        <div class="col-sm-2 col-sm-offset-3 framework-logo">
+          <img src="img/angular.png" alt="Angular logo">
         </div>
-        <div class="col-sm-6 book-preamble">
-          <h3>Everything you need to properly lock down your Angular app</h3>
-          <p>Understand the concepts needed for building in secure authentication and authorization.</p>
-          <p> Get the full picture about Angular security with plain and simple explanations of concepts like OAuth, JSON Web Tokens, client sessions, CSRF, XSS, and more.</p>
+        <div class="col-sm-2 node-logo framework-logo">
+          <img src="img/nodejs.png" alt="Node logo">
         </div>
-        <div class="email-box col-sm-12 row-content">
-          <h3 class="text-center margin-top extra-top">Coming June 12, 2018</h3>
-          <div class="row">
-            <div class="col-sm-4 extra-padding margin-top">
-              <p>Subscribe to get sample chapters, screencasts, and information on release dates and discounts!</p>
-            </div>
-            <div class="col-sm-8">
-              <script async id="_ck_238823" src="https://forms.convertkit.com/238823?v=6"></script>
-            </div>
-          </div>
+        <div class="col-sm-2 framework-logo">
+          <img src="img/mongodb.png" alt="MongoDB logo">
         </div>
       </div>
-    </section>
-    <section>
-      <h3 class="text-center">Building a robust application can be hard enough. Properly locking it down can be even harder. Any way you crunch it, getting authentication and authorization right is crucial for non-trivial apps.</h3>
-      <div class="row row-content">
+      <div class="row">
+        <div class="col-sm-12">
+          <img src="img/spacedust-1.png" alt="">
+        </div>
+      </div>
+      <div class="row">
+        <h3>Chapters</h3>
         <div class="col-sm-4">
-          <img src="./img/thinking-face.png" class="emoji img-center" alt="thinking face emoji">
-          <h4 class="text-center">What's so hard exactly?</h4>
+
+          <h4>An Insecure Start</h4>
+          <hr>
+          <p>Find out why "protecting" an Angular application is actually a misnomer</p>
         </div>
-        <div class="col-sm-8">
-          <p>Authentication and authorization in single page apps is a lot different than it is in traditional round-trip appliciations.</p>
-          <p>Having a separate client and server means you need to manage sessions on the front end while protecting data resources at the API in a stateless manner.</p>
-          <p>You also probably want to support social authentication through OAuth.</p>
+        <div class="col-sm-4">
+
+          <h4>Build a User Registration Form</h4>
+          <hr>
+          <p>Build a user registration form and keep new user records in a Mongo database</p>
         </div>
-      </div>
-    </section>
-    <section>
-      <h3 class="text-center">Focus on building your Angular app instead of trying to figure out authentication.</h3>
-      <img class="emoji img-center" src="./img/tada.png" alt="tada emoji">
-      <div class="row row-content">
-        <div class="col-sm-6">
-          <p>Learning about and implementing authentication and authorization in an Angular app can be hugely time-consuming. Not only do you need to search the web to learn about a ton of different concepts, you also need make sure that your implementation is rock solid.</p>
-        </div>
-        <div class="col-sm-6">
-          <p>Your time is valuable and it’s best-spent working on what matters: your actual application. Building in secure user authentication is a necessity, but it shouldn’t take as much time as building the rest of your app.</p>
+        <div class="col-sm-4">
+
+          <h4>Store Passwords the Right Way</h4>
+          <hr>
+          <p>Store passwords properly by salting and hashing them with bcrypt</p>
         </div>
       </div>
-    </section>
-    <section>
-      <h3 class="text-center">What’s in the guide</h3>
-        <div class="row row-content">
-          <div class="col-sm-6">
-            <img class="emoji img-center" src="./img/check.png" alt="checkmark emoji">
-            <h4><em>Securing Angular Applications</em> will teach you everything you need to know to build robust authentication and authorization in your Angular apps.</h4>
+      <div class="row">
+        <div class="col-sm-4">
+
+          <h4>The Case for Cookies and Sessions</h4>
+          <hr>
+          <p>Move data to MongoDB and implement cookie and session authentication to protect it. Learn the advantages and disadvantages
+            of session-based authentication for single page apps</p>
+        </div>
+        <div class="col-sm-4">
+
+          <h4>The Case for JSON Web Tokens</h4>
+          <hr>
+          <p>Refactor the app to use JSON Web Tokens for authentication. Learn the advantages and disadvantages of JSON Web
+            Tokens and where they fall short</p>
+        </div>
+        <div class="col-sm-4">
+
+          <h4>Angular's Auth Tool Belt: Route Guards</h4>
+          <hr>
+          <p>Learn how to add client-side route protection by preventing unauthorized users from accessing certain routes</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+
+          <h4>Angular's Auth Tool Belt: HTTP Interceptors</h4>
+          <hr>
+          <p>Simplify the process of attaching JSON Web Tokens to HTTP requests. Respond to unauthorized requests and reroute
+            users back to the login screen</p>
+        </div>
+        <div class="col-sm-4">
+
+          <h4>Add Authorization</h4>
+          <hr>
+          <p>Add a user role to grant privileges and allow or dissallow requests based on that role</p>
+        </div>
+        <div class="col-sm-4">
+
+          <h4>Harden the Application</h4>
+          <hr>
+          <p>Mitigate some of the most common attacks such as CSRF and XSS. Implement an assortment of protections to keep the
+            front end and backend safe
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--features end-->
+
+  <!--Video review-->
+  <section class="video-review section-spacing text-center" id="screencast">
+    <div class="container">
+      <header>
+        <h2>Check Out a Screencast</h2>
+        <h3>Angular's Auth Tool Belt: Route Guards</h3>
+      </header>
+      <div class="row">
+        <div class="col-md-12">
+
+          <!--video-->
+
+          <div class="embed-responsive embed-responsive-16by9">
+            <!--For vimeo-->
+            <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/274565038"></iframe>
           </div>
-          <div class="col-sm-6">
+
+          <!--video end-->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--video review-->
+
+  <!--counter-->
+  <div class="counter text-center">
+    <!--container-->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-xs-6">
+          <i class="fa fa-file-text fa-3x"></i>
+          <h3 class="total-number-1">227</h3>
+          <p>Pages</p>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+          <i class="fa fa-film fa-3x"></i>
+          <h3 class="total-number-2">4+</h3>
+          <p>Hours of Screencasts</p>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+          <i class="fa fa-code fa-3x"></i>
+          <h3 class="total-number-3">2</h3>
+          <p>Sample Applications</p>
+        </div>
+      </div>
+    </div>
+    <!--container end-->
+  </div>
+  <!--counter end-->
+
+  <!--reviews-->
+
+  <section class="reviews section-spacing text-center" id="testimonials">
+    <div class="container">
+      <h2>What the Angular Community is Saying</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="review-slider">
+            <!--review 1-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Ryan has been an avid contributor in the Angular community for many years now. I'm so happy that he's
+                  taken the time to consolidate his years of experience in building security into Angular applications into
+                  this complete guide. Thanks for making this happen!
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/brad-green.jpg" alt="Brad Green" class="img-circle">
+                <h4>Brad Green </h4>
+                <p>Angular Core Team Manager, Google</p>
+              </figure>
+            </div>
+            <!--review 1 end-->
+
+            <!--review 2-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Ryan is my go-to for anything related to authentication and authorization. He has been super informative
+                  as I’ve been building out the auth related aspects of Ultimate Angular. I highly recommend this book and
+                  course for anyone looking to lock down their Angular apps.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/todd-motto.jpg" alt="Todd Motto" class="img-circle">
+                <h4>Todd Motto </h4>
+                <p>Owner, Ultimate Angular</p>
+              </figure>
+            </div>
+            <!--review 2 end-->
+
+            <!--review 3-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Authentication is not something to be taken lightly. Your app and your users rely on you to stay safe.
+                  Relying on Ryan to take complex authentication/authorization topics and deliver as real live code is a
+                  no-brainer. Ryan has the expertise from his years in the auth field and the rare teaching quality to be
+                  your reliable source for securing your Angular apps.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/chris-sevilleja.jpg" alt="Chris Sevilleja" class="img-circle">
+                <h4>Chris Sevilleja
+                </h4>
+                <p>Scotch.io</p>
+              </figure>
+            </div>
+            <!--review 3 end-->
+
+            <!--review 4-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> This is by far the most comprehensive books on web application security that I have ever read. As
+                  a Google Developer Expert and Angular contributor, I know quite a bit on this topic, but Ryan blew me away
+                  the breadth and depth of amazing information within this book. In particular, I love the way he frames
+                  server-side vs client-side security concerns and lays out an overall mental model for web application security.
+                  This book is a must have for all web developers.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/jeff-whelpley.jpg" alt="Jeff Whelpley" class="img-circle">
+                <h4>Jeff Whelpley
+                </h4>
+                <p>CTO, Get Human</p>
+              </figure>
+            </div>
+            <!--review 4end-->
+
+            <!--review 5-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> I have had the pleasure of working, speaking, and running workshops with Ryan all in the context of
+                  authentication. Ryan has extremely thorough and expert knowledge of web application authentication and
+                  authorization. Having the opportunity to learn from Ryan has changed my perspectives on these topics. Everyone
+                  who builds apps for the web should take advantage of any chance to learn from his expertise. This book
+                  showcases his approachable and fun teaching style, as well as his in-depth knowledge of authentication
+                  and Angular. Highly recommended!
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/kim-maida.jpg" alt="Kim Maida" class="img-circle">
+                <h4>Kim Maida
+                </h4>
+                <p>Content Lead, Auth0</p>
+              </figure>
+            </div>
+            <!--review 5 end-->
+
+            <!--review 6-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Comprehensive and practical examples you can easily integrate into your existing applications. If
+                  you're wondering if your authentication system is secure, you need this book.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/david-east.jpg" alt="David East" class="img-circle">
+                <h4>David East
+                </h4>
+                <p>Engineer, Google</p>
+              </figure>
+            </div>
+            <!--review 6 end-->
+
+            <!--review 7-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> With privacy and security becoming more valuable by each passing minute, authentication has to be
+                  taken seriously and from what I read in this book, Ryan has done nothing short of depicting this. The concise
+                  manner in which key fragments of important information were detailed kept me eagerly turning every page
+                  for more. Newbie and veteran alike - this book is a must read for anyone who wants to implement that quintessential
+                  authentication solution on their Angular apps.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/christian-nwamba.jpg" alt="Christian Nwamba" class="img-circle">
+                <h4>Christian Nwamba
+                </h4>
+                <p>JavaScript Teacher</p>
+              </figure>
+            </div>
+            <!--review 7 end-->
+
+            <!--review 8-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Ryan is not only an expert software engineer but a great teacher because at a fundamental level, he
+                  deeply cares about his students and digs deep to explain concepts in clear, concise forms. I am constantly
+                  learning new things from Ryan and I frequently recommend his material to programmers looking to sharpen
+                  their skillset.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/lukas-ruebbelke.jpg" alt="Lukas Ruebbelke" class="img-circle">
+                <h4>Lukas Ruebbelke
+                </h4>
+                <p>Owner, VenturPlex</p>
+              </figure>
+            </div>
+            <!--review 8 end-->
+
+            <!--review 9-->
+            <div>
+              <blockquote class="col-md-10 center-block">
+                <p>
+                  <i class="fa fa-quote-left"></i> Authentication and authorization are parts of almost any project that are so easy to do badly. When
+                  your auth story is off, your business and users are at risk. Ryan comes from deep in the trenches of a
+                  leading company in this space and brings this depth of knowledge to the Angular scene.
+                  <i class="fa fa-quote-right"></i>
+                </p>
+              </blockquote>
+              <figure>
+                <img src="img/geoff-goodman.jpg" alt="Geoff Goodman" class="img-circle">
+                <h4>Geoff Goodman
+                </h4>
+                <p>Enginner, Auth0</p>
+                <p>Creator, Plunker</p>
+              </figure>
+            </div>
+            <!--review 9 end-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--reviews end-->
+
+  <!--sub form-->
+  <!-- <section class="sub-form section-spacing text-center" id="Subscribe">
+    <div class="container">
+      <header>
+        <h2>Subscribe To Get A Preview</h2>
+        <h3>Lorem ipsum dolor sit amet consectetur adip scing elit mauris</h3>
+      </header>
+      <div class="row">
+        <div class="col-md-8">
+          <img src="img/ebook-preview.png" alt="ebook preview" data-no-retina> </div>
+        <div class="col-md-4">
+          <form role="form" id="mc-form" action="php/subscribe.php">
+            <div>
+              <input type="text" class="form-control" placeholder="First Name" name="fname" required id="mailchimp-fname">
+              <i class="fa fa-user first-name-i"></i>
+            </div>
+            <div>
+              <input type="text" class="form-control" placeholder="Last Name" name="lname" required id="mailchimp-lname">
+              <i class="fa fa-user last-name-i"></i>
+            </div>
+            <div>
+              <input type="email" class="form-control" placeholder="Email" required name="email" id="mailchimp-email">
+              <i class="fa fa-envelope"></i>
+            </div>
+            <button type="submit" class="btn btn-default">Subscribe</button>
+          </form>
+          <div class="result"></div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ULTIMATE PRICES-->
+
+  <section class="prices text-center section-spacing" id="packages">
+    <div class="container">
+      <header>
+        <h2>Ultimate Package</h2>
+        <h3>The whole course plus a ton of extra goodies to make your app super secure</h3>
+      </header>
+      <div class="row">
+        <div class="col-md-8 ultimate-package">
+          <img src="img/ultimate-bundle.png" alt="Ultimate Package">
+        </div>
+        <div class="col-md-4">
+
+          <!--PRICE TABLE-->
+          <div class="plan">
+            <div class="header">
+              <h4>40% Launch Discount</h4>
+              <div class="price">
+                <span class="period">
+                  <del>$299</del>
+                </span>
+                <span class="currency"></span>$179
+              </div>
+            </div>
+            <ul class="plan-features clearfix">
+              <li>Securing Angular Applications eBook (227 pages)</li>
+              <li>SpaceDust Angular App Source Code</li>
+              <li>SpaceDust Node.js API Source Code</li>
+              <li>Over 4 Hours of Screencasts covering all book topics</li>
+              <li>Auth0 Integration Screencasts</li>
+              <li>1 Year of Full Access to Angularcasts.io</li>
+              <li>Complimentary 1 Hour Consultation and Code Review</li>
+            </ul>
+            <div class="buy-button">
+              <a class="button" href="https://gum.co/saa-ultimate/launch40">Buy Now
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+            </div>
+          </div>
+          <!--PRICE TABLE END-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--ULTIMATE PRICES END-->
+
+  <!-- PRO PRICES-->
+
+  <section class="prices text-center section-spacing" id="packages">
+    <div class="container">
+      <header>
+        <h2>Pro Package</h2>
+        <h3>Solidify your learning with a comprehensive screencast series</h3>
+      </header>
+      <div class="row">
+        <div class="col-md-4">
+
+          <!--PRICE TABLE-->
+          <div class="plan">
+            <div class="header">
+              <h4>30% Launch Discount</h4>
+              <div class="price">
+                <span class="period">
+                  <del>$119</del>
+                </span>
+                <span class="currency"></span>$79
+              </div>
+            </div>
+            <ul class="plan-features clearfix">
+              <li>Securing Angular Applications eBook (227 pages)</li>
+              <li>SpaceDust Angular App Source Code</li>
+              <li>SpaceDust Node.js API Source Code</li>
+              <li>Over 4 Hours of Screencasts covering all book topics</li>
+            </ul>
+            <div class="buy-button">
+              <a class="button" href="https://gum.co/saa-pro/launch30">Buy Now
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+            </div>
+          </div>
+          <!--PRICE TABLE END-->
+        </div>
+        <div class="col-md-8">
+          <img src="img/pro-bundle.png" alt="Pro Package">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--PRO PRICES END-->
+
+  <!-- ESSENTIAL PRICES-->
+
+  <section class="prices text-center section-spacing" id="packages">
+    <div class="container">
+      <header>
+        <h2>Essential Package</h2>
+        <h3>The book and complete source code to get started securing your app fast</h3>
+      </header>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+
+          <img src="img/angular-auth-book.png" alt="Essetial Package">
+
+        </div>
+        <div class="col-md-4">
+
+          <!--PRICE TABLE-->
+          <div class="plan">
+            <div class="header">
+              <h4>20% Launch Discount</h4>
+              <div class="price">
+                <span class="period">
+                  <del>$49</del>
+                </span>
+                <span class="currency"></span>$39
+              </div>
+            </div>
+            <ul class="plan-features clearfix">
+              <li>Securing Angular Applications eBook (227 pages)</li>
+              <li>SpaceDust Angular App Source Code</li>
+              <li>SpaceDust Node.js API Source Code</li>
+            </ul>
+            <div class="buy-button">
+              <a class="button" href="https://gum.co/saa-essential/launch20">Buy Now
+                <i class="fa fa-shopping-cart"></i>
+              </a>
+            </div>
+          </div>
+          <!--PRICE TABLE END-->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--ESSENTIAL PRICES END-->
+
+  <!--Author-->
+
+  <section class="author section-spacing" id="about">
+    <div class="container">
+      <header class="text-center">
+        <h2>About the Author</h2>
+      </header>
+      <div class="row">
+        <div class="col-md-5 text-center">
+          <img src="img/ryan-chenkie.jpg" alt="author" class="author-img"> </div>
+        <div class="col-md-7 author-bio">
+          <h4>Ryan Chenkie</h4>
+          <hr>
+          <p>Nice to see you here! I’m Ryan Chenkie and I really like JavaScript, Angular, and topics around authentication
+            and application security. I’m a Google Developer Expert (Web Tech and Identity), Angular and Node consultant,
+            and I also run
+            <a href="https://angularcasts.io">Angularcasts.io</a>.</p>
+          <p>I spent over two and a half years at Auth0 where I learned a
+            <b>ton</b> about authentication and identity. I'm looking forward to teaching you everything I learned!</p>
+
+          <!--social-->
+          <div class="social">
             <ul>
-              <li><i class="fa fa-check"></i> SPA vs round-trip application auth</li>
-              <li><i class="fa fa-check"></i> Login/signup form strategies</li>
-              <li><i class="fa fa-check"></i> Creating a user store</li>
-              <li><i class="fa fa-check"></i> Hashing passwords</li>
-              <li><i class="fa fa-check"></i> Creating client-side sessions</li>
-              <li><i class="fa fa-check"></i> Renewing client-side sessions</li>
-              <li><i class="fa fa-check"></i> Protecting client-side routes with guards</li>
-              <li><i class="fa fa-check"></i> JSON Web Tokens vs cookies and sessions</li>
-              <li><i class="fa fa-check"></i> OAuth 2.0</li>
-              <li><i class="fa fa-check"></i> Securing an API (Node and Laravel)</li>
-              <li><i class="fa fa-check"></i> Storing and sending tokens</li>
-              <li><i class="fa fa-check"></i> User experience considerations</li>
-              <li><i class="fa fa-check"></i> Making authenticated HTTP requests</li>
-              <li><i class="fa fa-check"></i> Role and scope-based access control</li>
-              <li><i class="fa fa-check"></i> Application security and attack mitigation</li>
-              <li><i class="fa fa-check"></i> Testing considerations</li>
-              <li><i class="fa fa-check"></i> Server-side rendering considerations</li>
-              <li><i class="fa fa-check"></i> Ionic authentication considerations</li>
-              <li><i class="fa fa-check"></i> Progressive Web App considerations</li>
-              <li><i class="fa fa-check"></i> Much more!</li>
+              <li>
+                <a href="https://twitter.com/ryanchenkie" target="_blank">
+                  <i class="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/chenkie" target="_blank">
+                  <i class="fa fa-github"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://ca.linkedin.com/in/ryan-chenkie-a6665890" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
             </ul>
           </div>
-        </div>
-    </section>
-    <section>
-      <h3 class="text-center">About the author</h3>
-      <div class="row row-content">
-        <div class="col-sm-6">
-          <img class="avatar img img-circle" src="./img/ryan.jpg" alt="ryan avatar">
-          <div class="text-center margin-top">
-            <a href="https://twitter.com/ryanchenkie" class="twitter-follow-button animated fadeInUp" data-show-count="false">Follow @ryanchenkie</a><script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <p class="margin-top">Nice to see you here! I’m <a href="https://ryanchenkie.com">Ryan Chenkie</a> and I really like JavaScript, Angular, and topics around authentication and application security. I’m a Google Developer Expert (Web Tech and Identity), Dev Advocate at Auth0, and I also run <a href="https://angularcasts.io">Angularcasts.io</a>.</p>
+          <!--social end-->
+
         </div>
       </div>
-    </section>
-    <section class="no-border">
-      <div class="col-sm-10 col-sm-offset-1">
-        <h3 class="text-center">Coming June 12, 2018</h3>
-        <p>The guide will be launched this March. In the meantime, feel free to sign up for the mailing list to get updates on the book as it progresses. You'll get sample chapters, sceencasts, and information about launch discounts.</p>
-        <div>
-          <script async id="_ck_238823" src="https://forms.convertkit.com/238823?v=6"></script>
-        </div>
-      </div>
-    </section>
-  </div>
-  <div class="footer">
-    <div class="container">
-      <p>© 2017 Elevate Digital Inc. All Rights Reserved.</p>
     </div>
-  </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  </section>
 
-    ga('create', 'UA-56619461-1', 'auto');
-    ga('send', 'pageview');
+  <!--Author end-->
 
-  </script>
+  <!--site-footer-->
+  <footer class="site-footer section-spacing">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="scroll-top">
+            <a href="#">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+          </p>
+
+
+          <small>&copy; Copyright 2018 Elevate Digital Inc. All Rights Reserved.</small>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--site-footer end-->
+
+  <script src="js/scripts.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://gumroad.com/js/gumroad.js"></script>
 </body>
+
 </html>
