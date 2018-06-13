@@ -1,0 +1,171 @@
+.ck_form.ck_naked {
+  /* divider image */
+  background: transparent;
+  line-height: 1.5em;
+  overflow: hidden;
+  color: #666;
+  font-size: 16px;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  clear: both;
+  margin: 20px 0px;
+  text-align: center;
+}
+
+.ck_form.ck_naked p {
+  padding: 0px;
+}
+
+.ck_form,
+.ck_form * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ck_form.ck_naked .ck_form_fields {
+  width: 100%;
+  float: left;
+  padding: 5%;
+}
+/* Form fields */
+
+.ck_errorArea {
+  display: none; /* temporary */
+}
+
+#ck_success_msg {
+  padding: 10px 10px 0px;
+  border: solid 1px #ddd;
+  background: #eee;
+}
+
+.ck_form.ck_naked input[type='text'],
+.ck_form.ck_naked input[type='email'] {
+  font-size: 18px;
+  padding: 10px 8px;
+  width: 34%;
+  border: 1px solid #d6d6d6; /* stroke */
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px; /* border radius */
+  background-color: #fff; /* layer fill content */
+  margin-bottom: 5px;
+  height: auto;
+  float: left;
+  margin: 0px;
+  margin-right: 1%;
+  height: 42px;
+}
+
+.ck_form input[type='text']:focus,
+.ck_form input[type='email']:focus {
+  outline: none;
+  border-color: #aaa;
+}
+
+.ck_form.ck_naked .ck_subscribe_button {
+  width: 100%;
+  color: #fff;
+  margin: 0px;
+  padding: 9px 0px;
+  font-size: 18px;
+  background: #0d6db8;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px; /* border radius */
+  cursor: pointer;
+  border: none;
+  text-shadow: none;
+  width: 30%;
+  float: left;
+  height: 42px;
+}
+
+.ck_converted_content {
+  display: none;
+  padding: 5%;
+  background: #fff;
+}
+
+/* max width 500 */
+
+.ck_form.ck_naked.width500 .ck_subscribe_button {
+  width: 100%;
+  float: none;
+  margin-top: 5px;
+}
+
+.ck_form.ck_naked.width500 input[type='text'],
+.ck_form.ck_naked.width500 input[type='email'] {
+  width: 49%;
+}
+
+.ck_form.ck_naked.width500 input[type='email'] {
+  margin-right: 0px;
+  width: 50%;
+}
+
+/* max width 400 */
+
+.ck_form.ck_naked.width400 .ck_subscribe_button,
+.ck_form.ck_naked.width400 input[type='text'],
+.ck_form.ck_naked.width400 input[type='email'] {
+  width: 100%;
+  float: none;
+  margin-top: 5px;
+}
+
+.ck_slide_up,
+.ck_modal,
+.ck_slide_up .ck_naked,
+.ck_modal .ck_naked {
+  min-width: 400px;
+}
+
+.page .ck_form.ck_naked {
+  margin: 50px auto;
+  max-width: 700px;
+}
+
+/* v6 */
+
+.ck_slide_up.ck_form_v6,
+.ck_modal.ck_form_v6,
+.ck_slide_up.ck_form_v6 .ck_naked,
+.ck_modal.ck_form_v6 .ck_naked {
+  min-width: 0 !important;
+}
+
+.ck_form_v6 #ck_success_msg {
+  padding: 0px 10px;
+}
+
+#ck_subscribe_form {
+  margin-top: 3em;
+}
+
+#ck_subscribe_form input,
+.contact-form .form-control {
+  margin-bottom: 1.5em;
+  border-radius: 4px;
+}
+
+#ck_subscribe_form > div {
+  position: relative;
+}
+
+#ck_subscribe_form i[class*='fa-user'],
+#ck_subscribe_form i[class*='fa-envelope'] {
+  position: absolute;
+  right: 1em;
+  color: #3498db;
+}
+
+#ck_subscribe_form i[class*='first-name-i'],
+#ck_subscribe_form i[class*='last-name-i'],
+#ck_subscribe_form i[class*='fa-envelope'] {
+  top: 19px;
+}
