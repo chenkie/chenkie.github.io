@@ -953,6 +953,9 @@ button.close {
      ========================================================================== */
 
 @media (min-width: 992px) {
+  .contact-form-container {
+    margin-left: -100px;
+  }
   .ultimate-package img {
     margin-top: 125px;
   }
