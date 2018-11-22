@@ -233,7 +233,7 @@ $(function() {
 
   var menu = $('.navbar');
 
-  var stickyNav = menu.offset().top;
+  // var stickyNav = menu.offset().top;
 
   $(window).scroll(function() {
     if ($(window).scrollTop() > $(window).height()) {
@@ -290,5 +290,5 @@ $(function() {
   }
 
   var deadline = new Date(1529002823000);
-  initializeClock('clock', deadline);
+  // initializeClock('clock', deadline);
 });

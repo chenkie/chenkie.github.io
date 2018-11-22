@@ -77,9 +77,35 @@ strong {
      Hero Section
      ========================================================================== */
 
+.banner {
+  padding: 15px;
+  background-color: #f00028;
+}
+
+.banner p {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.banner p a {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  border: 1px solid #fff;
+  padding: 15px;
+  border-radius: 64px;
+}
+
+.banner p a:hover {
+  background-color: #fff;
+  color: #f00028;
+}
+
 .hero {
   background-color: #f7f7f7;
-  padding: 3em 0 4.5em;
+  padding: 0 0 4.5em;
   position: relative;
   text-align: center;
 }
@@ -905,7 +931,7 @@ button.close {
 
 @media (min-width: 768px) {
   .hero {
-    padding: 3em 0 6em;
+    padding: 0 0 6em;
   }
 
   .logo {
@@ -961,7 +987,7 @@ button.close {
   }
 
   .hero {
-    padding: 3em 0 6em;
+    padding: 0 0 6em;
     text-align: left;
   }
 
